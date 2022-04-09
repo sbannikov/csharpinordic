@@ -51,12 +51,27 @@ namespace Queens
                     // отсекаем комбинации, когда ферзи стоят по одной диагонали
                     if (Math.Abs(queens[0] - queens[1]) == 1) { continue; }
 
-                    // Вывести содержимое массива на экран
-                    for (int i = 0; i < 8; i++)
+                    // Цикл по третьему ферзю
+                    for (int q3 = 0; q3 < 8; q3++)
                     {
-                        Console.Write($"{queens[i]} ");
+                        queens[2] = q3;
+
+                        // отсекаем комбинации, когда ферзи стоят по одной вертикали
+                        if (queens[0] == queens[2]) { continue; }
+                        if (queens[1] == queens[2]) { continue; }
+
+                        // отсекаем комбинации, когда ферзи стоят по одной диагонали
+                        if (Math.Abs(queens[0] - queens[2]) == 2) { continue; }
+                        if (Math.Abs(queens[1] - queens[2]) == 1) { continue; }
+
+
+                        // Вывести содержимое массива на экран
+                        for (int i = 0; i < 8; i++)
+                        {
+                            Console.Write($"{queens[i]} ");
+                        }
+                        Console.WriteLine();
                     }
-                    Console.WriteLine();
                 }
             }
         }
