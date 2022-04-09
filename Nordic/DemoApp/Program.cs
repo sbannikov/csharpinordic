@@ -38,6 +38,24 @@ namespace DemoApp
             Console.WriteLine(name);
             Console.WriteLine(name.Length);
             Console.WriteLine(c);
+
+            // Пример применения операторов инкремента
+            int n = 10, m = 10;
+            Console.WriteLine(n++);
+            Console.WriteLine(++m);
+            Console.WriteLine(n);
+            Console.WriteLine(m);
+            Console.WriteLine();
+
+            // Пример работы с массивами
+            int[] days = new int[10] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31 };
+            Console.WriteLine($"Размер массива: {days.Length}");
+            Array.Resize(ref days, 12);
+            Console.WriteLine($"Размер массива: {days.Length}");
+            days[10] = 30;
+            days[11] = 31;
+            Array.Resize(ref days, 10);
+            Console.WriteLine($"Размер массива: {days.Length}");
         }
     }
 }
