@@ -58,25 +58,60 @@ namespace Lesson4
 
         static void Main(string[] args)
         {
-            int Size = ReadNumber("Введите размер массива", 1000, 10);
+            int Size = ReadNumber("Введите размер массива", 100000, 10);
             var Numbers = new double[Size];
+
+            // следует рассчитать максимальное значение enum Mode динамически
+            Mode mode = (Mode)ReadNumber($"Введите вариант расчёта\n{(int)Mode.Minimum} - минимум\n{(int)Mode.Average} - среднее\n{(int)Mode.Maximum} - максимум", 3, (int)Mode.Minimum);
 
             double number = 1;
             // Инициализация всех элементов массива
+            var random = new Random();
             for (int n = 0; n < Numbers.Length; n++)
             {
-                Numbers[n] = number;
-                number *= 2;
+                Numbers[n] = random.NextDouble() * 100;
+                // number *= 2;
             }
 
-            // Вычисление статистики массива
-            double summa = 0;
-            for (int n = 0; n < Numbers.Length; n++)
+            Console.WriteLine($"Режим расчета: {mode} ({(int)mode})");
+            if (mode == Mode.Minimum)
             {
-                summa += Numbers[n];
+                double min = Numbers[0];
+                // традиционный вариант цикла for
+                for (int n = 1; n < Numbers.Length; n++)
+                {
+                    Console.Write($"{n}\r");
+                    min = Math.Min(min, Numbers[n]);
+                }
+                // перебор всех элементов последовательности
+                // (в данном случае массива)               
+                foreach (var d in Numbers)
+                {
+                    min = Math.Min(min, d);
+                }
+
+                Console.WriteLine($"Минимум по больнице: {min}");
             }
-            double avg = summa / Numbers.Length;
-            Console.WriteLine($"Среднее по больнице: {avg}");
+            else if (mode == Mode.Average)
+            {
+                // Вычисление статистики массива
+                double summa = 0;
+                for (int n = 0; n < Numbers.Length; n++)
+                {
+                    summa += Numbers[n];
+                }
+                double avg = summa / Numbers.Length;
+                Console.WriteLine($"Среднее по больнице: {avg}");
+            }
+            else if (mode == Mode.Maximum)
+            {
+                double max = Numbers[0];
+                for (int n = 1; n < Numbers.Length; n++)
+                {
+                    max = Math.Max(max, Numbers[n]);
+                }
+                Console.WriteLine($"Максимум по больнице: {max}");
+            }
         }
     }
 }
