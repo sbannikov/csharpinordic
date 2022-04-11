@@ -11,7 +11,7 @@ namespace Lesson3
         /// <param name="prompt">Экранная подсказка</param>
         /// <param name="max">Максимальное допустимое число (если 0, то контроль не выполняется)</param>
         /// <returns>Натуральное число</returns>
-        static int ReadNumber(string prompt, int max)
+        static int ReadNumber(string prompt, int max, int defaultValue)
         {
             bool correct;
             int number;
@@ -19,15 +19,23 @@ namespace Lesson3
             {
                 if (max == 0)
                 {
-                    Console.Write($"{prompt} (от 1) > ");
+                    prompt = $"{prompt} (от 1) [по умолчанию: {defaultValue}] > ";
                 }
                 else
                 {
-                    Console.Write($"{prompt} (от 1 до {max}) > ");
+                    prompt = $"{prompt} (от 1 до {max}) [по умолчанию: {defaultValue}]> ";
                 }
+                Console.Write(prompt);
 
                 // Чтение строки из ввода консоли
                 string s = Console.ReadLine();
+                // Проверка на пустую строку, если пустая - значение по умолчанию
+                if (string.IsNullOrEmpty(s))
+                {
+                    number = defaultValue;
+                    break;
+                }
+
                 // Преобразование строки в целое число
                 correct = int.TryParse(s, out number);
                 if (!correct)
@@ -85,9 +93,9 @@ namespace Lesson3
             /// Уровень заполнения стакана "жидкостью"
             int Level;
 
-            Width = ReadNumber("Введите ширину стакана", 0);
-            Height = ReadNumber("Введите высоту стакана", Console.WindowHeight);
-            Level = ReadNumber("Введите уровень жидкости", Height);
+            Width = ReadNumber("Введите ширину стакана", Console.WindowWidth, 10);
+            Height = ReadNumber("Введите высоту стакана", Console.WindowHeight, 12);
+            Level = ReadNumber("Введите уровень жидкости", Height, 5);
             // Сохранить цвет текста консоли
             ConsoleColor color = Console.ForegroundColor;
             // Кнопка, которую нажимает человек
