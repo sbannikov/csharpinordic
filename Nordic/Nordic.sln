@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chess", "Chess\Chess.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApp", "DemoApp\DemoApp.csproj", "{BCB75D04-42B8-49BB-A53B-2F1B50815171}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson3", "Lesson3\Lesson3.csproj", "{50CA065A-FE39-4CCB-AA9A-6BE0BB5DCDE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson3", "Lesson3\Lesson3.csproj", "{50CA065A-FE39-4CCB-AA9A-6BE0BB5DCDE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queens", "Queens\Queens.csproj", "{DDC83112-EA8A-41F4-863B-068074DC10E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Queens", "Queens\Queens.csproj", "{DDC83112-EA8A-41F4-863B-068074DC10E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson4", "Lesson4\Lesson4.csproj", "{D299C4E0-F263-49DD-8A20-B146A7734658}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DDC83112-EA8A-41F4-863B-068074DC10E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDC83112-EA8A-41F4-863B-068074DC10E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDC83112-EA8A-41F4-863B-068074DC10E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D299C4E0-F263-49DD-8A20-B146A7734658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D299C4E0-F263-49DD-8A20-B146A7734658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D299C4E0-F263-49DD-8A20-B146A7734658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D299C4E0-F263-49DD-8A20-B146A7734658}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
