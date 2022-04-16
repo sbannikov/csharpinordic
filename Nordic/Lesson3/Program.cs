@@ -103,6 +103,7 @@ namespace Lesson3
             // стереть всё на экране
             Console.Clear();
 
+            bool finish = false; // признак завершения программы
             do
             {
                 // Перемещение курсора в верхний левый угол
@@ -144,30 +145,48 @@ namespace Lesson3
 
                 // ожидание нажатия кнопки
                 key = Console.ReadKey();
-                if (key.Key == ConsoleKey.UpArrow)
+
+                switch (key.Key)
                 {
-                    if (Level == Height) // проверка на заполнение стакана
-                    {
+                    case ConsoleKey.UpArrow:
+                        if (Level == Height) // проверка на заполнение стакана
+                        {
+                            Console.Beep();
+                        }
+                        else
+                        {
+                            Level++;
+                        }
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        if (Level >= 1)// проверка на опустошение стакана
+                        {
+                            Level--;
+                        }
+                        else
+                        {
+                            Console.Beep();
+                        }
+                        break;
+
+                    case ConsoleKey.X: // выход из программы
+                        // пример использования строк
+                        // finish = key.KeyChar.ToString().ToLower() == "x";
+
+                        // пример проверки символов непосредственно
+                        if (key.KeyChar == 'X' || key.KeyChar == 'x')
+                        {
+                            finish = true;
+                        }                        
+                        break;
+
+                    default: // неизвестная кнопка
                         Console.Beep();
-                    }
-                    else
-                    {
-                        Level++;
-                    }
-                }
-                else if (key.Key == ConsoleKey.DownArrow)
-                {
-                    if (Level >= 1) // проверка на опустошение стакана
-                    {
-                        Level--;
-                    }
-                    else
-                    {
-                        Console.Beep();
-                    }
+                        break;
                 }
             }
-            while (key.KeyChar != 'X');
+            while (!finish);
         }
     }
 }

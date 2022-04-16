@@ -12,7 +12,7 @@ namespace DemoApp
         /// <param name="args">Параметры командной строки</param>
         static void Main(string[] args)
         {
-            double a, b;
+            int a, b;
             double number; // вещественное число 
             double summa; // вещественное число
             bool flag; // логическое значение
@@ -22,7 +22,11 @@ namespace DemoApp
 
             a = 1;
             b = 0;
-            number = a + b;
+            if (b != 0 && a / b == 1)
+            {
+                Console.WriteLine("*");
+            }
+            number = a / b;
 
             summa = Math.PI;
             flag = number > 0.0;
@@ -56,6 +60,8 @@ namespace DemoApp
             days[11] = 31;
             Array.Resize(ref days, 10);
             Console.WriteLine($"Размер массива: {days.Length}");
+
+
         }
     }
 }
