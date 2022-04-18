@@ -62,10 +62,10 @@ namespace NanoTetris
         /// <summary>
         /// Удаление последней строки и сдвиг вниз игрового поля
         /// </summary>
-        static void Shift()
+        static void Shift(int toDelete)
         {
             // Обрабатываются строки с предпоследней по первую
-            for (int y = field.GetUpperBound(1) - 1; y >= 0; y--)
+            for (int y = toDelete; y >= 0; y--)
             {
                 for (int x = 0; x <= field.GetUpperBound(0); x++)
                 {
@@ -186,7 +186,8 @@ namespace NanoTetris
 
                     if (IsFilled())
                     {
-                        Shift();
+                        // Удаление предпоследней строки
+                        Shift(field.GetUpperBound(1) - 1);
                     }
                 }
             }
