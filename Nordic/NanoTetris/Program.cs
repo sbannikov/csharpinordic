@@ -98,16 +98,14 @@ namespace NanoTetris
             // Score += field.GetUpperBound(1);
 
             // Обрабатываются строки с предпоследней по первую
-            for (int y = toDelete; y >= 0; y--)
+            for (int x = 0; x <= field.GetUpperBound(0); x++)
             {
-                for (int x = 0; x <= field.GetUpperBound(0); x++)
+                for (int y = toDelete; y >= 0; y--)
                 {
                     SetCell(x, y + 1, field[x, y]);
-                    if (y == 0) // только для самой верхней строки
-                    {
-                        SetCell(x, y, ConsoleColor.Black);
-                    }
                 }
+                // Покрасить самую верхнюю клетку чёрным
+                SetCell(x, 0, ConsoleColor.Black);
             }
         }
 
