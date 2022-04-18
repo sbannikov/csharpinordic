@@ -12,18 +12,41 @@ namespace NanoTetris
         static ConsoleColor[,] field;
 
         /// <summary>
+        /// Количество очков
+        /// </summary>
+        static int Score = 0;
+
+        /// <summary>
+        /// Ячейка игрового поля
+        /// </summary>
+        const string Cell = "[.]";
+
+        /// <summary>
+        /// Вывод количества очков
+        /// </summary>
+        static void DrawScore()
+        {
+            Console.CursorLeft = (field.GetUpperBound(0) + 2) * Cell.Length;
+            Console.CursorTop = 0;
+            Console.Write($"SCORE: {Score}");
+        }
+
+        /// <summary>
         /// Отображение одной клетки поля
         /// </summary>
         /// <param name="x">Абсцисса</param>
         /// <param name="y">Ордината</param>
         static void DrawCell(int x, int y)
         {
-            ConsoleColor oldColor = Console.BackgroundColor;
-            Console.CursorLeft = x * 3;
+            ConsoleColor oldBack = Console.BackgroundColor;
+            ConsoleColor oldFore = Console.ForegroundColor;
+            Console.CursorLeft = x * Cell.Length;
             Console.CursorTop = y;
             Console.BackgroundColor = field[x, y];
-            Console.Write("[.]");
-            Console.BackgroundColor = oldColor;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(Cell);
+            Console.BackgroundColor = oldBack;
+            Console.ForegroundColor = oldFore;
         }
 
         /// <summary>
@@ -64,13 +87,26 @@ namespace NanoTetris
         /// </summary>
         static void Shift(int toDelete)
         {
+            // Подсчёт очков
+            // за каждый кубик количество очков, равное его "цвету"
+            for (int x = 0; x <= field.GetUpperBound(0); x++)
+            {
+                Score += (int)field[x, toDelete];
+            }
+
+            // Это если каждый кубик - одно очко
+            // Score += field.GetUpperBound(1);
+
             // Обрабатываются строки с предпоследней по первую
             for (int y = toDelete; y >= 0; y--)
             {
                 for (int x = 0; x <= field.GetUpperBound(0); x++)
                 {
                     SetCell(x, y + 1, field[x, y]);
-                    SetCell(x, y, ConsoleColor.Black);
+                    if (y == 0) // только для самой верхней строки
+                    {
+                        SetCell(x, y, ConsoleColor.Black);
+                    }
                 }
             }
         }
@@ -95,6 +131,8 @@ namespace NanoTetris
                         DrawCell(x, y);
                     }
                 }
+
+                DrawScore();
 
                 // Жду нажатия кнопки
                 ConsoleKeyInfo key = Console.ReadKey(true);
@@ -188,6 +226,7 @@ namespace NanoTetris
                     {
                         // Удаление предпоследней строки
                         Shift(field.GetUpperBound(1) - 1);
+                        DrawScore();
                     }
                 }
             }
