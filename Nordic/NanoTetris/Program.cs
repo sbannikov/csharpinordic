@@ -38,6 +38,43 @@ namespace NanoTetris
             DrawCell(x, y);
         }
 
+        /// <summary>
+        /// Проверка на заполнение последней строки
+        /// </summary>
+        /// <returns>true, если последняя строка заполнена</returns>
+        static bool IsFilled()
+        {
+            int y = field.GetUpperBound(1);
+
+            bool flag = true; // можно без этой переменной
+            for (int x = 0; x <= field.GetUpperBound(0); x++)
+            {
+                if (field[x, y] == ConsoleColor.Black)
+                {
+                    flag = false; // return false; 
+                    break; // можно удалить, но эффективность снижается
+                }
+            }
+
+            return flag; // return true;
+        }
+
+        /// <summary>
+        /// Удаление последней строки и сдвиг вниз игрового поля
+        /// </summary>
+        static void Shift()
+        {
+            // Обрабатываются строки с предпоследней по первую
+            for (int y = field.GetUpperBound(1) - 1; y >= 0; y--)
+            {
+                for (int x = 0; x <= field.GetUpperBound(0); x++)
+                {
+                    SetCell(x, y + 1, field[x, y]);
+                    SetCell(x, y, ConsoleColor.Black);
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
             string message = null;
@@ -145,6 +182,11 @@ namespace NanoTetris
                     if (!finish)
                     {
                         key = Console.ReadKey(true);
+                    }
+
+                    if (IsFilled())
+                    {
+                        Shift();
                     }
                 }
             }

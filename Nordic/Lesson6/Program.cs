@@ -1,18 +1,30 @@
 ﻿using System;
+using System.Linq;
 
 namespace Lesson6
 {
     class Program
     {
         const char letter = 'о';
+
+        static bool Compare(char c)
+        {
+            return c == letter;
+        }
+
         static void Main(string[] args)
         {
             string message = "Над всей Испанией безоблачное небо";
 
+            int count;
+
+            // Пример LINQ - подсчёт количества символов в одну строку
+            count = message.Where(c => c == letter).Count();
+
             // Подсчёт количества буквы letter в строке
             // первый вариант - WHILE
             int n = 0;
-            int count = 0;
+            count = 0;
             while (n < message.Length)
             {
                 if (message[n] == letter)
