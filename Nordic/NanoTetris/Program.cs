@@ -148,7 +148,9 @@ namespace NanoTetris
                     {
                         case ConsoleKey.Escape:
                             finish = true; // выход из программы по кнопке
-                            break;
+                            // досрочно завершаем цикл и проверяем его условие
+                            // а так как условие не выполняется, то цикл завершается
+                            continue;
 
                         case ConsoleKey.Spacebar:
                         case ConsoleKey.DownArrow:
@@ -198,6 +200,7 @@ namespace NanoTetris
                                 Console.Beep();
                             }
                             break;
+
                         case ConsoleKey.RightArrow:
                             if (CurrentColor != ConsoleColor.Black && CurrentX < field.GetUpperBound(0) && field[CurrentX + 1, CurrentY] == ConsoleColor.Black)
                             {
@@ -209,20 +212,18 @@ namespace NanoTetris
                                 Console.Beep();
                             }
                             break;
+
                         default:
                             Console.Beep();
                             break;
                     }
 
                     // В конце цикла снова ждём нажатия кнопки
-                    if (!finish)
-                    {
-                        key = Console.ReadKey(true);
-                    }
+                    key = Console.ReadKey(true);
 
                     if (IsFilled())
                     {
-                        // Удаление предпоследней строки
+                        // Удаление предпоследней строки и подсчёт очков
                         Shift(field.GetUpperBound(1) - 1);
                         DrawScore();
                     }
