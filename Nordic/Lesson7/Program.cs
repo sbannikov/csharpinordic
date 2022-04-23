@@ -61,7 +61,42 @@ namespace Lesson7
 
         static void Main(string[] args)
         {
-            Palindrome();
+            // Palindrome();
+
+            // ОБОРОНОСПОСОБНОСТЬ
+            // СОН +, РОБА -
+            // КОКА: КОК +, ОКО -
+
+            Console.Write("Введите длинное слово> ");
+            string longWord = Console.ReadLine();
+            Console.Write("Введите короткое слово> ");
+            string shortWord = Console.ReadLine();
+
+            // Цикл по короткому слову 
+            bool found = true;
+            string s = longWord;
+            foreach (char c in shortWord)
+            {
+                int position = s.IndexOf(c);
+                if (position < 0) // не нашли
+                {
+                    found = false;
+                    break;
+                }
+                else
+                {
+                    s = s.Remove(position, 1);
+                }
+            }
+
+            if (found)
+            {
+                Console.WriteLine("В слове {0} есть слово {1}", longWord, shortWord);
+            }
+            else
+            {
+                Console.WriteLine("В слове {0} нет слова {1}", longWord, shortWord);
+            }
         }
     }
 }
