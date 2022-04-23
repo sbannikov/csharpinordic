@@ -59,8 +59,40 @@ namespace Lesson7
             Console.WriteLine($"Это {prefix}палиндром");
         }
 
+        /// <summary>
+        /// Разделитель слов
+        /// </summary>
+        const char Delimiter = ',';
+
+        /// <summary>
+        /// Добавление строки в конец строкового массива
+        /// </summary>
+        /// <param name="stringArray">Массив строк</param>
+        /// <param name="word">Добавляемое слово</param>
+        static void AddToArray(ref string[] stringArray, string word)
+        {
+            Array.Resize(ref stringArray, stringArray.Length + 1);
+            stringArray[stringArray.Length - 1] = word;
+        }
+
+        /// <summary>
+        /// Вывести результат поиска
+        /// </summary>
+        /// <param name="format">Строка форматирования</param>
+        /// <param name="longWord">Длинное слово</param>
+        /// <param name="stringArray">Массив коротких слов</param>
+        static void PrintResult(string format, string longWord, string[] stringArray)
+        {
+            if (stringArray.Length > 0)
+            {
+                string s = string.Join(Delimiter, stringArray);
+                Console.WriteLine(format, longWord, s);
+            }
+        }
+
         static void Main(string[] args)
         {
+
             // Palindrome();
 
             // ОБОРОНОСПОСОБНОСТЬ
@@ -69,34 +101,46 @@ namespace Lesson7
 
             Console.Write("Введите длинное слово> ");
             string longWord = Console.ReadLine();
-            Console.Write("Введите короткое слово> ");
-            string shortWord = Console.ReadLine();
+            Console.Write("Введите список коротких слов через запятую> ");
+            string shortWordString = Console.ReadLine();
 
-            // Цикл по короткому слову 
-            bool found = true;
-            string s = longWord;
-            foreach (char c in shortWord)
+            // Разрезать строку на подстроки по запятой
+            string[] shortWords = shortWordString.Split(Delimiter);
+            string[] foundWords = new string[0];
+            string[] notFoundWords = new string[0];
+
+            foreach (string shortWord in shortWords)
             {
-                int position = s.IndexOf(c);
-                if (position < 0) // не нашли
+                // Цикл по короткому слову 
+                bool found = true;
+                string s = longWord;
+                // обрабатываем все буквы, отсекая начальные и конечные пробелы
+                foreach (char c in shortWord.Trim())
                 {
-                    found = false;
-                    break;
+                    int position = s.IndexOf(c);
+                    if (position < 0) // не нашли
+                    {
+                        found = false;
+                        break;
+                    }
+                    else
+                    {
+                        s = s.Remove(position, 1);
+                    }
+                }
+
+                if (found)
+                {
+                    AddToArray(ref foundWords, shortWord);
                 }
                 else
                 {
-                    s = s.Remove(position, 1);
+                    AddToArray(ref notFoundWords, shortWord);                   
                 }
             }
 
-            if (found)
-            {
-                Console.WriteLine("В слове {0} есть слово {1}", longWord, shortWord);
-            }
-            else
-            {
-                Console.WriteLine("В слове {0} нет слова {1}", longWord, shortWord);
-            }
+            PrintResult("В слове {0} есть слова {1}", longWord, foundWords);
+            PrintResult("В слове {0} нет слов {1}", longWord, notFoundWords);            
         }
     }
 }
