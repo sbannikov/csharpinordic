@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Lesson7
 {
@@ -90,15 +91,11 @@ namespace Lesson7
             }
         }
 
-        static void Main(string[] args)
+        static void SearchWords()
         {
-
-            // Palindrome();
-
             // ОБОРОНОСПОСОБНОСТЬ
             // СОН +, РОБА -
             // КОКА: КОК +, ОКО -
-
             Console.Write("Введите длинное слово> ");
             string longWord = Console.ReadLine();
             Console.Write("Введите список коротких слов через запятую> ");
@@ -135,12 +132,46 @@ namespace Lesson7
                 }
                 else
                 {
-                    AddToArray(ref notFoundWords, shortWord);                   
+                    AddToArray(ref notFoundWords, shortWord);
                 }
             }
 
             PrintResult("В слове {0} есть слова {1}", longWord, foundWords);
-            PrintResult("В слове {0} нет слов {1}", longWord, notFoundWords);            
+            PrintResult("В слове {0} нет слов {1}", longWord, notFoundWords);
+        }
+
+        static void Main(string[] args)
+        {
+            // Palindrome();
+            // SearchWords();
+            // ДД.ММ.ГГГГ
+            // ##.##.####
+            Console.Write("Введите дату> ");
+            string dateString = Console.ReadLine();
+
+            Match match = Regex.Match(dateString, @"^(\d{1,2})[\-\.](\d{1,2})[\-\.](\d{2,4})$");
+            if (match.Success)
+            {
+                int day = int.Parse(match.Groups[1].Value);
+                int month = int.Parse(match.Groups[2].Value);
+                int year = int.Parse(match.Groups[3].Value);
+                if (year < 100)
+                {
+                    year += 2000;
+                }
+                if ((day > 31) || (month > 12))
+                {
+                    Console.WriteLine($"Плохая дата: {day:00}-{month:00}-{year:0000}");
+                }
+                else
+                {
+                    Console.WriteLine($"Хорошая дата: {day:00}-{month:00}-{year:0000}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Разбор неудачен");
+            }
         }
     }
 }
