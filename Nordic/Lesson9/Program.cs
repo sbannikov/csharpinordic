@@ -79,15 +79,56 @@ namespace Lesson9
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Преобразовать строку в число, а плохую строку - в 0
+        /// </summary>
+        /// <param name="s">Исходная строка</param>
+        /// <returns>Целое число</returns>
+        static int Parse(string s)
+        {
+            /*
+             * развернутая запись
+            int n;
+            if (int.TryParse(s, out n))
+            {
+                return n;
+            }
+            else
+            {
+                return 0;
+            }
+            */
+
+            return int.TryParse(s, out int n) ? n : 0;
+        }
+
+        /// <summary>
+        /// Счётчик количества сравнений
+        /// </summary>
+        static int CompareCounter = 0;
+
+        /// <summary>
+        /// Сравнение двух строк с учётом цифровой составляющей
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException"></exception>
         static int Compare(string s1, string s2)
         {
+            // Счетчик вызовов
+            CompareCounter++;
+
+            // Шаблон для регулярного выражения
+            const string pattern = @"^(.*?)(\d*)$";
             // вася1
             // вася1бис2
             // 123
 
             // Поиск по шаблону в строках
-            var match1 = System.Text.RegularExpressions.Regex.Match(s1, @"^(.*?)(\d*)$");
-            var match2 = System.Text.RegularExpressions.Regex.Match(s2, @"^(.*?)(\d*)$");
+            var match1 = System.Text.RegularExpressions.Regex.Match(s1, pattern);
+            var match2 = System.Text.RegularExpressions.Regex.Match(s2, pattern);
+
             // Проверка на корректность поиска
             if (!match1.Success || !match2.Success)
             {
@@ -102,8 +143,8 @@ namespace Lesson9
             }
 
             // Преобразование строк в натуральные числа
-            int n1 = string.IsNullOrEmpty(match1.Groups[2].Value) ? 0 : int.Parse(match1.Groups[2].Value);
-            int n2 = string.IsNullOrEmpty(match2.Groups[2].Value) ? 0 : int.Parse(match2.Groups[2].Value);
+            int n1 = Parse(match1.Groups[2].Value);
+            int n2 = Parse(match2.Groups[2].Value);
 
             // Сравнение натуральных чисел
             return n1.CompareTo(n2);
@@ -122,7 +163,7 @@ namespace Lesson9
                 for (int j = i + 1; j < list.Count; j++)
                 {
                     // Вывод промежуточного состояния списка
-                    PrintList(i, j, list);
+                    // * PrintList(i, j, list);
                     // Сравнение двух элементов списка - по возрастанию
                     if (Compare(list[i], list[j]) > 0)
                     {
@@ -137,31 +178,64 @@ namespace Lesson9
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Вводите строки, пустая строка для завершения");
-
-            // описание и создание списка
-            var list = new List<string>();
-
-            // Ввод списка до первой пустой строки
-            string s;
-            do
+            try
             {
-                // ввод строки и обрезка начальных и конечных пробелов
-                s = Console.ReadLine().Trim();
-                if (!string.IsNullOrEmpty(s))
+                Console.WriteLine("Вводите строки, пустая строка для завершения");
+
+                // описание и создание списка
+                var list = new List<string>();
+
+                // Ввод списка до первой пустой строки
+                string s;
+                do
                 {
-                    list.Add(s);
+                    // ввод строки и обрезка начальных и конечных пробелов
+                    s = Console.ReadLine().Trim();
+                    if (!string.IsNullOrEmpty(s))
+                    {
+                        list.Add(s);
+                    }
+                } while (!string.IsNullOrEmpty(s));
+
+                // Копия списка
+                var copy = new List<string>();
+
+                /*
+                 * Что делает AddRange внутри себя
+                foreach (var s in list)
+                {
+                    copy.Add(s);
                 }
-            } while (!string.IsNullOrEmpty(s));
+                */
 
-            // Сортировка списка по возрастанию
-            // list.Sort();
-            ListSort(list);
+                copy.AddRange(list);
 
-            // Вывод списка
-            foreach (string item in list)
+                // Стандартная сортировка списка по стандартному возрастанию
+                // list.Sort();
+
+                // Наша сортировка с нашим (нестандартным) сравнением
+                int save = CompareCounter;
+                DateTime now = DateTime.Now;
+                ListSort(list);
+                double ms = (DateTime.Now - now).TotalMilliseconds;
+                Console.WriteLine($"Нестандартная сортировка: {CompareCounter - save} сравнений, {ms} миллисекунд");
+
+                // Сортировка стандартным методом, но с нестандартным сравнением
+                save = CompareCounter;
+                now = DateTime.Now;
+                copy.Sort(Compare);
+                ms = (DateTime.Now - now).TotalMilliseconds;
+                Console.WriteLine($"Стандартная сортировка: {CompareCounter - save} сравнений, {ms} миллисекунд");
+
+                // Вывод списка
+                foreach (string item in list)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            catch (Exception ex)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(ex.Message);
             }
         }
     }
