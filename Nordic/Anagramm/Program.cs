@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 
 namespace Anagramm
 {
@@ -14,8 +15,9 @@ namespace Anagramm
         static Dictionary<char, int> ParseString(string s)
         {
             var dict = new Dictionary<char, int>();
-            foreach (char c in s)
-            {
+            // CultureInfo culture = CultureInfo.GetCultureInfo("ru-RU");
+            foreach (char c in s.ToUpperInvariant())
+            {                
                 if (dict.ContainsKey(c))
                 {
                     dict[c]++;
@@ -36,10 +38,10 @@ namespace Anagramm
         /// <summary>
         /// Вывод словаря на экран
         /// </summary>
-        /// <param name="dict"></param>
+        /// <param name="dict">Словарь</param>
         static void WriteDict(Dictionary<char, int> dict)
         {
-            foreach (char c in dict.Keys.OrderBy(Function))
+            foreach (char c in dict.Keys.OrderBy(c => c))
             {
                 Console.WriteLine($"{c} = {dict[c]}");
             }
@@ -64,9 +66,10 @@ namespace Anagramm
                 return;
             }
 
-            // Цикл по буквам первого словаря
+            // Цикл по буквам первого словаря           
             foreach (var c in dict1.Keys)
             {
+                /*
                 if (!dict2.ContainsKey(c))
                 {
                     Console.WriteLine("Слова - не анаграммы");
@@ -77,7 +80,14 @@ namespace Anagramm
                     Console.WriteLine("Слова - не анаграммы");
                     return;
                 }
-            }
+                */
+
+                if (!dict2.TryGetValue(c, out int count) || count != dict1[c])
+                {
+                    Console.WriteLine("Слова - не анаграммы");
+                    return;
+                }
+            }            
 
             Console.WriteLine("Слова - анаграммы");
         }
