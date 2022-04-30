@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lesson9
 {
@@ -58,25 +59,30 @@ namespace Lesson9
 
         static void Main(string[] args)
         {
-            int count = ReadNumber("Введите число строк", 100, 5);
+            Console.WriteLine("Вводите строки, пустая строка для завершения");
 
-            // описание и создание массива
-            string[] words = new string[count];
+            // описание и создание списка
+            var list = new List<string>();
 
-            // Ввод массива
-            for (int i = 0; i < count; i++)
+            // Ввод списка до первой пустой строки
+            string s;
+            do
             {
-                Console.Write($"Введите {i + 1}-е слово: ");
-                words[i] = Console.ReadLine();
-            }
+                // ввод строки и обрезка начальных и конечных пробелов
+                s = Console.ReadLine().Trim();
+                if (!string.IsNullOrEmpty(s))
+                {
+                    list.Add(s);
+                }
+            } while (!string.IsNullOrEmpty(s));
 
-            // Сортировка массива по возрастанию
-            Array.Sort(words);
+            // Сортировка списка по возрастанию
+            list.Sort();
 
-            // Вывод массива
-            for (int i = 0; i < count; i++)
+            // Вывод списка
+            foreach(string item in list)
             {
-                Console.WriteLine(words[i]);
+                Console.WriteLine(item);
             }
         }
     }
