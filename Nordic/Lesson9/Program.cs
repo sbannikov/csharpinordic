@@ -79,6 +79,36 @@ namespace Lesson9
             Console.WriteLine();
         }
 
+        static int Compare(string s1, string s2)
+        {
+            // вася1
+            // вася1бис2
+            // 123
+
+            // Поиск по шаблону в строках
+            var match1 = System.Text.RegularExpressions.Regex.Match(s1, @"^(.*?)(\d*)$");
+            var match2 = System.Text.RegularExpressions.Regex.Match(s2, @"^(.*?)(\d*)$");
+            // Проверка на корректность поиска
+            if (!match1.Success || !match2.Success)
+            {
+                throw new ApplicationException("Что-то пошло не так с шаблоном");
+            }
+
+            // Сравнение буквенной части строк
+            int n = match1.Groups[1].Value.CompareTo(match2.Groups[1].Value);
+            if (n != 0) // Если буквенная часть не одинаковая
+            {
+                return n; // Это и есть результат
+            }
+
+            // Преобразование строк в натуральные числа
+            int n1 = string.IsNullOrEmpty(match1.Groups[2].Value) ? 0 : int.Parse(match1.Groups[2].Value);
+            int n2 = string.IsNullOrEmpty(match2.Groups[2].Value) ? 0 : int.Parse(match2.Groups[2].Value);
+
+            // Сравнение натуральных чисел
+            return n1.CompareTo(n2);
+        }
+
         /// <summary>
         /// Сортировка списка методом модифицированного пузырька
         /// </summary>
@@ -93,8 +123,8 @@ namespace Lesson9
                 {
                     // Вывод промежуточного состояния списка
                     PrintList(i, j, list);
-                    // Сравнение двух элементов списка
-                    if (list[i].CompareTo(list[j]) < 0)
+                    // Сравнение двух элементов списка - по возрастанию
+                    if (Compare(list[i], list[j]) > 0)
                     {
                         // Обмен между двумя элементами списка
                         string s = list[i];
