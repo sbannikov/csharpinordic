@@ -57,6 +57,54 @@ namespace Lesson9
             return number;
         }
 
+        static void PrintList(int i, int j, List<string> list)
+        {
+            for (int n = 0; n < list.Count; n++)
+            {
+                if (n == i)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else if (n == j)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Black;
+                }
+                Console.Write($"{list[n]} ");
+            }
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Сортировка списка методом модифицированного пузырька
+        /// </summary>
+        /// <param name="list">Список</param>
+        static void ListSort(List<string> list)
+        {
+            // С первого по предпоследний
+            for (int i = 0; i < list.Count - 1; i++)
+            {
+                // Со следующего за i-м по последний
+                for (int j = i + 1; j < list.Count; j++)
+                {
+                    // Вывод промежуточного состояния списка
+                    PrintList(i, j, list);
+                    // Сравнение двух элементов списка
+                    if (list[i].CompareTo(list[j]) < 0)
+                    {
+                        // Обмен между двумя элементами списка
+                        string s = list[i];
+                        list[i] = list[j];
+                        list[j] = s;
+                    }
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Вводите строки, пустая строка для завершения");
@@ -77,10 +125,11 @@ namespace Lesson9
             } while (!string.IsNullOrEmpty(s));
 
             // Сортировка списка по возрастанию
-            list.Sort();
+            // list.Sort();
+            ListSort(list);
 
             // Вывод списка
-            foreach(string item in list)
+            foreach (string item in list)
             {
                 Console.WriteLine(item);
             }
