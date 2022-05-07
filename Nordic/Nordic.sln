@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson9", "Lesson9\Lesson9.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anagramm", "Anagramm\Anagramm.csproj", "{D8217068-596D-4CD5-B26D-41B4870F0EF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroTetris", "MicroTetris\MicroTetris.csproj", "{D6CA710A-C7CB-4466-9013-6C09269821F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroTetris", "MicroTetris\MicroTetris.csproj", "{D6CA710A-C7CB-4466-9013-6C09269821F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{CD37188F-89A8-4A35-8AEE-AB4AF8D0A545}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{D6CA710A-C7CB-4466-9013-6C09269821F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6CA710A-C7CB-4466-9013-6C09269821F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6CA710A-C7CB-4466-9013-6C09269821F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD37188F-89A8-4A35-8AEE-AB4AF8D0A545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD37188F-89A8-4A35-8AEE-AB4AF8D0A545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD37188F-89A8-4A35-8AEE-AB4AF8D0A545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD37188F-89A8-4A35-8AEE-AB4AF8D0A545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
