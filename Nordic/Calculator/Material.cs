@@ -16,9 +16,13 @@ namespace Calculator
         /// </summary>
         internal string Name;
         /// <summary>
-        /// Цвет
+        /// Цвет в виде объекта
         /// </summary>
-        internal string Color;
+        internal Color MaterialColor;
+        /// <summary>
+        /// Наименование цвета
+        /// </summary>
+        internal string ColorName;
         /// <summary>
         /// Цена (руб. за м2)
         /// (цена может быть не задана)
@@ -31,7 +35,7 @@ namespace Calculator
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{Name} {Color}";
+            return $"{Name} {MaterialColor}";
         }
     }
 }

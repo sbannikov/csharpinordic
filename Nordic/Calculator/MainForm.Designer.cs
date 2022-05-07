@@ -37,6 +37,9 @@
             this.comboMaterial = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textPrice = new System.Windows.Forms.TextBox();
+            this.comboColor = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.open = new System.Windows.Forms.OpenFileDialog();
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,7 +86,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 46);
+            this.label1.Location = new System.Drawing.Point(12, 83);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 20);
             this.label1.TabIndex = 1;
@@ -92,7 +95,7 @@
             // comboMaterial
             // 
             this.comboMaterial.FormattingEnabled = true;
-            this.comboMaterial.Location = new System.Drawing.Point(111, 43);
+            this.comboMaterial.Location = new System.Drawing.Point(111, 75);
             this.comboMaterial.Name = "comboMaterial";
             this.comboMaterial.Size = new System.Drawing.Size(677, 28);
             this.comboMaterial.TabIndex = 2;
@@ -101,7 +104,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 80);
+            this.label2.Location = new System.Drawing.Point(12, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 20);
             this.label2.TabIndex = 3;
@@ -109,10 +112,33 @@
             // 
             // textPrice
             // 
-            this.textPrice.Location = new System.Drawing.Point(111, 77);
+            this.textPrice.Location = new System.Drawing.Point(111, 109);
             this.textPrice.Name = "textPrice";
             this.textPrice.Size = new System.Drawing.Size(677, 27);
             this.textPrice.TabIndex = 4;
+            // 
+            // comboColor
+            // 
+            this.comboColor.FormattingEnabled = true;
+            this.comboColor.Location = new System.Drawing.Point(111, 41);
+            this.comboColor.Name = "comboColor";
+            this.comboColor.Size = new System.Drawing.Size(677, 28);
+            this.comboColor.TabIndex = 2;
+            this.comboColor.SelectedIndexChanged += new System.EventHandler(this.comboColor_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 44);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 20);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Цвет";
+            // 
+            // open
+            // 
+            this.open.FileName = "openFileDialog1";
+            this.open.Filter = "Файлы CSV|*.csv|Файлы XML|*.xml|Файлы JSON|*.json|Все файлы|*.*";
             // 
             // MainForm
             // 
@@ -121,7 +147,9 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.textPrice);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.comboColor);
             this.Controls.Add(this.comboMaterial);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menu);
             this.MainMenuStrip = this.menu;
@@ -145,5 +173,8 @@
         private System.Windows.Forms.ComboBox comboMaterial;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textPrice;
+        private System.Windows.Forms.ComboBox comboColor;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.OpenFileDialog open;
     }
 }

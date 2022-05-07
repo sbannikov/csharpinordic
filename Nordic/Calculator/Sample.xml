@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Materials>
+	<Material Name="Amarillo Sol t-30" Color="желтый" Price="8550" />
+	<Material Name="Arabescato Black Orobico t-20" Color="черный" Price="14040" />
+	<Material Name="Arabescato Corchia t-20" Color="белый" Price="18270" />
+	<Material Name="Arabescato Grigio Orobico t-20" Color="серый" Price="17280" />
+	<Material Name="Arabescato Vagli t-20" Color="белый" Price="20250" />
+	<Material Name="Arancio di Selva t-20" Color="красный" Price="12780" />
+	<Material Name="Ardesia Black Waves t-20 (сланец) - акваскульптура" Color="черный" Price="18900" />
+	<Material Name="Ardesia Grey Moon t-30 (сланец)" Color="серый" Price="12600" />
+	<Material Name="Ardesia Nero Notte  t-20 колотая (сланец)" Color="черный" Price="15300" />
+	<Material Name="Argolis Red t-20" Color="красный" Price="7920" />
+	<Material Name="Argos Black t-20" Color="черный" Price="10710" />
+	<Material Name="Armand Fossile t-20" Color="серый" Price="6750" />
+	<Material Name="Asinis t-20" Color="серый" Price="12690" />
+	<Material Name="Bardiglio Grey t-20" Color="серый" Price="11160" />
+	<Material Name="Bardiglio Imperiale t-20" Color="серый" Price="9360" />
+	<Material Name="Bardiglio Light t-20" Color="серый" Price="10170" />
+	<Material Name="Beige Royal t-20" Color="бежевый" Price="7920" />
+	<Material Name="Bianco Carrara C t-20" Color="белый" Price="13950" />
+	<Material Name="Bianco Carrara C t-30" Color="белый" Price="22050" />
+	<Material Name="Bianco Carrara Extra t-20" Color="белый" Price="22500" />
+	<Material Name="Bianco Carrara Gioia t-20" Color="белый" Price="18270" />
+	<Material Name="Bianco Carrara t-20" Color="белый" Price="17100" />
+	<Material Name="Bianco Carrara t-30" Color="белый" Price="17100" />
+	<Material Name="Bianco Carrara Venato t-20" Color="белый" Price="18000" />
+	<Material Name="Bianco Lasa t-20" Color="белый" Price="34740" />
+	<Material Name="Bianco Oroe t-20" Color="бежевый" Price="9450" />
+	<Material Name="Bianco Perlino t-20 (лощеный)" Color="бежевый" Price="9990" />
+	<Material Name="Bidaser Brown Antico t-20" Color="коричневый" Price="9630" />
+	<Material Name="Bidaser Brown t-20" Color="коричневый" Price="9630" />
+	<Material Name="Bidaser Brown t-30" Color="коричневый" Price="13680" />
+	<Material Name="Bidaser Green Spazzolato t-20" Color="зеленый" Price="11880" />
+	<Material Name="Bidaser Green t-20" Color="зеленый" Price="14220" />
+	<Material Name="Black & Gold t-20" Color="черный" Price="12600" />
+	<Material Name="Botticino Classico t-20" Color="бежевый" Price="10800" />
+	<Material Name="Botticino Crema t-20" Color="бежевый" Price="10800" />
+	<Material Name="Breccia Oniciata t-20" Color="бежевый" Price="10710" />
+	<Material Name="Breche de Loire t-20" Color="мультиколор" Price="12690" />
+	<Material Name="Caesar Brown Spazzolato t-20" Color="коричневый" Price="6750" />
+	<Material Name="Cafe Latte Dark t-20" Color="бежевый" Price="7650" />
+	<Material Name="Calacatta Bianco t-20" Color="белый" Price="19800" />
+	<Material Name="Calacatta Blu t-20 ( прожилки  диагональные)" Color="белый" Price="15750" />
+	<Material Name="Calacatta Bluette Extra t-20" Color="белый" Price="16650" />
+	<Material Name="Calacatta Manhattan t-20" Color="белый" Price="27000" />
+	<Material Name="Calacatta Oro t-20" Color="белый" Price="21150" />
+	<Material Name="Calacatta t-20" Color="белый" Price="21150" />
+	<Material Name="Caliza Capri  t-20" Color="бежевый" Price="10350" />
+	<Material Name="Camelot Grey t-20" Color="серый" Price="10080" />
+	<Material Name="Chocolato t-20" Color="бежевый" Price="9450" />
+	<Material Name="Chocoline t-20" Color="розовый" Price="12600" />
+	<Material Name="Chocorosa t-20" Color="розовый" Price="10170" />
+	<Material Name="Cipollino t-20" Color="зеленый" Price="16650" />
+	<Material Name="Cipollino Verde t-20" Color="зеленый" Price="21600" />
+	<Material Name="Cobra Gold t-20" Color="зеленый" Price="13950" />
+	<Material Name="Coffee Brown t- 19" Color="коричневый" Price="10710" />
+	<Material Name="Corinfos t-30" Color="бежевый" Price="12150" />
+	<Material Name="Crema Estremos t-20" Color="бежевый" Price="13500" />
+	<Material Name="Crema Europa t-20" Color="бежевый" Price="7380" />
+	<Material Name="Crema Marfil Extra t-20" Color="бежевый" Price="14850" />
+	<Material Name="Crema Marfil t-20" Color="бежевый" Price="14796" />
+	<Material Name="Crema Marfil t-30" Color="бежевый" Price="16650" />
+	<Material Name="Crema Valencia t-20" Color="желтый" Price="11700" />
+	<Material Name="Cristallino Striato t-20" Color="серый" Price="10170" />
+	<Material Name="Daino t-20" Color="бежевый" Price="9450" />
+	<Material Name="Daino t-30" Color="бежевый" Price="11700" />
+	<Material Name="Dark Olive t-20" Color="зеленый" Price="9000" />
+	<Material Name="Deep Grey t-20" Color="серый" Price="9504" />
+	<Material Name="Didymon Light t-20" Color="серый" Price="10620" />
+	<Material Name="Didymon t-20" Color="серый" Price="10440" />
+	<Material Name="Didymon t-30" Color="серый" Price="14850" />
+	<Material Name="Dust Silver t-20" Color="серый" Price="15300" />
+	<Material Name="Elysee Beige t-20" Color="бежевый" Price="6750" />
+	<Material Name="Emperador Dark t-20" Color="коричневый" Price="14580" />
+	<Material Name="Emperador Dark t-30" Color="коричневый" Price="13050" />
+	<Material Name="Emperador Extra t-20" Color="коричневый" Price="12150" />
+	<Material Name="Emperador Extra t-30" Color="коричневый" Price="13050" />
+	<Material Name="Emperador Light Special t-20" Color="бежевый" Price="8550" />
+	<Material Name="Fior di Pesco t-20" Color="серый" Price="18900" />
+	<Material Name="Galala  t-20" Color="бежевый" Price="9900" />
+	<Material Name="Gascony Blue t-20 (материал заказчика)" Color="" Price="" />
+	<Material Name="Giallo Reale t-20" Color="желтый" Price="9900" />
+	<Material Name="Giallo Reale t-30" Color="желтый" Price="13950" />
+	<Material Name="Giallo Sienna t-20" Color="желтый" Price="18450" />
+	<Material Name="Giallo Sunny Light (al verso) t-20" Color="желтый" Price="8460" />
+	<Material Name="Giallo Sunny Light (al verso) t-30" Color="желтый" Price="11790" />
+	<Material Name="Giallo Sunny Light t-20" Color="желтый" Price="8460" />
+	<Material Name="Giallo Sunny Light t-30" Color="желтый" Price="9810" />
+	<Material Name="Golden Coast t-20" Color="коричневый" Price="10350" />
+	<Material Name="Golden Grey t-20" Color="серый" Price="10080" />
+	<Material Name="Golden Spider t-20" Color="желтый" Price="11250" />
+	<Material Name="Golden Spider t-30" Color="желтый" Price="14670" />
+	<Material Name="Green Beige t-20" Color="зеленый" Price="11700" />
+	<Material Name="Green Tinos t-30" Color="зеленый" Price="8100" />
+	<Material Name="Grey Pink t-20" Color="серый" Price="9450" />
+	<Material Name="Grigio Carnico t-20" Color="серый" Price="16110" />
+	<Material Name="Grigio Saint Nicola t-20" Color="серый" Price="10800" />
+	<Material Name="Grigio Taormina t-20" Color="серый" Price="14400" />
+	<Material Name="Irish Connemarble Green t-20" Color="зеленый" Price="33750" />
+	<Material Name="Ligurio Light t-20" Color="бежевый" Price="10710" />
+	<Material Name="Ligurio Light t-30" Color="бежевый" Price="13320" />
+	<Material Name="Luxury White t-20" Color="белый" Price="17100" />
+	<Material Name="Marron Fossile t-20" Color="коричневый" Price="22050" />
+	<Material Name="Mocco Creme t-20 (лощеный)" Color="бежевый" Price="9900" />
+	<Material Name="Monaco Brown t-20" Color="коричневый" Price="11700" />
+	<Material Name="Monaco Brown t-30" Color="коричневый" Price="12600" />
+	<Material Name="Namibia Sky t-20" Color="белый" Price="10800" />
+	<Material Name="Nero Fossile t-20" Color="черный" Price="17550" />
+	<Material Name="Nero Marquina t-20" Color="черный" Price="11250" />
+	<Material Name="Nero Portoro t-20" Color="черный" Price="58500" />
+	<Material Name="New Marfil t-20" Color="бежевый" Price="10800" />
+	<Material Name="New Marfil t-30" Color="бежевый" Price="13050" />
+	<Material Name="Opera Fantastica t-20" Color="мультиколор" Price="22230" />
+	<Material Name="Oro Apuano t-20" Color="черный" Price="13500" />
+	<Material Name="Oro Apuano t-30" Color="черный" Price="25200" />
+	<Material Name="Palissandro Australia t-20" Color="серый" Price="13950" />
+	<Material Name="Palissandro Bluette t-20" Color="серый" Price="9900" />
+	<Material Name="Palissandro Classico t-20" Color="бежевый" Price="11700" />
+	<Material Name="Palissandro Dark t-20" Color="серый" Price="19170" />
+	<Material Name="Palissandro Oniciato t-20" Color="бежевый" Price="11700" />
+	<Material Name="Palissandro Oniciato t-30 (диагональ)" Color="белый" Price="20700" />
+	<Material Name="Palissandro Reale t-20" Color="бежевый" Price="17100" />
+	<Material Name="Palladio Beige t-20" Color="бежевый" Price="16200" />
+	<Material Name="Pietra Grey t-18" Color="серый" Price="14400" />
+	<Material Name="Pietra Grey t-20" Color="серый" Price="14400" />
+	<Material Name="Porto Black t-20" Color="черный" Price="9000" />
+	<Material Name="Portoro Gold t-20" Color="черный" Price="21600" />
+	<Material Name="Rainbow Extra Antico t-20" Color="коричневый" Price="18000" />
+	<Material Name="Rainbow Extra Spazzolato t-20 (песчаник)" Color="коричневый" Price="16650" />
+	<Material Name="Rainbow Extra t-20 (песчаник)" Color="коричневый" Price="15750" />
+	<Material Name="Rainbow t-20 (песчанник)" Color="коричневый" Price="12600" />
+	<Material Name="Rosa Aurora t-20" Color="розовый" Price="16650" />
+	<Material Name="Rosa Blue t-20" Color="серый" Price="19350" />
+	<Material Name="Rosa Portogallo (al contro) t-20" Color="розовый" Price="9900" />
+	<Material Name="Rosa Portogallo Creme t-20" Color="розовый" Price="9900" />
+	<Material Name="Rosa Portogallo Creme t-30" Color="розовый" Price="17100" />
+	<Material Name="Rosa Portogallo Extra t-20" Color="розовый" Price="15300" />
+	<Material Name="Rosa Portogallo t-20" Color="розовый" Price="9900" />
+	<Material Name="Rosa Valencia t-20" Color="розовый" Price="11250" />
+	<Material Name="Rose Volou t-30" Color="розовый" Price="9900" />
+	<Material Name="Rosso Alicante t-20" Color="красный" Price="12420" />
+	<Material Name="Rosso Alicante t-30" Color="красный" Price="15390" />
+	<Material Name="Rosso Erica t-20" Color="красный" Price="19350" />
+	<Material Name="Rosso Francia t-20" Color="красный" Price="13590" />
+	<Material Name="Rosso Lait t-20" Color="розовый" Price="6750" />
+	<Material Name="Rosso Levanto t-20" Color="красный" Price="13950" />
+	<Material Name="Rosso Orobico t-20" Color="красный" Price="17280" />
+	<Material Name="Rosso Verona t-20" Color="красный" Price="9180" />
+	<Material Name="Rosso Verona t-30" Color="красный" Price="10080" />
+	<Material Name="Rosso Versailles t-20" Color="мультиколор" Price="31500" />
+	<Material Name="Royal Red  t-30" Color="красный" Price="9180" />
+	<Material Name="Rubidium t-20" Color="розовый" Price="10170" />
+	<Material Name="Sahara Noir t-20" Color="черный" Price="19170" />
+	<Material Name="Serpeggiante t-20" Color="бежевый" Price="10800" />
+	<Material Name="Siberian Forest t-20" Color="желтый" Price="18450" />
+	<Material Name="Silver Galaxy t-20" Color="серый" Price="10980" />
+	<Material Name="Silver Grey t-20" Color="серый" Price="10800" />
+	<Material Name="Sivec Extra t-20" Color="белый" Price="42480" />
+	<Material Name="Skyros Argento t-30" Color="серый" Price="11520" />
+	<Material Name="Skyros Red t-20" Color="мультиколор" Price="10800" />
+	<Material Name="Skyros Silver t-20" Color="серый" Price="7470" />
+	<Material Name="Skyros t-20" Color="желтый" Price="10080" />
+	<Material Name="Skyros t-30" Color="желтый" Price="9900" />
+	<Material Name="Skyros Yellow Whitish t-20" Color="бежевый" Price="14580" />
+	<Material Name="Special White t-20" Color="белый" Price="17100" />
+	<Material Name="Statuarietto t-20" Color="белый" Price="15300" />
+	<Material Name="Statuario t-20" Color="белый" Price="32310" />
+	<Material Name="Statuario t-20 (проект Москва)" Color="" Price="58500" />
+	<Material Name="Summer Fantasy Dark t-20" Color="серый" Price="19350" />
+	<Material Name="Summer Fantasy Extra t-20" Color="желтый" Price="11250" />
+	<Material Name="Summer Fantasy Light t-20" Color="серый" Price="17100" />
+	<Material Name="Summer Fantasy t-30" Color="серый" Price="18000" />
+	<Material Name="Tanji Grey t-30" Color="серый" Price="15750" />
+	<Material Name="Teak Wood t-20" Color="желтый" Price="16650" />
+	<Material Name="Teak Wood t-30" Color="окаменевшее дерево" Price="20700" />
+	<Material Name="Thassos t-20" Color="белый" Price="18000" />
+	<Material Name="Theologos t-20" Color="бежевый" Price="6750" />
+	<Material Name="Tiger Shark t-20" Color="розовый" Price="13050" />
+	<Material Name="Uru Brown t-20" Color="коричневый" Price="11250" />
+	<Material Name="Verde Antigua t-20" Color="зеленый" Price="14400" />
+	<Material Name="Verde Guatemala t-20" Color="зеленый" Price="7920" />
+	<Material Name="Verde Venezia T-20" Color="зеленый" Price="18270" />
+	<Material Name="Verde Venezia t-30" Color="зеленый" Price="21960" />
+	<Material Name="White Citrus t-20" Color="белый" Price="12960" />
+	<Material Name="White Rhino t-20" Color="белый" Price="21600" />
+	<Material Name="Yellow Design t-17,5" Color="желтый" Price="9000" />
+</Materials>
