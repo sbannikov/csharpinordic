@@ -3,31 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Calculator
 {
     /// <summary>
     /// Материал
     /// </summary>
-    internal class Material
+    public class Material
     {
         /// <summary>
         /// Наименование
         /// </summary>
-        internal string Name;
+        [XmlAttribute()]
+        public string Name;
+
         /// <summary>
         /// Цвет в виде объекта
         /// </summary>
         internal Color MaterialColor;
+
         /// <summary>
         /// Наименование цвета
         /// </summary>
-        internal string ColorName;
+        [XmlAttribute(AttributeName = "Color")]
+        [JsonProperty(PropertyName = "Color")]
+        public string ColorName;
+
         /// <summary>
         /// Цена (руб. за м2)
         /// (цена может быть не задана)
         /// </summary>
-        internal double? Price;
+        [XmlAttribute()]
+        public double Price { get; set; }
 
         /// <summary>
         /// Строковое отображение объекта

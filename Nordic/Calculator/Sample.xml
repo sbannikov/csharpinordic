@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Materials>
+<Data>
 	<Material Name="Amarillo Sol t-30" Color="желтый" Price="8550" />
 	<Material Name="Arabescato Black Orobico t-20" Color="черный" Price="14040" />
 	<Material Name="Arabescato Corchia t-20" Color="белый" Price="18270" />
@@ -32,7 +32,7 @@
 	<Material Name="Bidaser Brown t-30" Color="коричневый" Price="13680" />
 	<Material Name="Bidaser Green Spazzolato t-20" Color="зеленый" Price="11880" />
 	<Material Name="Bidaser Green t-20" Color="зеленый" Price="14220" />
-	<Material Name="Black & Gold t-20" Color="черный" Price="12600" />
+	<Material Name="Black &amp; Gold t-20" Color="черный" Price="12600" />
 	<Material Name="Botticino Classico t-20" Color="бежевый" Price="10800" />
 	<Material Name="Botticino Crema t-20" Color="бежевый" Price="10800" />
 	<Material Name="Breccia Oniciata t-20" Color="бежевый" Price="10710" />
@@ -78,7 +78,7 @@
 	<Material Name="Emperador Light Special t-20" Color="бежевый" Price="8550" />
 	<Material Name="Fior di Pesco t-20" Color="серый" Price="18900" />
 	<Material Name="Galala  t-20" Color="бежевый" Price="9900" />
-	<Material Name="Gascony Blue t-20 (материал заказчика)" Color="" Price="" />
+	<Material Name="Gascony Blue t-20 (материал заказчика)" />
 	<Material Name="Giallo Reale t-20" Color="желтый" Price="9900" />
 	<Material Name="Giallo Reale t-30" Color="желтый" Price="13950" />
 	<Material Name="Giallo Sienna t-20" Color="желтый" Price="18450" />
@@ -184,4 +184,4 @@
 	<Material Name="White Citrus t-20" Color="белый" Price="12960" />
 	<Material Name="White Rhino t-20" Color="белый" Price="21600" />
 	<Material Name="Yellow Design t-17,5" Color="желтый" Price="9000" />
-</Materials>
+</Data>

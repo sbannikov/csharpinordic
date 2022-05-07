@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Calculator
 {
@@ -73,7 +75,7 @@ namespace Calculator
                 {
                     Name = fields[0],
                     MaterialColor = colors[fields[1]],
-                    Price = !string.IsNullOrEmpty(fields[2]) ? double.Parse(fields[2]) : null
+                    Price = !string.IsNullOrEmpty(fields[2]) ? double.Parse(fields[2]) : double.NaN
                 };
                 /*
                  * Альтернативный вариант инициализации Price
@@ -96,12 +98,62 @@ namespace Calculator
             comboMaterial.Items.AddRange(materials.ToArray());
         }
 
+        private void LoadData(Data data)
+        {
+            if (data != null)
+            {
+                // Список цветов
+                var colors = new Dictionary<string, Color>();
+
+                // Сохранение списка материалов
+                materials = data.Materials.ToList();
+
+                foreach (var material in materials)
+                {
+                    string colorName = material.ColorName ?? String.Empty;
+                    Color color;
+                    // Проверка на дубликат
+                    if (!colors.ContainsKey(colorName))
+                    {
+                        // Добавление нового цвета в словарь
+                        color = new Color()
+                        {
+                            Name = colorName
+                        };
+                        colors.Add(colorName, color);
+                    }
+                    else
+                    {
+                        color = colors[colorName];
+                    }
+                    material.MaterialColor = color;
+                }
+
+                // Выпадающий список цветов
+                comboColor.Items.AddRange(colors.Values.ToArray());
+
+                // Выпадающий список материалов
+                comboMaterial.Items.AddRange(materials.ToArray());
+            }
+        }
+
         /// <summary>
         /// Загрузка XML-файла десериализацией
         /// </summary>
         /// <param name="name"></param>
         private void LoadXml(string name)
-        { 
+        {
+            var serializer = new XmlSerializer(typeof(Data));
+            var reader = System.Xml.XmlReader.Create(name);
+            var data = (Data)serializer.Deserialize(reader);
+            LoadData(data);
+        }
+
+        private void LoadJson(string name)
+        {
+            string json = System.IO.File.ReadAllText(name);
+            var data = JsonConvert.DeserializeObject<Data>(json);
+            LoadData(data);
         }
 
         /// <summary>
@@ -111,20 +163,34 @@ namespace Calculator
         /// <param name="e"></param>
         private void LoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Запрос имени загружаемого файла 
-            if (open.ShowDialog() != DialogResult.OK) return;
-
-            switch (open.FilterIndex)
+            try
             {
-                case 1:
-                    LoadCsv(open.FileName);
-                    break;
-                case 2:
-                    LoadXml(open.FileName);
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }           
+                // Запрос имени загружаемого файла 
+                if (open.ShowDialog() != DialogResult.OK) return;
+
+                // Предварительная очистка списков
+                comboColor.Items.Clear();
+                comboMaterial.Items.Clear();
+
+                switch (open.FilterIndex)
+                {
+                    case 1:
+                        LoadCsv(open.FileName);
+                        break;
+                    case 2:
+                        LoadXml(open.FileName);
+                        break;
+                    case 3:
+                        LoadJson(open.FileName);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>

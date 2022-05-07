@@ -1,0 +1,923 @@
+{
+  "Materials": [
+    {
+      "Name": "Amarillo Sol t-30",
+      "Color": "желтый",
+      "Price": 8550.0
+    },
+    {
+      "Name": "Arabescato Black Orobico t-20",
+      "Color": "черный",
+      "Price": 14040
+    },
+    {
+      "Name": "Arabescato Corchia t-20",
+      "Color": "белый",
+      "Price": 18270
+    },
+    {
+      "Name": "Arabescato Grigio Orobico t-20",
+      "Color": "серый",
+      "Price": 17280
+    },
+    {
+      "Name": "Arabescato Vagli t-20",
+      "Color": "белый",
+      "Price": 20250
+    },
+    {
+      "Name": "Arancio di Selva t-20",
+      "Color": "красный",
+      "Price": 12780
+    },
+    {
+      "Name": "Ardesia Black Waves t-20 (сланец) - акваскульптура",
+      "Color": "черный",
+      "Price": 18900
+    },
+    {
+      "Name": "Ardesia Grey Moon t-30 (сланец)",
+      "Color": "серый",
+      "Price": 12600
+    },
+    {
+      "Name": "Ardesia Nero Notte  t-20 колотая (сланец)",
+      "Color": "черный",
+      "Price": 15300
+    },
+    {
+      "Name": "Argolis Red t-20",
+      "Color": "красный",
+      "Price": 7920
+    },
+    {
+      "Name": "Argos Black t-20",
+      "Color": "черный",
+      "Price": 10710
+    },
+    {
+      "Name": "Armand Fossile t-20",
+      "Color": "серый",
+      "Price": 6750
+    },
+    {
+      "Name": "Asinis t-20",
+      "Color": "серый",
+      "Price": 12690
+    },
+    {
+      "Name": "Bardiglio Grey t-20",
+      "Color": "серый",
+      "Price": 11160
+    },
+    {
+      "Name": "Bardiglio Imperiale t-20",
+      "Color": "серый",
+      "Price": 9360
+    },
+    {
+      "Name": "Bardiglio Light t-20",
+      "Color": "серый",
+      "Price": 10170
+    },
+    {
+      "Name": "Beige Royal t-20",
+      "Color": "бежевый",
+      "Price": 7920
+    },
+    {
+      "Name": "Bianco Carrara C t-20",
+      "Color": "белый",
+      "Price": 13950
+    },
+    {
+      "Name": "Bianco Carrara C t-30",
+      "Color": "белый",
+      "Price": 22050
+    },
+    {
+      "Name": "Bianco Carrara Extra t-20",
+      "Color": "белый",
+      "Price": 22500
+    },
+    {
+      "Name": "Bianco Carrara Gioia t-20",
+      "Color": "белый",
+      "Price": 18270
+    },
+    {
+      "Name": "Bianco Carrara t-20",
+      "Color": "белый",
+      "Price": 17100
+    },
+    {
+      "Name": "Bianco Carrara t-30",
+      "Color": "белый",
+      "Price": 17100
+    },
+    {
+      "Name": "Bianco Carrara Venato t-20",
+      "Color": "белый",
+      "Price": 18000
+    },
+    {
+      "Name": "Bianco Lasa t-20",
+      "Color": "белый",
+      "Price": 34740
+    },
+    {
+      "Name": "Bianco Oroe t-20",
+      "Color": "бежевый",
+      "Price": 9450
+    },
+    {
+      "Name": "Bianco Perlino t-20 (лощеный)",
+      "Color": "бежевый",
+      "Price": 9990
+    },
+    {
+      "Name": "Bidaser Brown Antico t-20",
+      "Color": "коричневый",
+      "Price": 9630
+    },
+    {
+      "Name": "Bidaser Brown t-20",
+      "Color": "коричневый",
+      "Price": 9630
+    },
+    {
+      "Name": "Bidaser Brown t-30",
+      "Color": "коричневый",
+      "Price": 13680
+    },
+    {
+      "Name": "Bidaser Green Spazzolato t-20",
+      "Color": "зеленый",
+      "Price": 11880
+    },
+    {
+      "Name": "Bidaser Green t-20",
+      "Color": "зеленый",
+      "Price": 14220
+    },
+    {
+      "Name": "Black & Gold t-20",
+      "Color": "черный",
+      "Price": 12600
+    },
+    {
+      "Name": "Botticino Classico t-20",
+      "Color": "бежевый",
+      "Price": 10800
+    },
+    {
+      "Name": "Botticino Crema t-20",
+      "Color": "бежевый",
+      "Price": 10800
+    },
+    {
+      "Name": "Breccia Oniciata t-20",
+      "Color": "бежевый",
+      "Price": 10710
+    },
+    {
+      "Name": "Breche de Loire t-20",
+      "Color": "мультиколор",
+      "Price": 12690
+    },
+    {
+      "Name": "Caesar Brown Spazzolato t-20",
+      "Color": "коричневый",
+      "Price": 6750
+    },
+    {
+      "Name": "Cafe Latte Dark t-20",
+      "Color": "бежевый",
+      "Price": 7650
+    },
+    {
+      "Name": "Calacatta Bianco t-20",
+      "Color": "белый",
+      "Price": 19800
+    },
+    {
+      "Name": "Calacatta Blu t-20 ( прожилки  диагональные)",
+      "Color": "белый",
+      "Price": 15750
+    },
+    {
+      "Name": "Calacatta Bluette Extra t-20",
+      "Color": "белый",
+      "Price": 16650
+    },
+    {
+      "Name": "Calacatta Manhattan t-20",
+      "Color": "белый",
+      "Price": 27000
+    },
+    {
+      "Name": "Calacatta Oro t-20",
+      "Color": "белый",
+      "Price": 21150
+    },
+    {
+      "Name": "Calacatta t-20",
+      "Color": "белый",
+      "Price": 21150
+    },
+    {
+      "Name": "Caliza Capri  t-20",
+      "Color": "бежевый",
+      "Price": 10350
+    },
+    {
+      "Name": "Camelot Grey t-20",
+      "Color": "серый",
+      "Price": 10080
+    },
+    {
+      "Name": "Chocolato t-20",
+      "Color": "бежевый",
+      "Price": 9450
+    },
+    {
+      "Name": "Chocoline t-20",
+      "Color": "розовый",
+      "Price": 12600
+    },
+    {
+      "Name": "Chocorosa t-20",
+      "Color": "розовый",
+      "Price": 10170
+    },
+    {
+      "Name": "Cipollino t-20",
+      "Color": "зеленый",
+      "Price": 16650
+    },
+    {
+      "Name": "Cipollino Verde t-20",
+      "Color": "зеленый",
+      "Price": 21600
+    },
+    {
+      "Name": "Cobra Gold t-20",
+      "Color": "зеленый",
+      "Price": 13950
+    },
+    {
+      "Name": "Coffee Brown t- 19",
+      "Color": "коричневый",
+      "Price": 10710
+    },
+    {
+      "Name": "Corinfos t-30",
+      "Color": "бежевый",
+      "Price": 12150
+    },
+    {
+      "Name": "Crema Estremos t-20",
+      "Color": "бежевый",
+      "Price": 13500
+    },
+    {
+      "Name": "Crema Europa t-20",
+      "Color": "бежевый",
+      "Price": 7380
+    },
+    {
+      "Name": "Crema Marfil Extra t-20",
+      "Color": "бежевый",
+      "Price": 14850
+    },
+    {
+      "Name": "Crema Marfil t-20",
+      "Color": "бежевый",
+      "Price": 14796
+    },
+    {
+      "Name": "Crema Marfil t-30",
+      "Color": "бежевый",
+      "Price": 16650
+    },
+    {
+      "Name": "Crema Valencia t-20",
+      "Color": "желтый",
+      "Price": 11700
+    },
+    {
+      "Name": "Cristallino Striato t-20",
+      "Color": "серый",
+      "Price": 10170
+    },
+    {
+      "Name": "Daino t-20",
+      "Color": "бежевый",
+      "Price": 9450
+    },
+    {
+      "Name": "Daino t-30",
+      "Color": "бежевый",
+      "Price": 11700
+    },
+    {
+      "Name": "Dark Olive t-20",
+      "Color": "зеленый",
+      "Price": 9000
+    },
+    {
+      "Name": "Deep Grey t-20",
+      "Color": "серый",
+      "Price": 9504
+    },
+    {
+      "Name": "Didymon Light t-20",
+      "Color": "серый",
+      "Price": 10620
+    },
+    {
+      "Name": "Didymon t-20",
+      "Color": "серый",
+      "Price": 10440
+    },
+    {
+      "Name": "Didymon t-30",
+      "Color": "серый",
+      "Price": 14850
+    },
+    {
+      "Name": "Dust Silver t-20",
+      "Color": "серый",
+      "Price": 15300
+    },
+    {
+      "Name": "Elysee Beige t-20",
+      "Color": "бежевый",
+      "Price": 6750
+    },
+    {
+      "Name": "Emperador Dark t-20",
+      "Color": "коричневый",
+      "Price": 14580
+    },
+    {
+      "Name": "Emperador Dark t-30",
+      "Color": "коричневый",
+      "Price": 13050
+    },
+    {
+      "Name": "Emperador Extra t-20",
+      "Color": "коричневый",
+      "Price": 12150
+    },
+    {
+      "Name": "Emperador Extra t-30",
+      "Color": "коричневый",
+      "Price": 13050
+    },
+    {
+      "Name": "Emperador Light Special t-20",
+      "Color": "бежевый",
+      "Price": 8550
+    },
+    {
+      "Name": "Fior di Pesco t-20",
+      "Color": "серый",
+      "Price": 18900
+    },
+    {
+      "Name": "Galala  t-20",
+      "Color": "бежевый",
+      "Price": 9900
+    },
+    {
+      "Name": "Gascony Blue t-20 (материал заказчика)"
+    },
+    {
+      "Name": "Giallo Reale t-20",
+      "Color": "желтый",
+      "Price": 9900
+    },
+    {
+      "Name": "Giallo Reale t-30",
+      "Color": "желтый",
+      "Price": 13950
+    },
+    {
+      "Name": "Giallo Sienna t-20",
+      "Color": "желтый",
+      "Price": 18450
+    },
+    {
+      "Name": "Giallo Sunny Light (al verso) t-20",
+      "Color": "желтый",
+      "Price": 8460
+    },
+    {
+      "Name": "Giallo Sunny Light (al verso) t-30",
+      "Color": "желтый",
+      "Price": 11790
+    },
+    {
+      "Name": "Giallo Sunny Light t-20",
+      "Color": "желтый",
+      "Price": 8460
+    },
+    {
+      "Name": "Giallo Sunny Light t-30",
+      "Color": "желтый",
+      "Price": 9810
+    },
+    {
+      "Name": "Golden Coast t-20",
+      "Color": "коричневый",
+      "Price": 10350
+    },
+    {
+      "Name": "Golden Grey t-20",
+      "Color": "серый",
+      "Price": 10080
+    },
+    {
+      "Name": "Golden Spider t-20",
+      "Color": "желтый",
+      "Price": 11250
+    },
+    {
+      "Name": "Golden Spider t-30",
+      "Color": "желтый",
+      "Price": 14670
+    },
+    {
+      "Name": "Green Beige t-20",
+      "Color": "зеленый",
+      "Price": 11700
+    },
+    {
+      "Name": "Green Tinos t-30",
+      "Color": "зеленый",
+      "Price": 8100
+    },
+    {
+      "Name": "Grey Pink t-20",
+      "Color": "серый",
+      "Price": 9450
+    },
+    {
+      "Name": "Grigio Carnico t-20",
+      "Color": "серый",
+      "Price": 16110
+    },
+    {
+      "Name": "Grigio Saint Nicola t-20",
+      "Color": "серый",
+      "Price": 10800
+    },
+    {
+      "Name": "Grigio Taormina t-20",
+      "Color": "серый",
+      "Price": 14400
+    },
+    {
+      "Name": "Irish Connemarble Green t-20",
+      "Color": "зеленый",
+      "Price": 33750
+    },
+    {
+      "Name": "Ligurio Light t-20",
+      "Color": "бежевый",
+      "Price": 10710
+    },
+    {
+      "Name": "Ligurio Light t-30",
+      "Color": "бежевый",
+      "Price": 13320
+    },
+    {
+      "Name": "Luxury White t-20",
+      "Color": "белый",
+      "Price": 17100
+    },
+    {
+      "Name": "Marron Fossile t-20",
+      "Color": "коричневый",
+      "Price": 22050
+    },
+    {
+      "Name": "Mocco Creme t-20 (лощеный)",
+      "Color": "бежевый",
+      "Price": 9900
+    },
+    {
+      "Name": "Monaco Brown t-20",
+      "Color": "коричневый",
+      "Price": 11700
+    },
+    {
+      "Name": "Monaco Brown t-30",
+      "Color": "коричневый",
+      "Price": 12600
+    },
+    {
+      "Name": "Namibia Sky t-20",
+      "Color": "белый",
+      "Price": 10800
+    },
+    {
+      "Name": "Nero Fossile t-20",
+      "Color": "черный",
+      "Price": 17550
+    },
+    {
+      "Name": "Nero Marquina t-20",
+      "Color": "черный",
+      "Price": 11250
+    },
+    {
+      "Name": "Nero Portoro t-20",
+      "Color": "черный",
+      "Price": 58500
+    },
+    {
+      "Name": "New Marfil t-20",
+      "Color": "бежевый",
+      "Price": 10800
+    },
+    {
+      "Name": "New Marfil t-30",
+      "Color": "бежевый",
+      "Price": 13050
+    },
+    {
+      "Name": "Opera Fantastica t-20",
+      "Color": "мультиколор",
+      "Price": 22230
+    },
+    {
+      "Name": "Oro Apuano t-20",
+      "Color": "черный",
+      "Price": 13500
+    },
+    {
+      "Name": "Oro Apuano t-30",
+      "Color": "черный",
+      "Price": 25200
+    },
+    {
+      "Name": "Palissandro Australia t-20",
+      "Color": "серый",
+      "Price": 13950
+    },
+    {
+      "Name": "Palissandro Bluette t-20",
+      "Color": "серый",
+      "Price": 9900
+    },
+    {
+      "Name": "Palissandro Classico t-20",
+      "Color": "бежевый",
+      "Price": 11700
+    },
+    {
+      "Name": "Palissandro Dark t-20",
+      "Color": "серый",
+      "Price": 19170
+    },
+    {
+      "Name": "Palissandro Oniciato t-20",
+      "Color": "бежевый",
+      "Price": 11700
+    },
+    {
+      "Name": "Palissandro Oniciato t-30 (диагональ)",
+      "Color": "белый",
+      "Price": 20700
+    },
+    {
+      "Name": "Palissandro Reale t-20",
+      "Color": "бежевый",
+      "Price": 17100
+    },
+    {
+      "Name": "Palladio Beige t-20",
+      "Color": "бежевый",
+      "Price": 16200
+    },
+    {
+      "Name": "Pietra Grey t-18",
+      "Color": "серый",
+      "Price": 14400
+    },
+    {
+      "Name": "Pietra Grey t-20",
+      "Color": "серый",
+      "Price": 14400
+    },
+    {
+      "Name": "Porto Black t-20",
+      "Color": "черный",
+      "Price": 9000
+    },
+    {
+      "Name": "Portoro Gold t-20",
+      "Color": "черный",
+      "Price": 21600
+    },
+    {
+      "Name": "Rainbow Extra Antico t-20",
+      "Color": "коричневый",
+      "Price": 18000
+    },
+    {
+      "Name": "Rainbow Extra Spazzolato t-20 (песчаник)",
+      "Color": "коричневый",
+      "Price": 16650
+    },
+    {
+      "Name": "Rainbow Extra t-20 (песчаник)",
+      "Color": "коричневый",
+      "Price": 15750
+    },
+    {
+      "Name": "Rainbow t-20 (песчанник)",
+      "Color": "коричневый",
+      "Price": 12600
+    },
+    {
+      "Name": "Rosa Aurora t-20",
+      "Color": "розовый",
+      "Price": 16650
+    },
+    {
+      "Name": "Rosa Blue t-20",
+      "Color": "серый",
+      "Price": 19350
+    },
+    {
+      "Name": "Rosa Portogallo (al contro) t-20",
+      "Color": "розовый",
+      "Price": 9900
+    },
+    {
+      "Name": "Rosa Portogallo Creme t-20",
+      "Color": "розовый",
+      "Price": 9900
+    },
+    {
+      "Name": "Rosa Portogallo Creme t-30",
+      "Color": "розовый",
+      "Price": 17100
+    },
+    {
+      "Name": "Rosa Portogallo Extra t-20",
+      "Color": "розовый",
+      "Price": 15300
+    },
+    {
+      "Name": "Rosa Portogallo t-20",
+      "Color": "розовый",
+      "Price": 9900
+    },
+    {
+      "Name": "Rosa Valencia t-20",
+      "Color": "розовый",
+      "Price": 11250
+    },
+    {
+      "Name": "Rose Volou t-30",
+      "Color": "розовый",
+      "Price": 9900
+    },
+    {
+      "Name": "Rosso Alicante t-20",
+      "Color": "красный",
+      "Price": 12420
+    },
+    {
+      "Name": "Rosso Alicante t-30",
+      "Color": "красный",
+      "Price": 15390
+    },
+    {
+      "Name": "Rosso Erica t-20",
+      "Color": "красный",
+      "Price": 19350
+    },
+    {
+      "Name": "Rosso Francia t-20",
+      "Color": "красный",
+      "Price": 13590
+    },
+    {
+      "Name": "Rosso Lait t-20",
+      "Color": "розовый",
+      "Price": 6750
+    },
+    {
+      "Name": "Rosso Levanto t-20",
+      "Color": "красный",
+      "Price": 13950
+    },
+    {
+      "Name": "Rosso Orobico t-20",
+      "Color": "красный",
+      "Price": 17280
+    },
+    {
+      "Name": "Rosso Verona t-20",
+      "Color": "красный",
+      "Price": 9180
+    },
+    {
+      "Name": "Rosso Verona t-30",
+      "Color": "красный",
+      "Price": 10080
+    },
+    {
+      "Name": "Rosso Versailles t-20",
+      "Color": "мультиколор",
+      "Price": 31500
+    },
+    {
+      "Name": "Royal Red  t-30",
+      "Color": "красный",
+      "Price": 9180
+    },
+    {
+      "Name": "Rubidium t-20",
+      "Color": "розовый",
+      "Price": 10170
+    },
+    {
+      "Name": "Sahara Noir t-20",
+      "Color": "черный",
+      "Price": 19170
+    },
+    {
+      "Name": "Serpeggiante t-20",
+      "Color": "бежевый",
+      "Price": 10800
+    },
+    {
+      "Name": "Siberian Forest t-20",
+      "Color": "желтый",
+      "Price": 18450
+    },
+    {
+      "Name": "Silver Galaxy t-20",
+      "Color": "серый",
+      "Price": 10980
+    },
+    {
+      "Name": "Silver Grey t-20",
+      "Color": "серый",
+      "Price": 10800
+    },
+    {
+      "Name": "Sivec Extra t-20",
+      "Color": "белый",
+      "Price": 42480
+    },
+    {
+      "Name": "Skyros Argento t-30",
+      "Color": "серый",
+      "Price": 11520
+    },
+    {
+      "Name": "Skyros Red t-20",
+      "Color": "мультиколор",
+      "Price": 10800
+    },
+    {
+      "Name": "Skyros Silver t-20",
+      "Color": "серый",
+      "Price": 7470
+    },
+    {
+      "Name": "Skyros t-20",
+      "Color": "желтый",
+      "Price": 10080
+    },
+    {
+      "Name": "Skyros t-30",
+      "Color": "желтый",
+      "Price": 9900
+    },
+    {
+      "Name": "Skyros Yellow Whitish t-20",
+      "Color": "бежевый",
+      "Price": 14580
+    },
+    {
+      "Name": "Special White t-20",
+      "Color": "белый",
+      "Price": 17100
+    },
+    {
+      "Name": "Statuarietto t-20",
+      "Color": "белый",
+      "Price": 15300
+    },
+    {
+      "Name": "Statuario t-20",
+      "Color": "белый",
+      "Price": 32310
+    },
+    {
+      "Name": "Statuario t-20 (проект Москва)",
+      "Color": "",
+      "Price": 58500
+    },
+    {
+      "Name": "Summer Fantasy Dark t-20",
+      "Color": "серый",
+      "Price": 19350
+    },
+    {
+      "Name": "Summer Fantasy Extra t-20",
+      "Color": "желтый",
+      "Price": 11250
+    },
+    {
+      "Name": "Summer Fantasy Light t-20",
+      "Color": "серый",
+      "Price": 17100
+    },
+    {
+      "Name": "Summer Fantasy t-30",
+      "Color": "серый",
+      "Price": 18000
+    },
+    {
+      "Name": "Tanji Grey t-30",
+      "Color": "серый",
+      "Price": 15750
+    },
+    {
+      "Name": "Teak Wood t-20",
+      "Color": "желтый",
+      "Price": 16650
+    },
+    {
+      "Name": "Teak Wood t-30",
+      "Color": "окаменевшее дерево",
+      "Price": 20700
+    },
+    {
+      "Name": "Thassos t-20",
+      "Color": "белый",
+      "Price": 18000
+    },
+    {
+      "Name": "Theologos t-20",
+      "Color": "бежевый",
+      "Price": 6750
+    },
+    {
+      "Name": "Tiger Shark t-20",
+      "Color": "розовый",
+      "Price": 13050
+    },
+    {
+      "Name": "Uru Brown t-20",
+      "Color": "коричневый",
+      "Price": 11250
+    },
+    {
+      "Name": "Verde Antigua t-20",
+      "Color": "зеленый",
+      "Price": 14400
+    },
+    {
+      "Name": "Verde Guatemala t-20",
+      "Color": "зеленый",
+      "Price": 7920
+    },
+    {
+      "Name": "Verde Venezia T-20",
+      "Color": "зеленый",
+      "Price": 18270
+    },
+    {
+      "Name": "Verde Venezia t-30",
+      "Color": "зеленый",
+      "Price": 21960
+    },
+    {
+      "Name": "White Citrus t-20",
+      "Color": "белый",
+      "Price": 12960
+    },
+    {
+      "Name": "White Rhino t-20",
+      "Color": "белый",
+      "Price": 21600
+    },
+    {
+      "Name": "Yellow Design t-17,5",
+      "Color": "желтый",
+      "Price": 9000
+    }
+
+  ]
+}
