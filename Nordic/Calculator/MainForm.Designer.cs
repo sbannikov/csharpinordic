@@ -31,6 +31,7 @@
             this.menu = new System.Windows.Forms.MenuStrip();
             this.FIleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,6 +41,7 @@
             this.comboColor = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.open = new System.Windows.Forms.OpenFileDialog();
+            this.save = new System.Windows.Forms.SaveFileDialog();
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +60,7 @@
             // 
             this.FIleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LoadToolStripMenuItem,
+            this.SaveToolStripMenuItem,
             this.toolStripSeparator1,
             this.ExitToolStripMenuItem});
             this.FIleToolStripMenuItem.Name = "FIleToolStripMenuItem";
@@ -67,19 +70,27 @@
             // LoadToolStripMenuItem
             // 
             this.LoadToolStripMenuItem.Name = "LoadToolStripMenuItem";
-            this.LoadToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.LoadToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.LoadToolStripMenuItem.Text = "Загрузить";
             this.LoadToolStripMenuItem.Click += new System.EventHandler(this.LoadToolStripMenuItem_Click);
+            // 
+            // SaveToolStripMenuItem
+            // 
+            this.SaveToolStripMenuItem.Enabled = false;
+            this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
+            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.SaveToolStripMenuItem.Text = "&Сохранить";
+            this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.ExitToolStripMenuItem.Text = "Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -140,6 +151,10 @@
             this.open.FileName = "openFileDialog1";
             this.open.Filter = "Файлы CSV|*.csv|Файлы XML|*.xml|Файлы JSON|*.json|Все файлы|*.*";
             // 
+            // save
+            // 
+            this.save.Filter = "Файлы CSV|*.csv|Файлы XML|*.xml|Файлы JSON|*.json|Все файлы|*.*";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -176,5 +191,7 @@
         private System.Windows.Forms.ComboBox comboColor;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.OpenFileDialog open;
+        private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog save;
     }
 }

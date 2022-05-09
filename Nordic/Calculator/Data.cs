@@ -17,5 +17,32 @@ namespace Calculator
         /// </summary>
         [XmlElement(ElementName = "Material")]
         public Material[] Materials;
+
+        /// <summary>
+        /// Сохранение в формате CSV
+        /// </summary>
+        /// <param name="name">Имя файла</param>
+        public void SaveToCsv(string name)
+        {
+            // Открыть текстовый файл для записи, очистить, если файл уже был
+            var file = new System.IO.StreamWriter(name);
+            // [!] можно использовать Reflection
+            file.WriteLine("Наименование;Цвет;Цена");
+
+            foreach (var material in Materials)
+            {
+                file.WriteLine($"{material.Name};{material.ColorName};{material.Price}");
+            }     
+            // Закрыть файл в конце!
+            file.Close();
+        }
+
+        public void SaveToXml(string name)
+        {
+        }
+
+        public void SaveToJson(string name)
+        {
+        }
     }
 }

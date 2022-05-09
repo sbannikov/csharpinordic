@@ -15,9 +15,9 @@ namespace Calculator
     public partial class MainForm : Form
     {
         /// <summary>
-        /// Список материалов
+        /// Загруженные данные
         /// </summary>
-        private List<Material> materials;
+        private Data data;
 
         public MainForm()
         {
@@ -63,7 +63,7 @@ namespace Calculator
             }
 
             // Список материалов
-            materials = new List<Material>();
+            var materials = new List<Material>();
 
             // Пропускаем первую строку (там заголовок)
             for (int i = 1; i < lines.Length; i++)
@@ -94,8 +94,14 @@ namespace Calculator
             // Выпадающий список цветов
             comboColor.Items.AddRange(colors.Values.ToArray());
 
+            // Сохранение загруженных данных
+            data = new Data()
+            {
+                Materials = materials.ToArray()
+            };
+
             // Выпадающий список материалов
-            comboMaterial.Items.AddRange(materials.ToArray());
+            comboMaterial.Items.AddRange(data.Materials);
         }
 
         private void LoadData(Data data)
@@ -105,10 +111,7 @@ namespace Calculator
                 // Список цветов
                 var colors = new Dictionary<string, Color>();
 
-                // Сохранение списка материалов
-                materials = data.Materials.ToList();
-
-                foreach (var material in materials)
+                foreach (var material in data.Materials)
                 {
                     string colorName = material.ColorName ?? String.Empty;
                     Color color;
@@ -133,7 +136,7 @@ namespace Calculator
                 comboColor.Items.AddRange(colors.Values.ToArray());
 
                 // Выпадающий список материалов
-                comboMaterial.Items.AddRange(materials.ToArray());
+                comboMaterial.Items.AddRange(data.Materials);
             }
         }
 
@@ -145,14 +148,14 @@ namespace Calculator
         {
             var serializer = new XmlSerializer(typeof(Data));
             var reader = System.Xml.XmlReader.Create(name);
-            var data = (Data)serializer.Deserialize(reader);
+            data = (Data)serializer.Deserialize(reader);
             LoadData(data);
         }
 
         private void LoadJson(string name)
         {
             string json = System.IO.File.ReadAllText(name);
-            var data = JsonConvert.DeserializeObject<Data>(json);
+            data = JsonConvert.DeserializeObject<Data>(json);
             LoadData(data);
         }
 
@@ -172,20 +175,23 @@ namespace Calculator
                 comboColor.Items.Clear();
                 comboMaterial.Items.Clear();
 
-                switch (open.FilterIndex)
+                switch ((FileType)open.FilterIndex)
                 {
-                    case 1:
+                    case FileType.CSV:
                         LoadCsv(open.FileName);
                         break;
-                    case 2:
+                    case FileType.XML:
                         LoadXml(open.FileName);
                         break;
-                    case 3:
+                    case FileType.JSON:
                         LoadJson(open.FileName);
                         break;
                     default:
                         throw new NotImplementedException();
                 }
+
+                // Включение пункта меню "Сохранить"
+                SaveToolStripMenuItem.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -217,11 +223,37 @@ namespace Calculator
             var color = (Color)comboColor.SelectedItem;
             if (color != null)
             {
-                var list = materials.Where(x => x.MaterialColor.Name == color.Name);
+                var list = data.Materials.Where(x => x.MaterialColor.Name == color.Name);
                 // Предварительная очистка списка материалов
                 comboMaterial.Items.Clear();
                 // Заполнение списка материалов
                 comboMaterial.Items.AddRange(list.ToArray());
+            }
+        }
+
+        /// <summary>
+        /// Сохранение файла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Запрос имени сохраняемого файла
+            if (save.ShowDialog() != DialogResult.OK) return;
+
+            switch ((FileType)open.FilterIndex)
+            {
+                case FileType.CSV:
+                    data.SaveToCsv(save.FileName);
+                    break;
+                case FileType.XML:
+                    data.SaveToXml(save.FileName);
+                    break;
+                case FileType.JSON:
+                    data.SaveToJson(save.FileName);
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
         }
     }
