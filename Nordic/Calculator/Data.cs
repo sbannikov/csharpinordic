@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Calculator
 {
@@ -60,6 +61,8 @@ namespace Calculator
         /// <param name="name"></param>
         public void SaveToJson(string name)
         {
+            string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            System.IO.File.WriteAllText(name, json);
         }
     }
 }

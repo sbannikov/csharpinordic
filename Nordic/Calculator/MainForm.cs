@@ -75,6 +75,7 @@ namespace Calculator
                 {
                     Name = fields[0],
                     MaterialColor = colors[fields[1]],
+                    ColorName = fields[1],
                     Price = !string.IsNullOrEmpty(fields[2]) ? double.Parse(fields[2]) : double.NaN
                 };
                 /*

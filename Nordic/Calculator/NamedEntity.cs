@@ -10,7 +10,7 @@ namespace Calculator
     /// <summary>
     /// Именованная сущность
     /// </summary>
-    public class NamedEntity
+    public abstract class NamedEntity
     {
         /// <summary>
         /// Наименование

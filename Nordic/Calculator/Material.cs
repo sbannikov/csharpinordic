@@ -16,27 +16,17 @@ namespace Calculator
         /// <summary>
         /// Цвет в виде объекта
         /// </summary>
-        [XmlElement(ElementName = "Color")]
+        // [XmlElement(ElementName = "Color")]
+        [JsonIgnore()]
+        [XmlIgnore()]
         public Color MaterialColor;
-
-        private string color;
 
         /// <summary>
         /// Наименование цвета
         /// </summary>
         [XmlAttribute(AttributeName = "Color")]
         [JsonProperty(PropertyName = "Color")]
-        public string ColorName
-        {
-            get
-            {
-                return (MaterialColor != null) ? MaterialColor.Name : color;
-            }
-            set
-            {
-                color = value;
-            }
-        }
+        public string ColorName;      
 
         /// <summary>
         /// Цена (руб. за м2)
