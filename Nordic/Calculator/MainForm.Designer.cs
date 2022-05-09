@@ -70,7 +70,7 @@
             // LoadToolStripMenuItem
             // 
             this.LoadToolStripMenuItem.Name = "LoadToolStripMenuItem";
-            this.LoadToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.LoadToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.LoadToolStripMenuItem.Text = "Загрузить";
             this.LoadToolStripMenuItem.Click += new System.EventHandler(this.LoadToolStripMenuItem_Click);
             // 
@@ -78,19 +78,19 @@
             // 
             this.SaveToolStripMenuItem.Enabled = false;
             this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.SaveToolStripMenuItem.Text = "&Сохранить";
             this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(163, 6);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.ExitToolStripMenuItem.Text = "Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -170,6 +170,7 @@
             this.MainMenuStrip = this.menu;
             this.Name = "MainForm";
             this.Text = "Калькулятор";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.ResumeLayout(false);

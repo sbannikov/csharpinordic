@@ -9,19 +9,107 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using NLog;
 
 namespace Calculator
 {
     public partial class MainForm : Form
     {
         /// <summary>
+        /// Протоколирование событий
+        /// </summary>
+        private Logger log = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
         /// Загруженные данные
         /// </summary>
         private Data data;
 
+        /// <summary>
+        /// Наблюдатель событий файловой системы
+        /// </summary>
+        private System.IO.FileSystemWatcher watcher;
+
+        /// <summary>
+        /// Очередь изменившихся файлов
+        /// </summary>
+        private Queue<string> queue = new Queue<string>();
+
+        /// <summary>
+        /// Таймер перезагрузки файлов
+        /// </summary>
+        private Timer timer;
+
         public MainForm()
         {
             InitializeComponent();
+
+            watcher = new System.IO.FileSystemWatcher()
+            {
+                Path = @"C:\FILE"
+            };
+            watcher.Created += WatchFile;
+            watcher.Changed += WatchFile;
+            watcher.Renamed += WatchFile;
+
+            timer = new Timer()
+            {
+                Interval = 1000
+            };
+            timer.Tick += Timer_Tick;
+        }
+
+        /// <summary>
+        /// Срабатывание таймера
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            // Опустошение очереди и построение списка измененных файлов
+            List<string> names = new List<string>();
+            while (queue.TryDequeue(out string name))
+            {
+                names.Add(name);
+            }
+            // Построение уникального списка файлов
+            names = names.Distinct().ToList();
+
+            // Загрузка файлов
+            foreach (string name in names)
+            {
+                string ext = System.IO.Path.GetExtension(name).ToLower();
+
+                switch (ext)
+                {
+                    case ".csv":
+                        break;
+                    case ".json":
+                        if (MessageBox.Show($"Перезагрузить файл {name}?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            LoadJson(name);
+                        }
+                        break;
+                    case ".xml":
+                        break;
+                    default:
+                        log.Trace($"Файл {name} не обрабатывается");
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Обработка события изменения файла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void WatchFile(object sender, System.IO.FileSystemEventArgs e)
+        {
+            log.Trace($"{e.Name} {e.ChangeType}");
+            queue.Enqueue(e.FullPath);
         }
 
         /// <summary>
@@ -260,6 +348,18 @@ namespace Calculator
                 default:
                     throw new NotImplementedException();
             }
+        }
+
+        /// <summary>
+        /// Загрузка формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            watcher.EnableRaisingEvents = true;
+            timer.Start();
+            log.Info("Программа запущена");
         }
     }
 }
