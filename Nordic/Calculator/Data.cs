@@ -25,22 +25,39 @@ namespace Calculator
         public void SaveToCsv(string name)
         {
             // Открыть текстовый файл для записи, очистить, если файл уже был
-            var file = new System.IO.StreamWriter(name);
-            // [!] можно использовать Reflection
-            file.WriteLine("Наименование;Цвет;Цена");
-
-            foreach (var material in Materials)
+            using (var file = new System.IO.StreamWriter(name))
             {
-                file.WriteLine($"{material.Name};{material.ColorName};{material.Price}");
-            }     
-            // Закрыть файл в конце!
-            file.Close();
+                // [!] можно использовать Reflection
+                file.WriteLine("Наименование;Цвет;Цена");
+
+                foreach (var material in Materials)
+                {
+                    file.WriteLine($"{material.Name};{material.MaterialColor.Name};{material.Price}");
+                }
+            }
         }
 
+        /// <summary>
+        /// Сохранение в формате XML
+        /// </summary>
+        /// <param name="name"></param>
         public void SaveToXml(string name)
         {
+            var serializer = new XmlSerializer(GetType());
+            var settings = new System.Xml.XmlWriterSettings()
+            {
+                Indent = true // форматировать XML удобным для человека образом
+            };
+            using (var writer = System.Xml.XmlWriter.Create(name, settings))
+            {
+                serializer.Serialize(writer, this);
+            }
         }
 
+        /// <summary>
+        /// Сохранение в формате JSON
+        /// </summary>
+        /// <param name="name"></param>
         public void SaveToJson(string name)
         {
         }

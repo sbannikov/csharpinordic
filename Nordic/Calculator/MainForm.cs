@@ -104,6 +104,10 @@ namespace Calculator
             comboMaterial.Items.AddRange(data.Materials);
         }
 
+        /// <summary>
+        /// Построение списка цветов
+        /// </summary>
+        /// <param name="data"></param>
         private void LoadData(Data data)
         {
             if (data != null)
@@ -241,7 +245,7 @@ namespace Calculator
             // Запрос имени сохраняемого файла
             if (save.ShowDialog() != DialogResult.OK) return;
 
-            switch ((FileType)open.FilterIndex)
+            switch ((FileType)save.FilterIndex)
             {
                 case FileType.CSV:
                     data.SaveToCsv(save.FileName);

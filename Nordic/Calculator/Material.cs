@@ -11,25 +11,32 @@ namespace Calculator
     /// <summary>
     /// Материал
     /// </summary>
-    public class Material
+    public class Material : NamedEntity
     {
-        /// <summary>
-        /// Наименование
-        /// </summary>
-        [XmlAttribute()]
-        public string Name;
-
         /// <summary>
         /// Цвет в виде объекта
         /// </summary>
-        internal Color MaterialColor;
+        [XmlElement(ElementName = "Color")]
+        public Color MaterialColor;
+
+        private string color;
 
         /// <summary>
         /// Наименование цвета
         /// </summary>
         [XmlAttribute(AttributeName = "Color")]
         [JsonProperty(PropertyName = "Color")]
-        public string ColorName;
+        public string ColorName
+        {
+            get
+            {
+                return (MaterialColor != null) ? MaterialColor.Name : color;
+            }
+            set
+            {
+                color = value;
+            }
+        }
 
         /// <summary>
         /// Цена (руб. за м2)

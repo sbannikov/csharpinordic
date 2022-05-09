@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Calculator
 {
     /// <summary>
-    /// Цвет материала
+    /// Именованная сущность
     /// </summary>
-    public class Color : NamedEntity
+    public class NamedEntity
     {
         /// <summary>
-        /// Строковое представление объекта
+        /// Наименование
         /// </summary>
-        /// <returns></returns>
-        public override string ToString() => Name;
+        [XmlAttribute()]
+        public string Name;
     }
 }
