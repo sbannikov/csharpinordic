@@ -28,6 +28,11 @@ namespace CSharpBot
         private static State state = State.Load();
 
         /// <summary>
+        /// Сценарий игры
+        /// </summary>
+        private Quest.Game game = Quest.Game.Load();
+
+        /// <summary>
         /// Таймер сохранения состояния - 1 раз в секунду
         /// </summary>
         private Timer timer = new Timer(SaveState, null, 0, 1000);
@@ -128,14 +133,14 @@ namespace CSharpBot
         {
             // Команда
             string command = message.Text.Substring(1).ToLower();
-
+            User user;
             switch (command)
             {
                 case "start":
                     if (!state.Users.ContainsKey(message.Chat.Id))
                     {
                         // Добавление пользователя в словарь
-                        var user = new User()
+                        user = new User()
                         {
                             ID = message.Chat.Id
                         };
@@ -148,15 +153,33 @@ namespace CSharpBot
                         сlient.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, вы уже зарегистрированы");
                     }
                     break;
+
                 case "play":
-                    // [!]
+                    user = state.Users[message.Chat.Id];
+                    int number; // номер комнаты
+                    if (game.Rooms.ContainsKey(user.Room))
+                    {
+                        number = user.Room;
+                    }
+                    else
+                    {
+                        // начинаем с комнаты с минимальным номером
+                        number = game.Rooms.Keys.Min(x => x);
+                        user.Room = number;
+                        state.Dirty = true;
+                    }
+                    Quest.Room room = game.Rooms[number];
+                    сlient.SendTextMessageAsync(message.Chat.Id, $"{room.Name}: {room.Description}");
                     break;
+
                 case "help":
                     сlient.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж");
                     break;
+
                 case "about":
                     сlient.SendTextMessageAsync(message.Chat.Id, "Учебный бот на C# - текстовый квест");
                     break;
+
                 default:
                     string s = $"Команда {command} пока не обрабатываются";
                     сlient.SendTextMessageAsync(message.Chat.Id, s);

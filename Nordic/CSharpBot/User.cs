@@ -20,5 +20,10 @@ namespace CSharpBot
         /// Дата и время последней активности пользователя
         /// </summary>
         public DateTime TimeStamp;
+
+        /// <summary>
+        /// Номер текущей комнаты
+        /// </summary>
+        public int Room;
     }
 }
