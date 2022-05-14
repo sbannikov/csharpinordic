@@ -14,23 +14,30 @@ namespace CSharpBot
 
         static void Main(string[] args)
         {
-            log.Info("Бот запускается...");
-            // Создание клиента
-            var client = new TelegramBotClient("<TOKEN>");
-            // Запрос информации о самом боте
-            var result = client.GetMeAsync();
-            log.Trace("Запрос отправлен");
-            // Ожидание результата
-            result.Wait();
-            // Получение результата асинхронного запроса
-            var user = result.Result;
-            // Вывод сведений о боте
-            log.Info($"Бот {user.Username} отвечает, следовательно, он существует");
-            // Начало приёма сообщений
-            var handler = new UpdateHandler();           
-            client.StartReceiving(handler);
+            try
+            {
+                log.Info("Бот запускается...");
+                // Создание клиента
+                var client = new TelegramBotClient("<TOKEN>");
+                // Запрос информации о самом боте
+                var result = client.GetMeAsync();
+                log.Trace("Запрос отправлен");
+                // Ожидание результата
+                result.Wait();
+                // Получение результата асинхронного запроса
+                var user = result.Result;
+                // Вывод сведений о боте
+                log.Info($"Бот {user.Username} отвечает, следовательно, он существует");
+                // Начало приёма сообщений
+                var handler = new UpdateHandler();
+                client.StartReceiving(handler);
 
-            Console.ReadLine();
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                log.Fatal(ex);
+            }
         }
     }
 }

@@ -23,9 +23,9 @@ namespace CSharpBot
         private static readonly Logger log = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// Словарь пользователей
+        /// Состояние бота
         /// </summary>
-        private Dictionary<long, User> users = new Dictionary<long, User>();
+        private State state = State.Load();
 
         /// <summary>
         /// Обработка ошибок
@@ -107,14 +107,15 @@ namespace CSharpBot
             switch (command)
             {
                 case "start":
-                    if (!users.ContainsKey(message.Chat.Id))
+                    if (!state.Users.ContainsKey(message.Chat.Id))
                     {
                         // Добавление пользователя в словарь
                         var user = new User()
                         {
                             ID = message.Chat.Id
                         };
-                        users.Add(message.Chat.Id, user);
+                        state.Users.Add(message.Chat.Id, user);
+                        state.Save();
                         сlient.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, я вас зарегистрировал");
                     }
                     else
