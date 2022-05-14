@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anagramm", "Anagramm\Anagra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroTetris", "MicroTetris\MicroTetris.csproj", "{D6CA710A-C7CB-4466-9013-6C09269821F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{CD37188F-89A8-4A35-8AEE-AB4AF8D0A545}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator\Calculator.csproj", "{CD37188F-89A8-4A35-8AEE-AB4AF8D0A545}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpBot", "CSharpBot\CSharpBot.csproj", "{EF2CC521-0B4A-49B0-B406-658C2F04BC29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{CD37188F-89A8-4A35-8AEE-AB4AF8D0A545}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD37188F-89A8-4A35-8AEE-AB4AF8D0A545}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD37188F-89A8-4A35-8AEE-AB4AF8D0A545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF2CC521-0B4A-49B0-B406-658C2F04BC29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF2CC521-0B4A-49B0-B406-658C2F04BC29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF2CC521-0B4A-49B0-B406-658C2F04BC29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF2CC521-0B4A-49B0-B406-658C2F04BC29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
