@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CSharpBot
+{
+    /// <summary>
+    /// Пользователь Telegram
+    /// </summary>
+    public class User
+    {
+       /// <summary>
+       /// Идентификатор пользователя
+       /// </summary>
+       public long ID;
+    }
+}
