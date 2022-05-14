@@ -20,5 +20,9 @@ namespace CSharpBot.Quest
         /// Описание комнаты
         /// </summary>
         public string Description;
+        /// <summary>
+        /// Список возможных действий
+        /// </summary>
+        public List<Action> Actions;
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot.Types.Enums;
 using NLog;
 
@@ -169,11 +170,17 @@ namespace CSharpBot
                         state.Dirty = true;
                     }
                     Quest.Room room = game.Rooms[number];
-                    сlient.SendTextMessageAsync(message.Chat.Id, $"{room.Name}: {room.Description}");
+                    var keys = room.Actions.Select(action => new KeyboardButton(action.Name));
+                    var markup = new ReplyKeyboardMarkup(keys)
+                    {
+                        ResizeKeyboard = true,
+                        OneTimeKeyboard = true
+                    };
+                    сlient.SendTextMessageAsync(message.Chat.Id, $"{room.Name}: {room.Description}", replyMarkup: markup);
                     break;
 
                 case "help":
-                    сlient.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж");
+                    сlient.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж", replyMarkup:null);
                     break;
 
                 case "about":
