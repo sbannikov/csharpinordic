@@ -1,0 +1,1412 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<Game xmlns="http:/quiz.orioner.ru/12floor/quest.xsd">
+  <Title>12 этаж</Title>
+  <Desciption>Офис КРОК через 25 лет. Футуристическая история</Desciption>
+  <Location>
+    <ID>1</ID>
+    <Name>Начало</Name>
+    <Text>
+      Офис КРОК через 25 лет. Ты опаздываешь на 50-летие компании на 12 этаж. Чтобы туда попасть, надо зачекиниться на всех остальных этажах. Но это не точно.
+    </Text>
+    <Action>
+      <Name>Начать игру</Name>
+      <Next>10</Next>
+      <Command>
+        for ($i = 1; $i &lt;= 11; $i++)
+        { $gamedata ['B'.$i] = 'active'; }
+        $gamedata ['B12'] = 'inactive';
+      </Command>
+    </Action>
+    <Action>
+      <Name>Войти через VK.COM</Name>
+      <Next>2</Next>
+    </Action>
+    <Action>
+      <Name>Команда</Name>
+      <Text>Команда 12 этаж</Text>
+      <Next>3</Next>
+    </Action>
+    <Action>
+      <Name>Справка</Name>
+      <Text>
+        Цель игры - разблокировать 12-й этаж
+      </Text>
+      <Next>4</Next>
+    </Action>
+    <Action>
+      <Name>Рейтинг</Name>
+      <Text>
+        Рейтинг учитывает открытые концовки, открытые этажи и найденных персонажей
+      </Text>
+      <Next>5</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>2</ID>
+    <Name>vk.com</Name>
+    <Template>intro.htm</Template>
+    <Text>
+      Регистрация ВКонтакте позволит сохранить результаты игры в рейтинге.
+    </Text>
+    <Action>
+      <Name>Без регистрации</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>3</ID>
+    <Name>Команда</Name>
+<Image>team.jpg</Image>
+    <Text>
+      Марков Дмитрий&lt;br/&gt;
+      Даева Ольга&lt;br/&gt;
+      Банников Сергей&lt;br/&gt;
+      Нуркаева Рената&lt;br/&gt;
+      Григорьева Анастасия&lt;br/&gt;
+      Пелевина Евгения&lt;br/&gt;
+      Шишканов Сергей&lt;br/&gt;
+      Боро Хадир&lt;br/&gt;
+      Радостев Никита&lt;br/&gt;
+      Титов Кирилл
+    </Text>
+    <Action>
+      <Name>В начало</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>4</ID>
+    <Name>Справка</Name>
+    <Text>
+      В игре ты встретишь сотрудников КРОК, их количество отображается в верхнем правом углу экрана.
+      Если сделать неудачный ход, игра начинается с самого начала.
+      Для записи результата в таблицу рекордов в случае выигрыша необходимо предварительно авторизоваться и посмотреть таблицу после выигрыша.&lt;br/&gt;
+      Справки по почте 6384@croc.ru
+    </Text>
+    <Action>
+      <Name>В начало</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>5</ID>
+    <Name>Рейтинг</Name>
+    <Template>halloffame.htm</Template>
+    <Text>
+      Rating := Score + 100*Floors + 10*Endings
+    </Text>
+    <Action>
+      <Name>В начало</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>10</ID>
+    <Name>1 этаж</Name>
+    <Text>Ты оказываешься на первом этаже здания КРОК. Впереди турникеты, оборудованные по последнему слову техники</Text>
+    <Action>
+      <Name>Показать пропуск</Name>
+      <Text>
+        Сушкевич хмурится и недоуменно смотрит на тебя:&lt;br/&gt;
+        - Откуда этот раритет? Такие штуки не выпускают последние 15 лет!
+      </Text>
+      <Score>1</Score>
+      <Command>
+        $gamedata['propusk'] = 1;
+      </Command>
+      <Condition>
+        ! isset ($gamedata['propusk'])
+      </Condition>
+    </Action>
+    <Action>
+      <Name>Поздороваться</Name>
+      <Text>
+        Ты говоришь "Здравствуйте!", задумавшись, не глупо ли это выглядит со стороны: но никто не удивляется и, более того, все аналогичным образом проходят через турникеты.&lt;br/&gt;
+        Система распознавания голоса отвечает приятным женским голосом&lt;br/&gt;
+        - Приветствую, коллега, проходи!&lt;br/&gt;
+        Турникет дружелюбно распахивается.
+      </Text>
+      <Next>11</Next>
+    </Action>
+    <Action>
+      <Name>Приложить палец</Name>
+      <Text>
+        Биометрическая система идентификации сразу опознаёт папиллярный рисунок, и дверцы турникета приветствующе раздвигаются.
+      </Text>
+      <Next>11</Next>
+    </Action>
+    <Action>
+      <Name>Посмотреть в камеру</Name>
+      <Text>
+        Ты заглядываешь в глазок камеры. На момент будто ничего не происходит, но вдруг ты замечаешь, как красный сканер пробегает по сетчатке.&lt;br/&gt;
+        Сразу же после этого камера мигнула зеленым огоньком, а дверцы турникета распахнулись.
+      </Text>
+      <Next>11</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>11</ID>
+    <Name>1 этаж - вестибюль</Name>
+    <Text>Ожидаемо, ты обнаруживаешь себя в холле 1 этажа. Всё так же сотрудника КРОК встречает спортивный Борис Леонидович и макет ЦОДа, только теперь голографический. И в остальном всё как прежде: справа находится гардероб, слева — лестница, а впереди лифтовый холл.</Text>
+    <Action>
+      <Name>Подняться по лестнице</Name>
+      <Condition>
+        isset ($gamedata['undress'])
+      </Condition>
+      <Command>
+        $gamedata['B1'] = 'done';
+        $gamedata['mask'][1]++;
+      </Command>
+      <Text>Ты поднимаешься по лестнице.</Text>
+      <Next>20</Next>
+    </Action>
+    <Action>
+      <Name>Подняться по лестнице</Name>
+      <Condition>
+        ! isset ($gamedata['undress'])
+      </Condition>
+      <Text>Ты пытаешься подняться по лестнице.</Text>
+      <Next>202</Next>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Condition>
+        isset ($gamedata['undress'])
+      </Condition>
+      <Command>
+        $gamedata['B1'] = 'done';
+        $gamedata['mask'][1]++;
+      </Command>
+      <Text>Ты нажимаешь на кнопку, двери открываются, и ты заходишь в кабину.</Text>
+      <Next>12</Next>
+    </Action>
+    <Action>
+      <Condition>
+        ! isset ($gamedata['undress'])
+      </Condition>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты пытаешься пройти к лифту.</Text>
+      <Next>202</Next>
+    </Action>
+    <Action>
+      <Name>Сдать одежду</Name>
+      <Text>
+        Подойдя к гардеробу, ты замечаешь всюду развешенные крючки, автоматически сортирующие принимаемую одежду.
+        Стоило тебе только повесить верхнюю одежду, как крючок моментально исчез среди остальных вешелок, а динамик произнёс что-то вроде "Ваша одежда принята".
+        Где-то в воздухе витает вопрос, почему так много курток в гардеробе летом, но он быстро улетучивается.
+      </Text>
+      <Command>
+        $gamedata['undress'] = 1;
+      </Command>
+      <Condition>
+        !isset ($gamedata['undress'])
+      </Condition>
+    </Action>
+    <Action>
+      <Name>Получить свою одежду</Name>
+      <Text>
+        Ты подходишь к стойке и опираешься на неё, вглядываясь вдаль и пытаясь понять, как теперь забрать одежду обратно.
+        Но в скором времени к тебе автоматически подъезжает знакомый крючок с верхней одеждой, оставив способ распознавания для тебя загадкой.
+      </Text>
+      <Command>
+        unset ($gamedata['undress']);
+      </Command>
+      <Condition>
+        isset ($gamedata['undress'])
+      </Condition>
+    </Action>
+  </Location>
+  <Location>
+    <ID>12</ID>
+    <Template>elevator.htm</Template>
+    <Name>Лифт</Name>
+    <Text>Ты находишься в кабине лифта. На панели управления расположены 12 кнопок.</Text>
+    <Command>
+      if (count ($gamedata['mask']) &gt; 3)
+      { $gamedata ['B12'] = 'finish'; }
+    </Command>
+    <Action>
+      <Name>Нажать любую кнопку</Name>
+      <Text>Лифт куда-то везет тебя</Text>
+      <Next>rand (2, 11) * 10</Next>
+    </Action>
+    <Action>
+      <Name>[1]</Name>
+      <Next>11</Next>
+      <Text>Лифт привозит тебя на первый этаж</Text>
+    </Action>
+    <Action>
+      <Name>[#]</Name>
+      <Next>20</Next>
+      <Text>Лифт привозит тебя на второй этаж</Text>
+    </Action>
+    <Action>
+      <Name>[$]</Name>
+      <Next>30</Next>
+      <Text>Лифт привозит тебя на третий этаж</Text>
+    </Action>
+    <Action>
+      <Name>[%]</Name>
+      <Next>40</Next>
+      <Text>Лифт привозит тебя на четвертый этаж</Text>
+    </Action>
+    <Action>
+      <Name>[^]</Name>
+      <Next>50</Next>
+      <Text>Лифт привозит тебя на пятый этаж</Text>
+    </Action>
+    <Action>
+      <Name>[&amp;]</Name>
+      <Next>60</Next>
+      <Text>Лифт привозит тебя на шестой этаж</Text>
+    </Action>
+    <Action>
+      <Name>[*]</Name>
+      <Next>70</Next>
+      <Text>Лифт привозит тебя на седьмой этаж</Text>
+    </Action>
+    <Action>
+      <Name>[~]</Name>
+      <Next>80</Next>
+      <Text>Лифт привозит тебя на восьмой этаж</Text>
+    </Action>
+    <Action>
+      <Name>[!]</Name>
+      <Next>90</Next>
+      <Text>Лифт привозит тебя на девятый этаж</Text>
+    </Action>
+    <Action>
+      <Name>[-]</Name>
+      <Next>100</Next>
+      <Text>Лифт привозит тебя на десятый этаж</Text>
+    </Action>
+    <Action>
+      <Name>[=]</Name>
+      <Next>110</Next>
+      <Text>Лифт привозит тебя на одиннадцатый этаж</Text>
+    </Action>
+    <Action>
+      <Name>[+]</Name>
+      <Next>120</Next>
+      <Text>Лифт стремительно везет тебя ввысь</Text>
+      <Condition>count ($gamedata['mask']) &gt; 3</Condition>
+    </Action>
+  </Location>
+  <Location>
+    <ID>20</ID>
+    <Name>2 этаж</Name>
+    <Text>
+      Ты находишься на втором этаже здания КРОК.
+      Здесь расположена столовая, конференц-зал и стенд с историей КРОК.
+    </Text>
+    <Action>
+      <Name>Почитать стенд</Name>
+      <Text>
+        Список победителей творческой подготовки прошлых лет:&lt;br/&gt;
+        ....&lt;br/&gt;
+        2016 - Пита Бреда Пита&lt;br/&gt;
+        2017 - 12 этаж&lt;br/&gt;
+        ....
+      </Text>
+      <Condition>
+        ! isset ($gamedata['info'])
+      </Condition>
+      <Command>
+        $gamedata['info'] = 1;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Пойти в столовую</Name>
+      <Text>Ты идешь по коридору на вкусный запах.</Text>
+      <Next>21</Next>
+    </Action>
+    <Action>
+      <Name>Пойти в конференц-зал</Name>
+      <Text>Ты осторожно открываешь дверь в конференц-зал.</Text>
+      <Next>22</Next>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт.</Text>
+      <Next>12</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>21</ID>
+    <Name>Столовая</Name>
+    <Text>Столовая оборудована системой автоматической выдачи блюд. Надо набрать код блюда на панели, и автоматический раздатчик ставит требуемую тарелку на поднос. Ты выбираешь несколько блюд и подходишь к кассовому терминалу.</Text>
+    <Action>
+      <Name>Оплатить наличными</Name>
+      <Text>
+        Ты вытаскиваешь наличные деньги. Внезапно кто-то кладет руку на твое плечо. Обернувшись, ты видишь человека в темно-зеленой форме с надписью на шевроне "Финансовая полиция" &lt;br/&gt;
+        - Вы арестованы за попытку наличного оборота денежных знаков. Вы имеете право хранить молчание, каждое ваше слово будет записано в фискальную память.&lt;br/&gt;
+        Кто бы мог подумать, что наличные деньги будут запрещены окончательно...
+      </Text>
+      <Next>202</Next>
+    </Action>
+    <Action>
+      <Name>Оплатить картой</Name>
+      <Text>Транзакция успешно проведена. Приятного аппетита!</Text>
+      <Command>
+        $gamedata['B2'] = 'done';
+        $gamedata['mask'][2]++;
+      </Command>
+      <Next>20</Next>
+    </Action>
+    <Action>
+      <Name>Оплатить бобриками</Name>
+      <Text>Бобрики успешно списаны. Приятного аппетита!</Text>
+      <Command>
+        $gamedata['B2'] = 'done';
+        $gamedata['mask'][2]++;
+      </Command>
+      <Next>20</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>22</ID>
+    <Name>Конференц-зал</Name>
+    <Text>
+      В конференц-зале проходит очередная конференция "IT-ясли".
+      Дети собирают голографические центры обработки данных ,
+      тянут квантовые локальные сеточки
+      и разрабатывают простенькие программы на многопоточном языке программирования "МалыШок".
+      На трибуне стоит Надежда Янушкевич.
+    </Text>
+    <Action>
+      <Name>Привет, Надя!</Name>
+      <Text>
+        Лицо Надежды озаряется надеждой:&lt;br/&gt;
+        - О привет! Заходи! Хочешь провести мастер-класс для детей?
+      </Text>
+      <Score>1</Score>
+      <Condition>
+        ! isset ($gamedata['yashma'])
+      </Condition>
+      <Command>
+        $gamedata['yashma'] = 1;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Провести мастер-класс</Name>
+      <Text>
+        Ты проводишь мастер-класс для детей.
+        Вдохновенно рассказываешь про самые крутые технологии и случайно запутываешься в квантовой сетке.
+        Дети в ажитации, помогают тебе распутаться и просят рассказать про жизнь в IT-компании.
+        Ты начинаешь рассказывать. Через 4 часа ты прощаешься с новыми друзьями.
+        Дети выходят, одухотворённые новыми знаниями.
+      </Text>
+      <Condition>
+        isset ($gamedata['yashma']) &amp;&amp; $gamedata['master'] &lt; 1
+      </Condition>
+      <Command>
+        $gamedata['B2'] = 'done';
+        $gamedata['mask'][2]++;
+        $gamedata['master']++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Повторить мастер-класс</Name>
+      <Text>Ты провел второй мастер-класс для детей. Дети разбежались</Text>
+      <Condition>
+        isset ($gamedata['yashma']) &amp;&amp; $gamedata['master'] == 1
+      </Condition>
+      <Command>
+        $gamedata['master']++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Next>20</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>30</ID>
+    <Name>3 этаж</Name>
+    <Text>
+      Ты находишься на третьем этаже здания КРОК.
+      Тут расположен самый первый ЦОД, массажный кабинет и спортивный зал.
+    </Text>
+    <Action>
+      <Name>Открыть дверь в ЦОД</Name>
+      <Text>Ты пытаешься открыть дверь в ЦОД, но она заперта, а у тебя нет допуска.</Text>
+      <Command>
+        $gamedata['datacenter'] = 1;
+      </Command>
+      <Condition>
+        ! isset ($gamedata['datacenter'])
+      </Condition>
+    </Action>
+    <Action>
+      <Name>Тренажерный зал</Name>
+      <Text>Ты открываешь дверь.</Text>
+      <Next>31</Next>
+    </Action>
+    <Action>
+      <Name>Посетить массаж</Name>
+      <Text>Ты заходишь в массажный кабинет.</Text>
+      <Next>32</Next>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт.</Text>
+      <Next>12</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>31</ID>
+    <Name>Тренажерный зал</Name>
+    <Text>
+      Ты находишься в тренажерном зале.
+      Здесь в наличии широчайший выбор тренажеров - вакуумные штанги, квантовые дорожки и нанонастольный теннис
+    </Text>
+    <Action>
+      <Name>Выжать штангу</Name>
+      <Text>Ты неловко пытаешься выжать штангу, но она внезапно соскальзывает на тебя.</Text>
+      <Condition>! isset ($gamedata['sport'])</Condition>
+      <Next>204</Next>
+    </Action>
+    <Action>
+      <Name>Выжать штангу</Name>
+      <Text>Ты успешно выжал штангу.</Text>
+      <Condition>isset ($gamedata['sport'])</Condition>
+      <Command>
+        $gamedata['B3'] = 'done';
+        $gamedata['mask'][3]++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Пробежать марафон</Name>
+      <Text>Ты бежишь марафон, но внезапно шнурок на неправильно завязанных ботинках попадает в механизм.</Text>
+      <Condition>! isset ($gamedata['sport'])</Condition>
+      <Next>204</Next>
+    </Action>
+    <Action>
+      <Name>Пробежать марафон</Name>
+      <Text>Ты бежишь марафон и улучшаешь недавнее достижение Егора Осипова.</Text>
+      <Condition> isset ($gamedata['sport'])</Condition>
+      <Command>
+        $gamedata['B3'] = 'done';
+        $gamedata['mask'][3]++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Пройти инструктаж</Name>
+      <Text>Ты проходишь инструктаж по использованию высокотехнологичного спортивного оборудования.</Text>
+      <Command>
+        $gamedata['sport'] = 1;
+      </Command>
+      <Condition>
+        !isset ($gamedata['sport'])
+      </Condition>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>30</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>32</ID>
+    <Name>Массажный кабинет</Name>
+    <Text>Ты находишься в массажном кабинете. В нем размещаются автоматические интеллектуальные массажеры с встроенной диагностической подсистемой.</Text>
+    <Action>
+      <Name>Массаж 10 минут</Name>
+      <Text>&quot;Хорошо, но мало&quot; - думаешь ты, вставая с массажного кресла.</Text>
+    </Action>
+    <Action>
+      <Name>Массаж 25 минут</Name>
+      <Text>&quot;В самый раз!&quot; - думаешь ты, вставая с массажного кресла.</Text>
+      <Command>
+        $gamedata['B3'] = 'done';
+        $gamedata['mask'][3]++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Массаж 60 минут</Name>
+      <Text>Ты незаметно засыпаешь в массажном кресле.</Text>
+      <Next>205</Next>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>30</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>40</ID>
+    <Name>4 этаж</Name>
+    <Text>
+      Ты находишься на четвертом этаже здания КРОК.
+      Здесь расположены департамент по работе с персоналом, учебные классы и Женя Манакова.
+    </Text>
+    <Action>
+      <Name>Зайти за бобролотом</Name>
+      <Text>Ты заходишь в отдел корпоративной культуры.</Text>
+      <Next>41</Next>
+    </Action>
+    <Action>
+      <Name>Найти Манакову</Name>
+      <Text>После получасовых безуспешных поисков выясняется, что Женя занимается открытием филиала КРОК-Луна и организовывает перевозку туда сотрудников ДИТ.</Text>
+      <Condition>! isset ($gamedata['manakova'])</Condition>
+      <Command>$gamedata['manakova'] = 1;</Command>
+    </Action>
+    <Action>
+      <Name>Зайти в учебный класс</Name>
+      <Text>Ты заходишь в учебный класс.</Text>
+      <Next>42</Next>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт.</Text>
+      <Next>12</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>41</ID>
+    <Name>Корпоративная культура</Name>
+    <Text>
+      В отделе корпоративной культуры пусто.
+      Все готовятся к пятидесятилетию КРОК.
+      Слева стоит стеллаж с бобромагазином.
+      Справа - портрет Полины Хабаровой на конференции HR-директоров Марса
+    </Text>
+    <Action>
+      <Name>Взять бобролот</Name>
+      <Text>Крадучись, ты пытаешься утащить бобролот.</Text>
+      <Condition>! isset ($gamedata['B4'])</Condition>
+      <Next>206</Next>
+    </Action>
+    <Action>
+      <Name>Подождать</Name>
+      <Text>Ты ждешь 5 минут. Никто не приходит.</Text>
+      <Command>$gamedata['time']++;</Command>
+      <Condition>$gamedata['time'] &lt; 1</Condition>
+    </Action>
+    <Action>
+      <Name>Подождать еще</Name>
+      <Text>Ты ждаешь еще 5 минут. Никто не приходит.</Text>
+      <Command>$gamedata['time']++;</Command>
+      <Condition>$gamedata['time'] == 1</Condition>
+    </Action>
+    <Action>
+      <Name>Еще чуть-чуть</Name>
+      <Text>
+        Ты ждешь последние 5 минут.
+        Внезапно прибегает Наталия Прилуцкая, вручает тебе заказанный бобролот и быстро убегает.
+      </Text>
+      <Command>
+        $gamedata['B4'] = 'done';
+        $gamedata['mask'][4]++;
+        $gamedata['time']++;
+      </Command>
+      <Condition>$gamedata['time'] == 2</Condition>
+      <Score>1</Score>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>40</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>42</ID>
+    <Name>Учебный класс</Name>
+    <Text>
+      В учебном классе идет практическое занятие по виртуализированной виртуальности.
+      Виртуальный преподаватель преподает голографическим слушателям.
+    </Text>
+    <Action>
+      <Name>Послушать семинар</Name>
+      <Text>Ты пытаешься понять уровень виртуализированности виртуальности, но это оказывается слишком сложно.</Text>
+      <Command>
+        $gamedata['seminar'] = 1;
+      </Command>
+      <Condition>
+        ! isset ($gamedata['seminar'])
+      </Condition>
+    </Action>
+    <Action>
+      <Name>Виртуализироваться</Name>
+      <Text>Ты подключаешься к виртуализованному виртуализатору.</Text>
+      <Next>207</Next>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>40</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>50</ID>
+    <Name>5 этаж</Name>
+    <Text>
+      Ты находишься на пятом этаже здания КРОК.
+      Здесь расположен департамент продаж.
+      В холле стоит Максим Стрижков и что-то рассказывает.
+    </Text>
+    <Action>
+      <Name>Продать что-нибудь</Name>
+      <Text>
+        Здесь работают мастера своего дела.
+        Попытка продать им что бы то ни было заранее обречена на провал.
+      </Text>
+    </Action>
+    <Action>
+      <Name>Купить что-нибудь</Name>
+      <Text>Задумавшись о покупке, ты не сразу вспомнил, что твой бюджет не потянет ни тучу данных, ни гиперквантовый процессор, ни нановолновую мультилинию. А жаль...</Text>
+    </Action>
+    <Action>
+      <Name>Послушать Максима</Name>
+      <Text>Ты подходишь ближе к Максиму.</Text>
+      <Score>1</Score>
+      <Command>
+        $gamedata['B5'] = 'done';
+        $gamedata['mask'][5]++;
+      </Command>
+      <Next>51</Next>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт.</Text>
+      <Next>12</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>51</ID>
+    <Name>Стрижков</Name>
+    <Image>movie.jpg</Image>
+    <Text>
+      Максим стоит у экрана. Он показывает на экран, на котором демонстрируется фильм 'Сделка':&lt;br/&gt;
+      - Уже 25 лет этот фильм студии '12 этаж' является основным учебным фильмом департамента продаж.
+    </Text>
+    <Action>
+      <Name>Посмотреть фильм</Name>
+      <Text>Ты смотришь фильм 'Сделка' и отмечаешь отличную игру актеров</Text>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>50</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>60</ID>
+    <Name>6 этаж</Name>
+    <Text>
+      Ты находишься на шестом этаже здания КРОК.
+      Здесь располагается Департамент вычислительных систем.
+      Вдоль коридора ты видишь двери с табличками.
+    </Text>
+    <Action>
+      <Name>Белогривые лошадки</Name>
+      <Text>Ты весьма осторожно открываешь дверь.</Text>
+      <Next>61</Next>
+    </Action>
+    <Action>
+      <Name>Мегамозг</Name>
+      <Text>Ты очень осторожно открываешь дверь.</Text>
+      <Next>62</Next>
+    </Action>
+    <Action>
+      <Name>Наливное блюдечко</Name>
+      <Text>Ты крайне осторожно открываешь дверь.</Text>
+      <Next>63</Next>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт.</Text>
+      <Next>12</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>61</ID>
+    <Name>Белогривые лошадки</Name>
+<Image>cloud.jpg</Image>
+    <Text>
+      Ты оказываешься в помещении, заполненном зеленоватым туманом.
+      Монотонно работают какие-то машины, одна из них находится как раз рядом с тобой.
+      Внезапно из дымки показывается Максим Березин.
+    </Text>
+    <Action>
+      <Name>Спросить о тумане</Name>
+      <Text>Ты пытаешься заговорить.</Text>
+      <Condition>! isset($gamedata['maxim'])</Condition>
+      <Next>208</Next>
+    </Action>
+    <Action>
+      <Name>Спросить о тумане</Name>
+      <Text>
+        Ты спрашиваешь, что это такое.
+        Максим рассказывает, что это новейшая технология - вычислительные наночастицы размещаются прямо в дождевом облаке.
+        Облако обеспечивает охлаждение, а солнце - электропитание.
+        Для того, чтобы отличать облака различных поставщиков, используются красители.
+      </Text>
+      <Condition>isset($gamedata['maxim'])</Condition>
+    </Action>
+    <Action>
+      <Name>Дернуть рычаг</Name>
+      <Text>Ты дергаешь за рычаг установки.</Text>
+      <Next>209</Next>
+    </Action>
+    <Action>
+      <Name>Поздороваться</Name>
+      <Text>- Здравствуй, Максим!&lt;br/&gt;- Приветствую, коллега!</Text>
+      <Condition>! isset($gamedata['maxim'])</Condition>
+      <Command>$gamedata['maxim'] = 1;</Command>
+      <Score>1</Score>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты покидаешь комнату.</Text>
+      <Next>60</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>62</ID>
+    <Name>Мегамозг</Name>
+    <Text>
+      В комнате находится огромная стеклянная банка с жидкостью.
+      В основании находится пульт с красной кнопкой. К вам приближается Валентин Губарев.
+    </Text>
+    <Action>
+      <Name>Спросить, что это</Name>
+      <Text>Ты пытаешься заговорить.</Text>
+      <Condition>! isset($gamedata['brain'])</Condition>
+      <Next>208</Next>
+    </Action>
+    <Action>
+      <Name>Спросить, что это</Name>
+      <Condition>isset($gamedata['brain'])</Condition>
+      <Text>
+        Губарев рассказывает, что это последняя разработка в области хранения - банка данных.
+        В ней размещаются клонированные куриные мозги, образующие гигансткую вычислительную сеть производительностью в 25 йоттафлопсов.
+      </Text>
+    </Action>
+    <Action>
+      <Name>Представиться</Name>
+      <Text>Ты называешь себя.</Text>
+      <Condition>! isset($gamedata['brain'])</Condition>
+      <Command>$gamedata['brain'] = 1;</Command>
+      <Score>1</Score>
+    </Action>
+    <Action>
+      <Name>Нажать красную кнопку</Name>
+      <Text>Ты нажимаешь красную кнопку.</Text>
+      <Next>209</Next>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты покидаешь комнату.</Text>
+      <Next>60</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>63</ID>
+    <Name>Наливное блюдечко</Name>
+    <Text>В комнате находятся несколько проекторов на штативах, какие-то экраны и консоль. На стене висит фотография.</Text>
+    <Action>
+      <Name>Посмотреть на консоль</Name>
+      <Text>На консоли укреплено фарфоровое блюдечко с голубой каемочкой. На блюдечке лежит зеленый шарик.</Text>
+      <Condition>! isset($gamedata['apple'])</Condition>
+      <Command>$gamedata['apple'] = 1;</Command>
+    </Action>
+    <Action>
+      <Name>Покатать шарик</Name>
+      <Text>Ты катишь шарик по блюдечку. Внезапно экраны включаются.</Text>
+      <Condition>isset($gamedata['apple']) &amp;&amp; ! isset($gamedata['3d'])</Condition>
+      <Command>$gamedata['3d'] = 1;</Command>
+    </Action>
+    <Action>
+      <Name>Посмотреть на экраны</Name>
+      <Text>Экраны ничего не показывают.</Text>
+      <Condition>! isset($gamedata['3d'])</Condition>
+    </Action>
+    <Action>
+      <Name>Посмотреть на экраны</Name>
+      <Text>
+        На экране возникает Ольга Даева и рассказывает, что это - новейший трехмерный интерфейс для людей всех возрастов.
+        Еще древние люди катали яблочко по блюдечку в своих примитивных системах телеприсутствия.
+        Современные технологии здесь сочетаются с традицонными рецептами старины.
+      </Text>
+      <Score>1</Score>
+      <Condition>isset($gamedata['3d'])</Condition>
+      <Command>
+        $gamedata['B6'] = 'done';
+        $gamedata['mask'][6]++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Посмотреть на фото</Name>
+      <Text>На фотографии изображен Александр Леус на фоне своего последнего детища - капсулы виртуальной реальности 'Шестое чувство'.</Text>
+      <Score>1</Score>
+    </Action>
+    <Action>
+      <Name>Споткнуться</Name>
+      <Text>Ты спотыкаешься о какой-то кабель, он вылетает из гнезда.</Text>
+      <Next>209</Next>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты покидаешь комнату.</Text>
+      <Next>60</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>70</ID>
+    <Name>7 этаж</Name>
+    <Text>
+      Ты находишься на седьмом этаже здания КРОК.
+      Здесь располагается Департамент интеллектуальных зданий. За ближайшей дверью что-то гудит.
+    </Text>
+    <Action>
+      <Name>Войти в дверь</Name>
+      <Text>Ты аккуратно открываешь дверь.</Text>
+      <Next>71</Next>
+    </Action>
+    <Action>
+      <Name>Зайти на кухню</Name>
+      <Text>Ты заходишь на кухню.</Text>
+      <Next>72</Next>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт.</Text>
+      <Next>12</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>71</ID>
+    <Name>Бублик</Name>
+    <Image>fusion.jpg</Image>
+    <Text>
+      В середине комнаты находится странная установка.
+      На консоли управления есть красная клавиша.
+    </Text>
+    <Action>
+      <Name>Обойти вокруг</Name>
+      <Score>1</Score>
+      <Text>
+        Ты обходишь установку. С одной стороны к ней подключены энерговоды, уходящие в стену комнаты.
+        С другой стороны есть панель, на которой светится показатель: 1.2 ПВт-ч.
+        В комнату входит Александр Широков.
+      </Text>
+      <Command>$gamedata['tor'] = 1;</Command>
+      <Condition>! isset ($gamedata['tor'])</Condition>
+    </Action>
+    <Action>
+      <Name>Нажать клавишу</Name>
+      <Text>
+        Ты осторожно нажимаешь на клавишу. Голос Александра Широкова сзади весело произносит:&lt;br/&gt;
+        - Ничего не будет - восьмикратное резервирование, 200% надежность!
+      </Text>
+      <Score>1</Score>
+      <Command>$gamedata['tor'] = 1;</Command>
+      <Condition>! isset ($gamedata['tor'])</Condition>
+    </Action>
+    <Action>
+      <Name>Спросить, что это</Name>
+      <Text>
+        Широков рассказывает:&lt;br/&gt;
+        - Это последняя модель автономного термоядерного реактора ТОКОКРОК-40.
+        Абсолютно надежен, экономичен, обеспечивает энергией весь район, и никаких выбросов стронция!
+      </Text>
+      <Condition>isset ($gamedata['tor'])</Condition>
+      <Command>
+        $gamedata['B7'] = 'done';
+        $gamedata['mask'][7]++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты аккуратно покидаешь комнату.</Text>
+      <Next>70</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>72</ID>
+    <Name>Кухня</Name>
+    <Text>
+      Ты находишься в стандартном кухонном модуле.
+      Здесь расположен автоматический четырехпоточный кухонный процессор, трехмерный пищевой принтер и синтезатор жидкостей (без модуля перегонки).
+    </Text>
+    <Action>
+      <Name>Выпить кофе</Name>
+      <Text>Недавно в КРОК завезли новый сорт кофе. Зерна, проходя через пищеварительный тракт венерианской циклопендры, приобретают особый, совершенно неземной аромат. Ты пьешь кофе.</Text>
+      <Command>
+        $gamedata['B7'] = 'done';
+        $gamedata['mask'][7]++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Выпить чая</Name>
+      <Text>В ассортименте представлены сорта традиционного черного, интенсивного синего, вегетарианского зеленого, бодрящего желтого и расслабляющего белого чая. Ты пьешь чай.</Text>
+      <Command>
+        $gamedata['B7'] = 'done';
+        $gamedata['mask'][7]++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Посмотреть в окно</Name>
+      <Text>
+        Напротив офиса расположен завод по ремонту сверхмагнитных поездов.
+        Иногда вагоны зависают как раз на уровне пятого этажа, проходя приемочные испытания.
+      </Text>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>70</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>80</ID>
+    <Name>8 этаж</Name>
+    <Text>
+      Ты находишься на восьмом этаже здания КРОК.
+      Здесь располагается Департамент информационных технологий.
+      Весь коридор уставлен роботами различных конструкций, так что айфону негде упасть.
+      Рядом о чем-то рассказывает Марат Чураков
+    </Text>
+    <Action>
+      <Name>Послушать Марата</Name>
+      <Text>
+        - Мы вчера, наконец, тандыр выиграли!&lt;br/&gt;
+        - Может быть, тендер, Марат?&lt;br/&gt;
+        - Тендеры мы каждый день выигрываем, а вчера - тандыр!
+      </Text>
+      <Score>1</Score>
+      <Command>
+        $gamedata['B8'] = 'done';
+        $gamedata['mask'][8]++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Рассмотреть роботов</Name>
+      <Text>
+        Среди роботов попадаются судейские модели в мантиях,
+        медицинские киберхирурги в белоснежных халатах и даже несколько бронированных робоучителей.
+      </Text>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт.</Text>
+      <Next>12</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>90</ID>
+    <Image>dish.jpg</Image>
+    <Name>9 этаж</Name>
+    <Text>
+      Ты находишься на девятом этаже здания КРОК.
+      Здесь располагается Департамент телекоммуникаций.
+      В холле три сотрудника с трудом удерживают антенну радиотелескопа.
+      Внезапно антенна начинает угрожающе крениться.
+    </Text>
+    <Action>
+      <Name>Помочь удержать</Name>
+      <Text>
+        Благодаря твоей помощи ценное оборудование не пострадало.
+        Наталья Дьяконова лично выразила тебе благодарность!
+      </Text>
+      <Score>1</Score>
+      <Command>
+        $gamedata['B9'] = 'done';
+        $gamedata['mask'][9]++;
+      </Command>
+      <Condition>!isset ($gamedata['mask'][9])</Condition>
+    </Action>
+    <Action>
+      <Name>Отскочить в сторону</Name>
+      <Text>
+        Ты пробуешь отскочить...
+      </Text>
+      <Condition>!isset ($gamedata['mask'][9])</Condition>
+      <Next>203</Next>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт, но...</Text>
+      <Condition>!isset ($gamedata['mask'][9])</Condition>
+      <Next>203</Next>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт.</Text>
+      <Condition>isset ($gamedata['mask'][9])</Condition>
+      <Next>12</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>100</ID>
+    <Name>10 этаж</Name>
+    <Text>
+      Ты находишься на десятом этаже здания КРОК.
+      Здесь располагается финансовый департамент и департамент маркетинга.
+    </Text>
+    <Action>
+      <Name>В маркетинг!</Name>
+      <Text>Ты заходишь в отдел маркетинга.</Text>
+      <Next>103</Next>
+    </Action>
+    <Action>
+      <Name>Сдать отчет</Name>
+      <Text>Ты заходишь к бухгалтерам.</Text>
+      <Next>101</Next>
+    </Action>
+    <Action>
+      <Name>Заказать перевод</Name>
+      <Text>Ты заходишь к переводчикам.</Text>
+      <Next>102</Next>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт.</Text>
+      <Next>12</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>101</ID>
+    <Name>Бухгалтерия</Name>
+    <Text>
+      Ты находишься в бухгалтерии.
+      Вдоль стен стоят сверкающие терминалы для сдачи отчетов.
+    </Text>
+    <Action>
+      <Name>Сдать командировочное</Name>
+      <Text>Да ты что! его еще в 2015 году отменили!</Text>
+    </Action>
+    <Action>
+      <Name>Вставить флешку</Name>
+      <Text>Ты пытаешься вставить флешку с отчетом, но не находишь подходящего разъема.</Text>
+    </Action>
+    <Action>
+      <Name>Прикоснуться к сенсору</Name>
+      <Text>
+        Проанализировав феромонный след на коже, терминал сам определяет, в каких городах ты был, и заполняет отчет автоматически.
+      </Text>
+      <Command>
+        $gamedata['B10'] = 'done';
+        $gamedata['mask'][10]++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>100</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>102</ID>
+    <Name>Переводчики</Name>
+    <Text>
+      Ты находишься в отделе переводов. Александр Цедилин беседует по телефону на санскрите,
+      Евгений Мамонтов заканчивает перевод листовки на суахили, а Мария Кордюкова чертит марсианские руны.
+      Ты просишь перевести на русский фразу:
+    </Text>
+    <Action>
+      <Name>twaalfde vloer</Name>
+      <Text>Двенадцатый этаж (африкаанс) - отвечает Цедилин</Text>
+      <Score>1</Score>
+      <Command>
+        $gamedata['B10'] = 'done';
+        $gamedata['mask'][10]++;
+        $gamedata['afro'] = 1;
+      </Command>
+      <Condition>!isset ($gamedata['afro'])</Condition>
+    </Action>
+    <Action>
+      <Name>tekau ma rua papa</Name>
+      <Text>Двенадцатый этаж (маори) - отвечает Мамонтов</Text>
+      <Score>1</Score>
+      <Command>
+        $gamedata['B10'] = 'done';
+        $gamedata['mask'][10]++;
+        $gamedata['maori'] = 1;
+      </Command>
+      <Condition>!isset ($gamedata['maori'])</Condition>
+    </Action>
+    <Action>
+      <Name>tolfde ferdjipping</Name>
+      <Score>1</Score>
+      <Text>Двенадцатый этаж (фризский) - отвечает Кордюкова</Text>
+      <Command>
+        $gamedata['B10'] = 'done';
+        $gamedata['mask'][10]++;
+        $gamedata['freeze'] = 1;
+      </Command>
+      <Condition>!isset ($gamedata['freeze'])</Condition>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>100</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>103</ID>
+    <Name>Маркетинг</Name>
+    <Text>
+      Ты находишься в отделе маркетинга.
+      Все сотрудники сосредоточенно изобретают новый фирменный стиль компании.
+      Какой цвет будет основным цветом в следующие 25 лет?
+    </Text>
+    <Action>
+      <Name>Зеленый</Name>
+      <Text>Вероника Гименез соглашается использовать зеленый цвет как основной цвет компании</Text>
+      <Score>1</Score>
+      <Command>
+        $gamedata['B10'] = 'done';
+        $gamedata['mask'][10]++;
+        $gamedata['green1'] = 1;
+      </Command>
+      <Condition>!isset ($gamedata['green1'])</Condition>
+    </Action>
+    <Action>
+      <Name>Зеленый</Name>
+      <Text>Анна Адилханян соглашается использовать зеленый цвет как основной цвет компании</Text>
+      <Score>1</Score>
+      <Command>
+        $gamedata['B10'] = 'done';
+        $gamedata['mask'][10]++;
+        $gamedata['green2'] = 1;
+      </Command>
+      <Condition>!isset ($gamedata['green2'])</Condition>
+    </Action>
+    <Action>
+      <Name>Зеленый</Name>
+      <Text>Вячеслав Танцоров соглашается использовать зеленый цвет как основной цвет компании</Text>
+      <Score>1</Score>
+      <Command>
+        $gamedata['B10'] = 'done';
+        $gamedata['mask'][10]++;
+        $gamedata['green3'] = 1;
+      </Command>
+      <Condition>!isset ($gamedata['green3'])</Condition>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>100</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>110</ID>
+    <Name>11 этаж</Name>
+    <Text>
+      Ты находишься на одиннадцатом этаже здания КРОК.
+      Здесь располагается администрация компании.
+    </Text>
+    <Action>
+      <Name>Зайти к Никулину</Name>
+      <Text>Ты осторожно заходишь к Игорю Никулину.</Text>
+      <Next>111</Next>
+    </Action>
+    <Action>
+      <Name>Идея для ББЛ</Name>
+      <Text>Ты заходишь к генеральному директору.</Text>
+      <Next>112</Next>
+    </Action>
+    <Action>
+      <Name>Погладить крокодила</Name>
+      <Text>Ты гладишь крокодила. Символ фирмы лениво мигает левым глазом.</Text>
+      <Command>
+        $gamedata['B11'] = 'done';
+        $gamedata['mask'][11]++;
+      </Command>
+    </Action>
+    <Action>
+      <Name>Вызвать лифт</Name>
+      <Text>Ты вызываешь лифт.</Text>
+      <Next>12</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>111</ID>
+    <Name>Никулин</Name>
+    <Text>
+      В кабинете Никулина полно народу. Игорь, как всегда, занят. Над ним горит табло: 'следующий талон № 318'
+    </Text>
+    <Action>
+      <Name>Кто последний?</Name>
+      <Text>Тут электронная очередь - отвечает кто-то из середины кабинета</Text>
+    </Action>
+    <Action>
+      <Name>Взять талончик</Name>
+      <Text>Ты отрываешь талончик - его номер 564. Придется подождать некоторое время</Text>
+      <Condition>!isset($gamedata['talon'])</Condition>
+      <Command>$gamedata['talon']=1;</Command>
+      <Score>1</Score>
+    </Action>
+    <Action>
+      <Name>Посмотреть на табло</Name>
+      <Condition>isset($gamedata['talon'])</Condition>
+      <Text>На табло новый номер: 319</Text>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>110</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>112</ID>
+    <Name>ББД</Name>
+    <Text>
+      Борис Леонидович находится в своем кабинете. Как всегда, он готов выслушать инновационную идею от любого сотрудника компании.
+    </Text>
+    <Action>
+      <Name>Рассказать идею</Name>
+      <Text>Борис Леонидович обещает рассмотреть эту идею лично</Text>
+      <Condition>!isset($gamedata['idea'])</Condition>
+      <Command>$gamedata['idea']=1;</Command>
+      <Score>1</Score>
+    </Action>
+    <Action>
+      <Name>Рассказать еще идею</Name>
+      <Text>Борис Леонидович обещает рассмотреть и эту идею лично</Text>
+      <Condition>$gamedata['idea'] == 1</Condition>
+      <Command>$gamedata['idea']++;</Command>
+    </Action>
+    <Action>
+      <Name>Рассказать еще идею</Name>
+      <Text>- Всех бобриков не заработаешь! - Борис Леонидович намекает, что его время ограничено</Text>
+      <Condition>$gamedata['idea'] == 2</Condition>
+      <Command>$gamedata['idea']++;</Command>
+    </Action>
+    <Action>
+      <Name>Вернуться в холл</Name>
+      <Text>Ты возвращаешься в холл.</Text>
+      <Next>110</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>120</ID>
+    <Template>finish.htm</Template>
+    <Name>12 этаж</Name>
+    <Ending>1</Ending>
+    <Text>
+      Вы переноситесь в 2017 год на голосование за лучшую команду и голосуете за &lt;b&gt;12 этаж&lt;/b&gt;.
+      Ваш голос принят!
+      Просьба повторить это 01.07.2017&lt;br/&gt;
+      Спасибо за участие!&lt;br/&gt;&lt;br/&gt;
+      Для записи и просмотра рейтинга нажмите [Рейтинг]
+    </Text>
+    <Action>
+      <Name>Сыграть снова</Name>
+      <Text></Text>
+      <Next>1</Next>
+    </Action>
+    <Action>
+      <Name>Рейтинг</Name>
+      <Text></Text>
+      <Next>121</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>202</ID>
+    <Ending>1</Ending>
+    <Name>Концовка №2</Name>
+    <Text>
+      Внезапно из стенной ниши появился робот и, преградив тебе путь, сказал:&lt;br/&gt;
+      - Лица в верхней одежде в офис не допускаются. Попрошу покинуть здание. Попрошу покинуть здание.&lt;br/&gt;
+      Тебе даже не удалось уйти дальше первого этажа. В следующий раз надо быть более сообразительным.
+    </Text>
+    <Action>
+      <Name>Начать сначала</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>203</ID>
+    <Ending>1</Ending>
+    <Name>Концовка #3</Name>
+    <Text>
+      ...но тебя придавливает радиотелескопом, и ты попадаешь в реанимацию.
+      Праздник состоится без тебя...
+    </Text>
+    <Action>
+      <Name>Начать сначала</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>204</ID>
+    <Ending>1</Ending>
+    <Name>Концовка #4</Name>
+    <Text>
+      Вы не прошли инструктаж по технике безопасности и правилам поведения в спортивном зале.
+      Сожалеть об этом придется на больничной койке.
+    </Text>
+    <Action>
+      <Name>Начать сначала</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>205</ID>
+    <Ending>1</Ending>
+    <Name>Концовка #5</Name>
+    <Text>
+      Вы совсем потеряли чувство реальности в массажном кабинете. Когда на следующий день вас обнаружила охрана, вы даже не сразу поняли, где вы находитесь.
+    </Text>
+    <Action>
+      <Name>Начать сначала</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>206</ID>
+    <Ending>1</Ending>
+    <Name>Концовка #6</Name>
+    <Text>
+      Вы вздрогнули, так как металлический голос внезапно произнес:&lt;br/&gt;
+      - Совесть - лучший контролер!&lt;br/&gt;
+      Из-за угла шкафа выкатился вооруженный охранный дроид, на котором было написано "Совесть, модель 47А12".&lt;br/&gt;
+      Вас поймали за руку при попытке кражи бобролота.
+    </Text>
+    <Action>
+      <Name>Начать сначала</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>207</ID>
+    <Ending>1</Ending>
+    <Name>Концовка #7</Name>
+    <Text>
+      Уйдя в виртуализированную виртуальность, вы перестали понимать, где вы сейчас находитесь на самом деле. Добро пожаловать в Матрицу!
+    </Text>
+    <Action>
+      <Name>Начать сначала</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>208</ID>
+    <Ending>1</Ending>
+    <Name>Концовка #8</Name>
+    <Text>
+      Прежде чем начинать разговор, имеет смысл поздороваться. Как минимум, это вежливо. В следующий раз не забывайте про это.
+    </Text>
+    <Action>
+      <Name>Начать сначала</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+  <Location>
+    <ID>209</ID>
+    <Ending>1</Ending>
+    <Name>Концовка #9</Name>
+    <Text>
+      Нормально работавший агрегат внезапно глохнет, на панели загорается россыпь оранжевых и красных огоньков.
+      Похоже, вам теперь тут не очень рады. В следующий раз будьте аккуратнее.
+    </Text>
+    <Action>
+      <Name>Начать сначала</Name>
+      <Next>1</Next>
+    </Action>
+  </Location>
+</Game>
+
