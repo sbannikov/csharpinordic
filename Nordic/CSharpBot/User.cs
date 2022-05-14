@@ -11,9 +11,14 @@ namespace CSharpBot
     /// </summary>
     public class User
     {
-       /// <summary>
-       /// Идентификатор пользователя
-       /// </summary>
-       public long ID;
+        /// <summary>
+        /// Идентификатор пользователя
+        /// </summary>
+        public long ID;
+
+        /// <summary>
+        /// Дата и время последней активности пользователя
+        /// </summary>
+        public DateTime TimeStamp;
     }
 }

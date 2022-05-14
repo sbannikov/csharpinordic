@@ -25,7 +25,24 @@ namespace CSharpBot
         /// <summary>
         /// Состояние бота
         /// </summary>
-        private State state = State.Load();
+        private static State state = State.Load();
+
+        /// <summary>
+        /// Таймер сохранения состояния - 1 раз в секунду
+        /// </summary>
+        private Timer timer = new Timer(SaveState, null, 0, 1000);
+
+        /// <summary>
+        /// Сохранение состояния по требованию
+        /// </summary>
+        /// <param name="state"></param>
+        private static void SaveState(object o)
+        {
+            if (state.Dirty)
+            {
+                state.Save();
+            }
+        }
 
         /// <summary>
         /// Обработка ошибок
@@ -42,7 +59,7 @@ namespace CSharpBot
         }
 
         /// <summary>
-        /// Обработка сообщений боту
+        /// Обработка обновлений боту
         /// </summary>
         /// <param name="сlient"></param>
         /// <param name="update"></param>
@@ -51,6 +68,14 @@ namespace CSharpBot
         /// <exception cref="NotImplementedException"></exception>
         public Task HandleUpdateAsync(ITelegramBotClient сlient, Update update, CancellationToken cancellationToken)
         {
+            // Поиск пользователя по идентификатору
+            if (state.Users.TryGetValue(update.Message.Chat.Id, out User user))
+            {
+                // Фиксация последней активности пользователя
+                user.TimeStamp = DateTime.Now;
+                state.Dirty = true;
+            }
+
             switch (update.Type)
             {
                 case UpdateType.Message:
@@ -83,7 +108,7 @@ namespace CSharpBot
                     else
                     {
                         ProcessText(сlient, message);
-                    }                    
+                    }
                     break;
 
                 default:
@@ -115,7 +140,7 @@ namespace CSharpBot
                             ID = message.Chat.Id
                         };
                         state.Users.Add(message.Chat.Id, user);
-                        state.Save();
+                        state.Dirty = true;
                         сlient.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, я вас зарегистрировал");
                     }
                     else

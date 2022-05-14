@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using NLog;
 
 namespace CSharpBot
 {
@@ -12,6 +13,11 @@ namespace CSharpBot
     /// </summary>
     public class State
     {
+        /// <summary>
+        /// Протоколирование
+        /// </summary>
+        private static readonly Logger log = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Имя файла для сохранения состояния
         /// </summary>
@@ -23,22 +29,32 @@ namespace CSharpBot
         public Dictionary<long, User> Users = new Dictionary<long, User>();
 
         /// <summary>
+        /// Признак необходимости сохранения состояния на диск
+        /// </summary>
+        internal bool Dirty = false;
+
+        /// <summary>
         /// Загрузка состояния
         /// </summary>
         /// <returns></returns>
         public static State Load()
         {
             State state;
-            if (System.IO.File.Exists(Name)) // проверка файла на существование
+            try
             {
                 string json = System.IO.File.ReadAllText(Name);
                 state = JsonConvert.DeserializeObject<State>(json);
             }
-            else
+            catch (System.IO.FileNotFoundException)
             {
                 state = new State();
             }
-            return state; 
+            catch (Exception ex)
+            {
+                log.Warn(ex);
+                state = new State();
+            }
+            return state;
         }
 
         /// <summary>
@@ -48,7 +64,7 @@ namespace CSharpBot
         {
             string json = JsonConvert.SerializeObject(this, Formatting.Indented);
             System.IO.File.WriteAllText(Name, json);
-
+            Dirty = false;
         }
     }
 }
