@@ -17,8 +17,9 @@ namespace CSharpBot
             try
             {
                 log.Info("Бот запускается...");
+                Configuration config = Configuration.Load();
                 // Создание клиента
-                var client = new TelegramBotClient("<TOKEN>");
+                var client = new TelegramBotClient(config.Token);
                 // Запрос информации о самом боте
                 var result = client.GetMeAsync();
                 log.Trace("Запрос отправлен");
