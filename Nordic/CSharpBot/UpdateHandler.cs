@@ -31,12 +31,24 @@ namespace CSharpBot
         /// <summary>
         /// Сценарий игры
         /// </summary>
-        private Quest.Game game = Quest.Game.Load<Quest.Game>();
+        private Quest.Game game;
 
         /// <summary>
         /// Таймер сохранения состояния - 1 раз в секунду
         /// </summary>
         private Timer timer = new Timer(SaveState, null, 0, 1000);
+
+        /// <summary>
+        /// Конструктор класса
+        /// </summary>
+        public UpdateHandler()
+        {
+            game = Quest.Game.Load<Quest.Game>();
+            if (game.Rooms == null)
+            {
+                throw new BotException("Конфигурация игры не содержит комнат");
+            }
+        }
 
         /// <summary>
         /// Сохранение состояния по требованию
@@ -180,7 +192,7 @@ namespace CSharpBot
                     break;
 
                 case "help":
-                    сlient.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж", replyMarkup:null);
+                    сlient.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж", replyMarkup: null);
                     break;
 
                 case "about":

@@ -54,6 +54,39 @@ namespace CSharpBot
         }
 
         /// <summary>
+        /// Загрузка объекта заданного типа
+        /// </summary>
+        /// <param name="type">Тип данных</param>
+        /// <returns></returns>
+        public static object Load(Type type) 
+        {
+            object entity;
+            string name = null;
+            try
+            {
+                // Краткое имя типа данных
+                name = $"{type.Name}.json";
+                // Чтение JSON-файла
+                string json = System.IO.File.ReadAllText(name);
+                // Десериализация в объект
+                entity = JsonConvert.DeserializeObject(json, type);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                log.Warn($"Файл '{name}' не найден");      
+                // Создание объекта типа, заданного переменной
+                entity = Activator.CreateInstance(type);
+            }
+            catch (Exception ex)
+            {
+                log.Warn(ex);
+                // Создание объекта типа, заданного переменной
+                entity = Activator.CreateInstance(type);
+            }
+            return entity;
+        }
+
+        /// <summary>
         /// Сохранение объекта в формате JSON
         /// </summary>
         public void Save()

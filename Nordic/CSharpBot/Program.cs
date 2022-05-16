@@ -17,7 +17,16 @@ namespace CSharpBot
             try
             {
                 log.Info("Бот запускается...");
-                Configuration config = Configuration.Load<Configuration>();
+                Configuration config;
+                // Загрузка конфигурации при помощи шаблонного метода
+                config = Configuration.Load<Configuration>();
+                // Загрузка конфигурации при помощи простого метода
+                config = (Configuration)JsonFile.Load(typeof(Configuration));
+                // Проверка конфигурации на корректность
+                if (string.IsNullOrEmpty(config.Token))
+                {
+                    throw new BotException("Некорректная конфигурация приложения: нет ключа Telegram");
+                }
                 // Создание клиента
                 var client = new TelegramBotClient(config.Token);
                 // Запрос информации о самом боте
@@ -34,6 +43,10 @@ namespace CSharpBot
                 client.StartReceiving(handler);
 
                 Console.ReadLine();
+            }
+            catch (BotException ex)
+            {
+                log.Fatal(ex.Message);
             }
             catch (Exception ex)
             {
