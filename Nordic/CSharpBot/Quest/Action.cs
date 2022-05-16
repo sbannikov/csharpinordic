@@ -13,8 +13,12 @@ namespace CSharpBot.Quest
         /// </summary>
         public string Name;
         /// <summary>
+        /// Описание действия
+        /// </summary>
+        public string Description;
+        /// <summary>
         /// Номер комнаты, в которую перемещается игрок
         /// </summary>
-        public int Room;
+        public int? Room;
     }
 }

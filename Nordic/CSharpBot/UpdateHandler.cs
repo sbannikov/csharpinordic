@@ -26,7 +26,7 @@ namespace CSharpBot
         /// <summary>
         /// Состояние бота
         /// </summary>
-        private static State state = State.Load<State>();
+        internal static State BotState = State.Load<State>();
 
         /// <summary>
         /// Сценарий игры
@@ -56,9 +56,9 @@ namespace CSharpBot
         /// <param name="state"></param>
         private static void SaveState(object o)
         {
-            if (state.Dirty)
+            if (BotState.Dirty)
             {
-                state.Save();
+                BotState.Save();
             }
         }
 
@@ -79,30 +79,30 @@ namespace CSharpBot
         /// <summary>
         /// Обработка обновлений боту
         /// </summary>
-        /// <param name="сlient"></param>
+        /// <param name="client"></param>
         /// <param name="update"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Task HandleUpdateAsync(ITelegramBotClient сlient, Update update, CancellationToken cancellationToken)
+        public Task HandleUpdateAsync(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
         {
             // Поиск пользователя по идентификатору
-            if (state.Users.TryGetValue(update.Message.Chat.Id, out User user))
+            if (BotState.Users.TryGetValue(update.Message.Chat.Id, out User user))
             {
                 // Фиксация последней активности пользователя
                 user.TimeStamp = DateTime.Now;
-                state.Dirty = true;
+                BotState.Dirty = true;
             }
 
             switch (update.Type)
             {
                 case UpdateType.Message:
-                    ProcessMessage(сlient, update.Message);
+                    ProcessMessage(client, update.Message);
                     break;
 
                 default:
                     string s = $"Обновления типа {update.Type} пока не обрабатываются";
-                    сlient.SendTextMessageAsync(update.Message.Chat.Id, s);
+                    client.SendTextMessageAsync(update.Message.Chat.Id, s);
                     log.Warn(s);
                     break;
             }
@@ -114,24 +114,24 @@ namespace CSharpBot
         /// Обработка сообщения
         /// </summary>
         /// <param name="message"></param>
-        private void ProcessMessage(ITelegramBotClient сlient, Message message)
+        private void ProcessMessage(ITelegramBotClient client, Message message)
         {
             switch (message.Type)
             {
                 case MessageType.Text:
                     if (message.Text[0] == '/')
                     {
-                        ProcessCommand(сlient, message);
+                        ProcessCommand(client, message);
                     }
                     else
                     {
-                        ProcessText(сlient, message);
+                        ProcessText(client, message);
                     }
                     break;
 
                 default:
                     string s = $"Сообщения типа {message.Type} пока не обрабатываются";
-                    сlient.SendTextMessageAsync(message.Chat.Id, s);
+                    client.SendTextMessageAsync(message.Chat.Id, s);
                     log.Warn(s);
                     break;
             }
@@ -140,9 +140,9 @@ namespace CSharpBot
         /// <summary>
         /// Обработка команды
         /// </summary>
-        /// <param name="сlient"></param>
+        /// <param name="client"></param>
         /// <param name="message"></param>
-        private void ProcessCommand(ITelegramBotClient сlient, Message message)
+        private void ProcessCommand(ITelegramBotClient client, Message message)
         {
             // Команда
             string command = message.Text.Substring(1).ToLower();
@@ -150,25 +150,31 @@ namespace CSharpBot
             switch (command)
             {
                 case "start":
-                    if (!state.Users.ContainsKey(message.Chat.Id))
+                    if (!BotState.Users.ContainsKey(message.Chat.Id))
                     {
                         // Добавление пользователя в словарь
                         user = new User()
                         {
                             ID = message.Chat.Id
                         };
-                        state.Users.Add(message.Chat.Id, user);
-                        state.Dirty = true;
-                        сlient.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, я вас зарегистрировал");
+                        BotState.Users.Add(message.Chat.Id, user);
+                        BotState.Dirty = true;
+                        client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, я вас зарегистрировал");
                     }
                     else
                     {
-                        сlient.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, вы уже зарегистрированы");
+                        client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, вы уже зарегистрированы");
                     }
                     break;
 
+                case "reset": // Сброс игры
+                    user = BotState.Users[message.Chat.Id];
+                    // начинаем с комнаты с минимальным номером
+                    user.Room = game.Rooms.Keys.Min(x => x);
+                    break;
+
                 case "play":
-                    user = state.Users[message.Chat.Id];
+                    user = BotState.Users[message.Chat.Id];
                     int number; // номер комнаты
                     if (game.Rooms.ContainsKey(user.Room))
                     {
@@ -179,29 +185,22 @@ namespace CSharpBot
                         // начинаем с комнаты с минимальным номером
                         number = game.Rooms.Keys.Min(x => x);
                         user.Room = number;
-                        state.Dirty = true;
                     }
                     Quest.Room room = game.Rooms[number];
-                    var keys = room.Actions.Select(action => new KeyboardButton(action.Name));
-                    var markup = new ReplyKeyboardMarkup(keys)
-                    {
-                        ResizeKeyboard = true,
-                        OneTimeKeyboard = true
-                    };
-                    сlient.SendTextMessageAsync(message.Chat.Id, $"{room.Name}: {room.Description}", replyMarkup: markup);
+                    room.Show(client, message.Chat.Id);
                     break;
 
                 case "help":
-                    сlient.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж", replyMarkup: null);
+                    client.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж", replyMarkup: null);
                     break;
 
                 case "about":
-                    сlient.SendTextMessageAsync(message.Chat.Id, "Учебный бот на C# - текстовый квест");
+                    client.SendTextMessageAsync(message.Chat.Id, "Учебный бот на C# - текстовый квест");
                     break;
 
                 default:
                     string s = $"Команда {command} пока не обрабатываются";
-                    сlient.SendTextMessageAsync(message.Chat.Id, s);
+                    client.SendTextMessageAsync(message.Chat.Id, s);
                     log.Warn(s);
                     break;
             }
@@ -210,13 +209,45 @@ namespace CSharpBot
         /// <summary>
         /// Обработка текста
         /// </summary>
-        /// <param name="сlient"></param>
+        /// <param name="client"></param>
         /// <param name="message"></param>
-        private void ProcessText(ITelegramBotClient сlient, Message message)
+        private void ProcessText(ITelegramBotClient client, Message message)
         {
-            // обработка результата?
-            сlient.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, вы сказали мне: {message.Text}");
             log.Trace(message.Text);
+            // Пользователь - игрок
+            var user = BotState.Users[message.Chat.Id];
+            // Поиск единственной комнаты по номеру из состояния игрока
+            // Если комната не нашлась - null
+            Quest.Room room = game.FindRoom(client, message.Chat.Id, user.Room);
+            // Проверка на существование комнаты
+            if (room == null)
+            {
+                return;
+            }
+            // Поиск действия в комнате по тексту
+            // [!] надо сделать сравнение без учета регистра
+            Quest.Action action = room.Actions.SingleOrDefault(x => x.Name == message.Text);
+            // Проверка на существование действия
+            if (action == null)
+            {
+                client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, действие {message.Text} отсутствует в комнате");
+                return;
+            }
+            // Если у действия есть описание, отправим его игроку
+            if (!string.IsNullOrEmpty(action.Description))
+            {
+                // ожидаем окончания отправки сообщения!
+                client.SendTextMessageAsync(message.Chat.Id, action.Description).Wait();
+            }
+            // Если у действия задана комната, перейдем в эту комнату
+            if (action.Room.HasValue)
+            {
+                user.Room = action.Room.Value;
+                room = game.FindRoom(client, message.Chat.Id, user.Room);
+                if (room == null) return;
+            }
+            // Показать комнату
+            room.Show(client, message.Chat.Id);
         }
     }
 }

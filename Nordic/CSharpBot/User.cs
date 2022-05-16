@@ -24,6 +24,22 @@ namespace CSharpBot
         /// <summary>
         /// Номер текущей комнаты
         /// </summary>
-        public int Room;
+        private int room;
+
+        /// <summary>
+        /// Номер текущей комнаты
+        /// </summary>
+        public int Room
+        {
+            get
+            {
+                return room;
+            }
+            set
+            {
+                UpdateHandler.BotState.Dirty = true;
+                room = value;
+            }
+        }
     }
 }
