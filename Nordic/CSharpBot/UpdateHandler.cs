@@ -26,12 +26,12 @@ namespace CSharpBot
         /// <summary>
         /// Состояние бота
         /// </summary>
-        private static State state = State.Load();
+        private static State state = State.Load<State>();
 
         /// <summary>
         /// Сценарий игры
         /// </summary>
-        private Quest.Game game = Quest.Game.Load();
+        private Quest.Game game = Quest.Game.Load<Quest.Game>();
 
         /// <summary>
         /// Таймер сохранения состояния - 1 раз в секунду

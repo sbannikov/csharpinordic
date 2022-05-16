@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using NLog;
+
+namespace CSharpBot
+{
+    /// <summary>
+    /// Базовый класс для файла JSON
+    /// </summary>
+    public abstract class JsonFile
+    {
+        /// <summary>
+        /// Протоколирование
+        /// </summary>
+        private static readonly Logger log = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// Признак необходимости сохранения состояния на диск
+        /// </summary>
+        internal bool Dirty = false;
+
+        /// <summary>
+        /// Загрузка состояния
+        /// </summary>
+        /// <returns></returns>
+        public static T Load<T>() where T : new()
+        {
+            T entity;
+            string name = null;
+            try
+            {
+                // Краткое имя типа данных
+                name = $"{typeof(T).Name}.json";
+                // Чтение JSON-файла
+                string json = System.IO.File.ReadAllText(name);
+                // Десериализация в объект
+                entity = JsonConvert.DeserializeObject<T>(json);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                log.Warn($"Файл '{name}' не найден");
+                entity = new T();
+            }
+            catch (Exception ex)
+            {
+                log.Warn(ex);
+                entity = new T();
+            }
+            return entity;
+        }
+
+        /// <summary>
+        /// Сохранение объекта в формате JSON
+        /// </summary>
+        public void Save()
+        {
+            string name =  $"{GetType().Name}.json";
+            string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            System.IO.File.WriteAllText(name, json);
+            Dirty = false;
+        }
+    }
+}
