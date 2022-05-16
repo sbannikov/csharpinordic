@@ -13,11 +13,19 @@ namespace Lesson14
                 Console.WriteLine($"n = {n}");
                 list.Add(new Number());
             }
+            var nn = new Number(-1);
         }
 
         static void Main(string[] args)
         {
-            Process();
+            try
+            {
+                Process();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             // Принудительная сборка мусора
             // GC.Collect();
             Console.ReadLine();

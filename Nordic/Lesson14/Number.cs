@@ -21,10 +21,46 @@ namespace Lesson14
         /// </summary>
         public static int counter = 0;
 
+        private int numberField;
+
         /// <summary>
         /// Целое число
         /// </summary>
-        public readonly int number;
+        public int number
+        {
+            get
+            {
+                return numberField;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ApplicationException("Ерунда какая");
+                }
+                numberField = value;
+            }
+        }
+
+        public int DoubleNumberLong
+        {
+            get
+            {         
+                // свойство не имеет морального права менять состояние объекта
+                return numberField * 2;
+            }
+        }
+
+        public int DoubleNumberShort => numberField * 2;
+
+        public int DoubleNumberMethod()
+        {
+            // метод имеет право менять состояние объекта
+            // например, вот так: numberField++; 
+            return numberField * 2;
+        }
+
+        public int DoubleNumberMethodShort() => numberField * 2;
 
         /// <summary>
         /// Статический конструктор
@@ -47,11 +83,7 @@ namespace Lesson14
         /// </summary>
         /// <param name="n">Натуральное число</param>
         public Number(int n)
-        {
-            if (n <= 0)
-            {
-                throw new ArgumentOutOfRangeException("n");
-            }
+        {            
             number = n;
             Console.WriteLine($"+ {number}");
             counter++;
