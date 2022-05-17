@@ -37,7 +37,10 @@ namespace CSharpBot
             }
             set
             {
-                UpdateHandler.BotState.Dirty = true;
+                if (UpdateHandler.BotState != null)
+                {
+                    UpdateHandler.BotState.Dirty = true;
+                }
                 room = value;
             }
         }

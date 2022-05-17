@@ -43,6 +43,12 @@ namespace CSharpBot
         /// </summary>
         public UpdateHandler()
         {
+            var gamexml = Quest.Game.LoadXml("quest.xml");
+            foreach (var room in gamexml.XmlRooms)
+            {
+                gamexml.Rooms.Add(room.Number, room);
+            }
+            gamexml.Save();
             game = Quest.Game.Load<Quest.Game>();
             if (game.Rooms == null)
             {

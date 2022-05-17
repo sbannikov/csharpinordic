@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
+using System.Xml.Serialization;
 
 namespace CSharpBot.Quest
 {
@@ -13,6 +14,7 @@ namespace CSharpBot.Quest
         /// <summary>
         /// Уникальный номер комнаты
         /// </summary>
+        [XmlElement(ElementName = "ID")]
         public int Number;
         /// <summary>
         /// Название комнаты
@@ -21,10 +23,12 @@ namespace CSharpBot.Quest
         /// <summary>
         /// Описание комнаты
         /// </summary>
+        [XmlElement(ElementName = "Text")] 
         public string Description;
         /// <summary>
         /// Список возможных действий
         /// </summary>
+        [XmlElement(ElementName = "Action")]
         public List<Action> Actions;
 
         /// <summary>
