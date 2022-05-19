@@ -2,6 +2,7 @@
 using Telegram.Bot;
 using Telegram.Bot.Extensions.Polling;
 using NLog;
+using System.Linq;
 
 namespace CSharpBot
 {
@@ -16,7 +17,18 @@ namespace CSharpBot
         {
             try
             {
-                log.Info("Бот запускается...");
+                // Служебный запуск для конвертации XML в JSON
+                if (args.Any() && args[0] == "import")
+                {
+                    var game = Quest.Game.LoadXml("quest.xml");
+                    foreach (var room in game.XmlRooms)
+                    {
+                        game.Rooms.Add(room.Number, room);
+                    }
+                    game.Save();
+                    return;
+                }
+
                 Configuration config;
                 // Загрузка конфигурации при помощи шаблонного метода
                 config = Configuration.Load<Configuration>();

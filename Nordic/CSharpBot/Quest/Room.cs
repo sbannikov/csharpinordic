@@ -26,6 +26,14 @@ namespace CSharpBot.Quest
         [XmlElement(ElementName = "Text")] 
         public string Description;
         /// <summary>
+        /// Команда при входе в комнату
+        /// </summary>
+        public string Command;
+        /// <summary>
+        /// Признак концовки игры
+        /// </summary>
+        public int? Ending;
+        /// <summary>
         /// Список возможных действий
         /// </summary>
         [XmlElement(ElementName = "Action")]

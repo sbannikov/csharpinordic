@@ -23,5 +23,17 @@ namespace CSharpBot.Quest
         /// </summary>
         [XmlElement(ElementName = "Next")] 
         public int? Room;
+        /// <summary>
+        /// Команда при выполнении действия
+        /// </summary>      
+        public string Command;
+        /// <summary>
+        /// Условие видимости команды
+        /// </summary>
+        public string Condition;
+        /// <summary>
+        /// Очки, набираемые при выполнении данного действия
+        /// </summary>
+        public int? Score;
     }
 }
