@@ -129,6 +129,14 @@ namespace CSharpBot
                     }
                     break;
 
+                case MessageType.Sticker:
+                    client.SendStickerAsync(message.Chat.Id, message.Sticker.FileId);
+                    if (string.IsNullOrEmpty(message.Sticker.Emoji))
+                    {
+                        client.SendTextMessageAsync(message.Chat.Id, message.Sticker.Emoji);
+                    }
+                    break;
+
                 default:
                     string s = $"Сообщения типа {message.Type} пока не обрабатываются";
                     client.SendTextMessageAsync(message.Chat.Id, s);
@@ -147,62 +155,75 @@ namespace CSharpBot
             // Команда
             string command = message.Text.Substring(1).ToLower();
             User user;
-            switch (command)
+
+            // Команда start выполняется для любого, в том числе и 
+            // незарегистрированного пользователя
+            if (command == "start")
             {
-                case "start":
-                    if (!BotState.Users.ContainsKey(message.Chat.Id))
+                if (!BotState.Users.ContainsKey(message.Chat.Id))
+                {
+                    // Добавление пользователя в словарь
+                    user = new User()
                     {
-                        // Добавление пользователя в словарь
-                        user = new User()
-                        {
-                            ID = message.Chat.Id
-                        };
-                        BotState.Users.Add(message.Chat.Id, user);
-                        BotState.Dirty = true;
-                        client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, я вас зарегистрировал");
-                    }
-                    else
-                    {
-                        client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, вы уже зарегистрированы");
-                    }
-                    break;
+                        ID = message.Chat.Id
+                    };
+                    BotState.Users.Add(message.Chat.Id, user);
+                    BotState.Dirty = true;
+                    client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, я вас зарегистрировал");
+                }
+                else
+                {
+                    client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, вы уже зарегистрированы");
+                }
+            }
+            else
+            {
+                // Проверка на существование зарегистрированного пользователя
+                if (!BotState.Users.ContainsKey(message.Chat.Id))
+                {
+                    client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, для начала работы надо зарегистрироваться при помощи команды /start");
+                    return;
+                }
 
-                case "reset": // Сброс игры
-                    user = BotState.Users[message.Chat.Id];
-                    // начинаем с комнаты с минимальным номером
-                    user.Room = game.Rooms.Keys.Min(x => x);
-                    break;
-
-                case "play":
-                    user = BotState.Users[message.Chat.Id];
-                    int number; // номер комнаты
-                    if (game.Rooms.ContainsKey(user.Room))
-                    {
-                        number = user.Room;
-                    }
-                    else
-                    {
+                switch (command)
+                {                   
+                    case "reset": // Сброс игры
+                        user = BotState.Users[message.Chat.Id];
                         // начинаем с комнаты с минимальным номером
-                        number = game.Rooms.Keys.Min(x => x);
-                        user.Room = number;
-                    }
-                    Quest.Room room = game.Rooms[number];
-                    room.Show(client, message.Chat.Id);
-                    break;
+                        user.Room = game.Rooms.Keys.Min(x => x);
+                        break;
 
-                case "help":
-                    client.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж", replyMarkup: null);
-                    break;
+                    case "play":
+                        user = BotState.Users[message.Chat.Id];
+                        int number; // номер комнаты
+                        if (game.Rooms.ContainsKey(user.Room))
+                        {
+                            number = user.Room;
+                        }
+                        else
+                        {
+                            // начинаем с комнаты с минимальным номером
+                            number = game.Rooms.Keys.Min(x => x);
+                            user.Room = number;
+                        }
+                        Quest.Room room = game.Rooms[number];
+                        room.Show(client, message.Chat.Id);
+                        break;
 
-                case "about":
-                    client.SendTextMessageAsync(message.Chat.Id, "Учебный бот на C# - текстовый квест");
-                    break;
+                    case "help":
+                        client.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж", replyMarkup: null);
+                        break;
 
-                default:
-                    string s = $"Команда {command} пока не обрабатываются";
-                    client.SendTextMessageAsync(message.Chat.Id, s);
-                    log.Warn(s);
-                    break;
+                    case "about":
+                        client.SendTextMessageAsync(message.Chat.Id, "Учебный бот на C# - текстовый квест");
+                        break;
+
+                    default:
+                        string s = $"Команда {command} пока не обрабатываются";
+                        client.SendTextMessageAsync(message.Chat.Id, s);
+                        log.Warn(s);
+                        break;
+                }
             }
         }
 
@@ -214,6 +235,14 @@ namespace CSharpBot
         private void ProcessText(ITelegramBotClient client, Message message)
         {
             log.Trace(message.Text);
+
+            // Проверка на существование зарегистрированного пользователя
+            if (!BotState.Users.ContainsKey(message.Chat.Id))
+            {
+                client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, для начала работы надо зарегистрироваться при помощи команды /start");
+                return;
+            }
+
             // Пользователь - игрок
             var user = BotState.Users[message.Chat.Id];
             // Поиск единственной комнаты по номеру из состояния игрока
