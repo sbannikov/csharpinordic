@@ -38,6 +38,10 @@ namespace CSharpBot.Quest
         /// Условие для отображения команды
         /// </summary>
         public string Condition;
+        /// <summary>
+        /// Очки за выполнение действия
+        /// </summary>
+        public int? Score;
 
         /// <summary>
         /// Проверка выполнения условия для заданного игрока
@@ -90,6 +94,43 @@ namespace CSharpBot.Quest
                     log.Warn($"Некорректная операция: {Condition}");
                     return false;
             }
+        }
+
+        /// <summary>
+        /// Обработка команды
+        /// </summary>
+        /// <param name="user">Игрок</param>
+        public void DoCommand(User user)
+        {
+            // Если команда не задана, ничего не делаем
+            if (string.IsNullOrEmpty(Command)) return ;
+            // Очистка пробелов
+            string c = Command.Replace(" ", "");
+            // группы: (1)       (2)
+            // строка: undress = 0
+            var match = Regex.Match(c, "^([a-z]+)=([0-9]+)$", RegexOptions.IgnoreCase);
+            // Если не соответствует грамматике, то условие не выполнено
+            if (!match.Success)
+            {
+                log.Warn($"Некорректная команда: {Command}");
+                return;
+            }
+            // Имя переменной игрока
+            string name = match.Groups[1].Value;
+            string constString = match.Groups[2].Value;
+            // Новое значение переменной
+            int constValue = int.Parse(constString);
+            // Сохранение переменной в словаре переменных игрока
+            if (user.Variables.ContainsKey(name))
+            {
+                user.Variables[name] = constValue;
+            }
+            else
+            {
+                user.Variables.Add(name, constValue);
+            }
+            // Протоколирование
+            log.Trace($"{name} = {constValue}");
         }
     }
 }

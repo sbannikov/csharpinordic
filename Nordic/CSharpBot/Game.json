@@ -68,8 +68,8 @@
         {
           "Name": "Показать пропуск",
           "Description": "\n        Сушкевич хмурится и недоуменно смотрит на тебя:<br/>\n        - Откуда этот раритет? Такие штуки не выпускают последние 15 лет!\n      ",
-          "Command": "\n        $gamedata['propusk'] = 1;\n      ",
-          "Condition": "\n        ! isset ($gamedata['propusk'])\n      "
+          "Command": "propusk = 1",
+          "Condition": "propusk == 0"
         },
         {
           "Name": "Поздороваться",

@@ -191,6 +191,9 @@ namespace CSharpBot
                         user = BotState.Users[message.Chat.Id];
                         // начинаем с комнаты с минимальным номером
                         user.Room = game.Rooms.Keys.Min(x => x);
+                        // Очистка пользовательских переменных
+                        user.Variables.Clear();
+                        client.SendTextMessageAsync(message.Chat.Id, "Состояние игры сброшено");
                         break;
 
                     case "play":
@@ -263,6 +266,8 @@ namespace CSharpBot
                 client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, действие {message.Text} отсутствует в комнате");
                 return;
             }
+            // Выполнение команды
+            action.DoCommand(user);
             // Если у действия есть описание, отправим его игроку
             if (!string.IsNullOrEmpty(action.Description))
             {
