@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "CSharpBot": {
+      "commandName": "Project"
+    },
+    "Import": {
+      "commandName": "Project",
+      "commandLineArgs": "import"
+    }
+  }
+}

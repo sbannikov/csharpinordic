@@ -58,7 +58,7 @@ namespace CSharpBot
         /// </summary>
         /// <param name="type">Тип данных</param>
         /// <returns></returns>
-        public static object Load(Type type) 
+        public static object Load(Type type)
         {
             object entity;
             string name = null;
@@ -73,7 +73,7 @@ namespace CSharpBot
             }
             catch (System.IO.FileNotFoundException)
             {
-                log.Warn($"Файл '{name}' не найден");      
+                log.Warn($"Файл '{name}' не найден");
                 // Создание объекта типа, заданного переменной
                 entity = Activator.CreateInstance(type);
             }
@@ -91,8 +91,13 @@ namespace CSharpBot
         /// </summary>
         public void Save()
         {
-            string name =  $"{GetType().Name}.json";
-            string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            string name = $"{GetType().Name}.json";
+            var settings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            };
+            string json = JsonConvert.SerializeObject(this, settings);
             System.IO.File.WriteAllText(name, json);
             Dirty = false;
         }

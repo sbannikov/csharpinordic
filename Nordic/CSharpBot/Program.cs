@@ -16,6 +16,17 @@ namespace CSharpBot
         {
             try
             {
+                if (args.Length > 0 && args[0] == "import")
+                {
+                    var game = Quest.Game.LoadXml("quest.xml");
+                    foreach (var room in game.XmlRooms)
+                    {
+                        game.Rooms.Add(room.Number, room);
+                    }
+                    game.Save();
+                    return;
+                }
+
                 log.Info("Бот запускается...");
                 Configuration config;
                 // Загрузка конфигурации при помощи шаблонного метода
