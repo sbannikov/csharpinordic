@@ -255,7 +255,8 @@ namespace CSharpBot
             }
             // Поиск действия в комнате по тексту
             // [!] надо сделать сравнение без учета регистра
-            Quest.Action action = room.Actions.SingleOrDefault(x => x.Name == message.Text);
+            // [!] вернуть потом Single
+            Quest.Action action = room.Actions.Where(x => x.IsCondition(user)).FirstOrDefault(x => x.Name == message.Text);
             // Проверка на существование действия
             if (action == null)
             {

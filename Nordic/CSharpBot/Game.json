@@ -98,38 +98,38 @@
           "Description": "Ты поднимаешься по лестнице.",
           "Room": 20,
           "Command": "\n        $gamedata['B1'] = 'done';\n        $gamedata['mask'][1]++;\n      ",
-          "Condition": "\n        isset ($gamedata['undress'])\n      "
+          "Condition": "undress == 1"
         },
         {
           "Name": "Подняться по лестнице",
           "Description": "Ты пытаешься подняться по лестнице.",
           "Room": 202,
-          "Condition": "\n        ! isset ($gamedata['undress'])\n      "
+          "Condition": "undress == 0"
         },
         {
           "Name": "Вызвать лифт",
           "Description": "Ты нажимаешь на кнопку, двери открываются, и ты заходишь в кабину.",
           "Room": 12,
           "Command": "\n        $gamedata['B1'] = 'done';\n        $gamedata['mask'][1]++;\n      ",
-          "Condition": "\n        isset ($gamedata['undress'])\n      "
+          "Condition": "undress == 1"
         },
         {
           "Name": "Вызвать лифт",
           "Description": "Ты пытаешься пройти к лифту.",
           "Room": 202,
-          "Condition": "\n        ! isset ($gamedata['undress'])\n      "
+          "Condition": "undress == 0"
         },
         {
           "Name": "Сдать одежду",
           "Description": "\n        Подойдя к гардеробу, ты замечаешь всюду развешенные крючки, автоматически сортирующие принимаемую одежду.\n        Стоило тебе только повесить верхнюю одежду, как крючок моментально исчез среди остальных вешелок, а динамик произнёс что-то вроде \"Ваша одежда принята\".\n        Где-то в воздухе витает вопрос, почему так много курток в гардеробе летом, но он быстро улетучивается.\n      ",
-          "Command": "\n        $gamedata['undress'] = 1;\n      ",
-          "Condition": "\n        !isset ($gamedata['undress'])\n      "
+          "Command": "undress = 1",
+          "Condition": "undress == 0"
         },
         {
           "Name": "Получить свою одежду",
           "Description": "\n        Ты подходишь к стойке и опираешься на неё, вглядываясь вдаль и пытаясь понять, как теперь забрать одежду обратно.\n        Но в скором времени к тебе автоматически подъезжает знакомый крючок с верхней одеждой, оставив способ распознавания для тебя загадкой.\n      ",
-          "Command": "\n        unset ($gamedata['undress']);\n      ",
-          "Condition": "\n        isset ($gamedata['undress'])\n      "
+          "Command": "undress = 0",
+          "Condition": "undress == 1"
         }
       ]
     },

@@ -16,7 +16,7 @@ namespace CSharpBot.Quest
         /// <summary>
         /// Описание действия
         /// </summary>
-        [XmlElement(ElementName = "Text")] 
+        [XmlElement(ElementName = "Text")]
         public string Description;
         /// <summary>
         /// Номер комнаты, в которую перемещается игрок
@@ -31,5 +31,15 @@ namespace CSharpBot.Quest
         /// Условие для отображения команды
         /// </summary>
         public string Condition;
+
+        /// <summary>
+        /// Проверка выполнения условия для заданного игрока
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public bool IsCondition(User user)
+        {
+            return true;
+        }
     }
 }

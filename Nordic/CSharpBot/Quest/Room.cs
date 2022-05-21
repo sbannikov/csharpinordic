@@ -14,7 +14,7 @@ namespace CSharpBot.Quest
         /// <summary>
         /// Уникальный номер комнаты
         /// </summary>
-        [XmlElement(ElementName ="ID")]
+        [XmlElement(ElementName = "ID")]
         public int Number;
         /// <summary>
         /// Название комнаты
@@ -43,11 +43,13 @@ namespace CSharpBot.Quest
         /// Вывод комнаты в чат
         /// </summary>
         /// <param name="сlient">Клиент Telegram</param>
-        /// <param name="id">Идентификатор чата</param>
+        /// <param name="id">Идентификатор чата и пользователя</param>
         public void Show(ITelegramBotClient сlient, long id)
         {
+            // Пользователь-игрок
+            var user = UpdateHandler.BotState.Users[id];
             // Список кнопок
-            var keys = Actions.Select(action => new KeyboardButton(action.Name));
+            var keys = Actions.Where(x => x.IsCondition(user)).Select(action => new KeyboardButton(action.Name));
             // Разметка для клавиатуры
             var markup = new ReplyKeyboardMarkup(keys)
             {

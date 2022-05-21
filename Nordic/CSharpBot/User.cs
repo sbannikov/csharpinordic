@@ -26,6 +26,7 @@ namespace CSharpBot
         /// </summary>
         private int room;
 
+
         /// <summary>
         /// Номер текущей комнаты
         /// </summary>
@@ -44,5 +45,10 @@ namespace CSharpBot
                 room = value;
             }
         }
+
+        /// <summary>
+        /// Переменные игры для пользователя
+        /// </summary>
+        public Dictionary<string, int> Variables = new Dictionary<string, int>();
     }
 }
