@@ -20,9 +20,28 @@ namespace Turnip
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Сценарий игры из файла JSON
+        /// </summary>
+        private Scenario.Game game;
+
+        /// <summary>
+        /// Стандартный конструктор
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Пункт меню "Игра | Загрузить"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LoadMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            // Загрузка сценария
+            game = Scenario.Game.Load<Scenario.Game>();
         }
     }
 }

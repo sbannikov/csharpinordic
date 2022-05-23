@@ -9,7 +9,7 @@
     <Grid>
         <Menu  IsMainMenu="True">
             <MenuItem Header="Игра">
-                <MenuItem Header="Загрузить"></MenuItem>
+                <MenuItem Header="Загрузить" Click="LoadMenuItem_Click"></MenuItem>
                 <MenuItem Header="Сохранить"></MenuItem>
                 <MenuItem Header="Выход"></MenuItem>
             </MenuItem>
