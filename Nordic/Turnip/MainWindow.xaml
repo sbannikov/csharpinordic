@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Turnip"
         mc:Ignorable="d"
         Title="Алхимия" Height="450" Width="800">
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="32"></RowDefinition>
             <RowDefinition Height="32"></RowDefinition>

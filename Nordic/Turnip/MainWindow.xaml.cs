@@ -36,9 +36,25 @@ namespace Turnip
         private Point mouseDelta;
 
         /// <summary>
+        /// Фигура, с которой мы соприкоснулись
+        /// </summary>
+        private Thing intersect;
+
+        /// <summary>
         /// Сценарий игры из файла JSON
         /// </summary>
         private Scenario.Game game;
+
+        /// <summary>
+        /// Перекодировка категории в цвет
+        /// </summary>
+        private Dictionary<string, string> colors = new Dictionary<string, string>()
+        {
+            { "earth", "brown" },
+            { "fire", "red" },
+            { "water", "blue" },
+            { "air", "lightblue" }
+        };
 
         /// <summary>
         /// Стандартный конструктор
@@ -64,7 +80,7 @@ namespace Turnip
                 // Создаем кнопку
                 var button = new Button()
                 {
-                    Content = name
+                    Content = name,
                 };
                 button.Click += AddThing_Click;
                 toolBar.Items.Add(button);
@@ -82,23 +98,23 @@ namespace Turnip
         /// <exception cref="NotImplementedException"></exception>
         private void AddThing_Click(object sender, RoutedEventArgs e)
         {
-            var rect = new Rectangle()
-            {
-                Height = ThingWidth,
-                Width = ThingHeight,
-                Fill = new SolidColorBrush(Colors.Navy)
-            };
+            Button button = (Button)sender;
+            string category = game.Things[(string)button.Content];
+            string color = colors[category];
+
+            var thing = new Thing((string)button.Content, color);
+
 
             // Обработчики для перемещения
-            rect.MouseDown += Thing_MouseDown;
-            rect.MouseUp += Thing_MouseUp;
-            rect.MouseMove += Thing_MouseMove;
+            thing.MouseDown += Thing_MouseDown;
+            thing.MouseUp += Thing_MouseUp;
+            thing.MouseMove += Thing_MouseMove;
 
             // Устанавливаем в случайное место 
-            Canvas.SetLeft(rect, random.Next(0, (int)(canvas.ActualWidth - ThingWidth)));
-            Canvas.SetTop(rect, random.Next(0, (int)(canvas.ActualHeight - ThingHeight)));
+            Canvas.SetLeft(thing, random.Next(0, (int)(canvas.ActualWidth - ThingWidth)));
+            Canvas.SetTop(thing, random.Next(0, (int)(canvas.ActualHeight - ThingHeight)));
 
-            canvas.Children.Add(rect);
+            canvas.Children.Add(thing);
         }
 
         /// <summary>
@@ -111,9 +127,56 @@ namespace Turnip
         {
             if (mousePressed)
             {
+                Thing ui = (Thing)sender;
+
+                double x1 = Canvas.GetLeft(ui);
+                double x2 = Canvas.GetLeft(ui) + ui.ActualWidth;
+                double y1 = Canvas.GetTop(ui);
+                double y2 = Canvas.GetTop(ui) + ui.ActualHeight;
+
+                // Проверка на пересечение с другими объектами
+                Thing overlapped = null;
+                foreach (Thing item in canvas.Children)
+                {
+                    // Пропуск себя самого
+                    if (item == ui) continue;
+
+                    double x1i = Canvas.GetLeft(item);
+                    double x2i = Canvas.GetLeft(item) + item.ActualWidth;
+                    double y1i = Canvas.GetTop(item);
+                    double y2i = Canvas.GetTop(item) + item.ActualHeight;
+
+                    // Проверка на пересечение по каждому из 4 углов
+                    if ((x1 < x1i && x1i < x2 && y1 < y1i && y1i < y2) ||
+                        (x1 < x2i && x2i < x2 && y1 < y1i && y1i < y2) ||
+                        (x1 < x1i && x1i < x2 && y1 < y2i && y2i < y2) ||
+                        (x1 < x2i && x2i < x2 && y1 < y2i && y2i < y2))
+                    {
+                        overlapped = item;
+                        break;
+                    }
+                }
+
+                if (overlapped != null) // нашли объект, с которым пересеклись
+                {
+                    // Если мы наехали на новый объект, не выехав с предыдущего
+                    if ((intersect != overlapped) && (intersect != null))
+                    {
+                        // Предыдущий объект вернуть к черной рамке
+                        intersect.Stroke = "black";
+                    }
+                    overlapped.Stroke = "red";
+                    intersect = overlapped;
+                }
+                else if (intersect != null)
+                { // не нашли, но ранее было пересечение
+                    intersect.Stroke = "black";
+                    intersect = null;
+                }
+
                 Point point = e.GetPosition(canvas);
-                Canvas.SetLeft((UIElement)sender, point.X - mouseDelta.X);
-                Canvas.SetTop((UIElement)sender, point.Y - mouseDelta.Y);
+                Canvas.SetLeft(ui, Math.Max(0, point.X - mouseDelta.X));
+                Canvas.SetTop(ui, Math.Max(0, point.Y - mouseDelta.Y));
             }
         }
 
@@ -124,7 +187,13 @@ namespace Turnip
         /// <param name="e"></param>
         private void Thing_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            Thing ui = (Thing)sender;
+
             mousePressed = false;
+            if (intersect != null)
+            {
+                MessageBox.Show($"Вы соединяете {ui.Name} и {intersect.Name}");
+            }
         }
 
         /// <summary>
@@ -134,8 +203,19 @@ namespace Turnip
         /// <param name="e"></param>
         private void Thing_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            UIElement ui = (UIElement)sender;
             mousePressed = true;
-            mouseDelta = e.GetPosition((UIElement)sender);
+            mouseDelta = e.GetPosition(ui);
+
+            // Поиск максимального ZIndex
+            int max = int.MinValue;
+            foreach (UIElement item in canvas.Children)
+            {
+                int zIndex = Canvas.GetZIndex(item);
+                max = Math.Max(max, zIndex);
+            }
+
+            Canvas.SetZIndex(ui, max + 1);
         }
     }
 }
