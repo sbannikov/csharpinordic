@@ -7,12 +7,21 @@
         mc:Ignorable="d"
         Title="Алхимия" Height="450" Width="800">
     <Grid>
-        <Menu  IsMainMenu="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu IsMainMenu="True" Grid.Row="0" Panel.ZIndex="30">
             <MenuItem Header="Игра">
                 <MenuItem Header="Загрузить" Click="LoadMenuItem_Click"></MenuItem>
                 <MenuItem Header="Сохранить"></MenuItem>
                 <MenuItem Header="Выход"></MenuItem>
             </MenuItem>
         </Menu>
+        <ToolBar x:Name="toolBar" Grid.Row="1" Panel.ZIndex="20">
+        </ToolBar>
+        <Canvas x:Name="canvas" Grid.Row="2" Panel.ZIndex="10">
+        </Canvas>
     </Grid>
 </Window>
