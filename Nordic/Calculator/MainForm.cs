@@ -93,7 +93,7 @@ namespace Calculator
                     case ".csv":
                         break;
                     case ".json":
-                        if (MessageBox.Show($"Перезагрузить файл {name}?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        // if (MessageBox.Show($"Перезагрузить файл {name}?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             LoadJson(name);
                         }

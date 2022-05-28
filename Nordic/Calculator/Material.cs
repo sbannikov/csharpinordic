@@ -12,7 +12,7 @@ namespace Calculator
     /// Материал
     /// </summary>
     public class Material : NamedEntity
-    {
+    {      
         /// <summary>
         /// Цвет в виде объекта
         /// </summary>

@@ -13,6 +13,11 @@ namespace Calculator
     public abstract class NamedEntity
     {
         /// <summary>
+        /// Уникальный идентификатор записи
+        /// </summary>
+        public int ID;
+
+        /// <summary>
         /// Наименование
         /// </summary>
         [XmlAttribute()]
