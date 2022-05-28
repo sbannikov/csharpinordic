@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpBot", "CSharpBot\CSha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson14", "Lesson14\Lesson14.csproj", "{4338FA31-E6FB-417B-BFB9-51DEFE2EA72B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turnip", "Turnip\Turnip.csproj", "{EB32D446-C658-455D-A035-D60B0B91F1F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Turnip", "Turnip\Turnip.csproj", "{EB32D446-C658-455D-A035-D60B0B91F1F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{51496877-BDD8-4EBF-B125-3D7116B1A46E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

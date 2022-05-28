@@ -26,6 +26,11 @@ namespace Calculator
         private Data data;
 
         /// <summary>
+        /// База данных
+        /// </summary>
+        private Database db;
+
+        /// <summary>
         /// Наблюдатель событий файловой системы
         /// </summary>
         private System.IO.FileSystemWatcher watcher;
@@ -57,6 +62,8 @@ namespace Calculator
                 Interval = 1000
             };
             timer.Tick += Timer_Tick;
+
+            db = new Database();
         }
 
         /// <summary>
@@ -245,11 +252,17 @@ namespace Calculator
             LoadData(data);
         }
 
+        /// <summary>
+        /// Загрузка данных из JSON
+        /// </summary>
+        /// <param name="name"></param>
         private void LoadJson(string name)
         {
             string json = System.IO.File.ReadAllText(name);
             data = JsonConvert.DeserializeObject<Data>(json);
             LoadData(data);
+            // Загрузить список материалов в базу данных
+            db.InsertMaterials(data.Materials);
         }
 
         /// <summary>
@@ -359,6 +372,7 @@ namespace Calculator
         {
             watcher.EnableRaisingEvents = true;
             timer.Start();
+            db.Connect();
             log.Info("Программа запущена");
         }
     }
