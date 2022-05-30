@@ -14,6 +14,21 @@ namespace ConsoleThreads
         private static Random random = new Random();
 
         /// <summary>
+        /// Объект для блокировки
+        /// </summary>
+        internal static object locker = new object();
+
+        /// <summary>
+        /// Счётчик созданных объектов
+        /// </summary>
+        private static int counter = 0;
+
+        /// <summary>
+        /// Поток
+        /// </summary>
+        internal System.Threading.Thread thread;
+
+        /// <summary>
         /// Нижний предел интегрирования
         /// </summary>
         private double a;
@@ -25,6 +40,15 @@ namespace ConsoleThreads
         /// Количество интервало интегрирования
         /// </summary>
         private int n;
+        /// <summary>
+        /// Номер созданного объекта, начиная с 0
+        /// </summary>
+        private int number;
+
+        /// <summary>
+        /// Время запуска расчета
+        /// </summary>
+        private DateTime start;
 
         /// <summary>
         /// Результат интегрирования
@@ -39,10 +63,12 @@ namespace ConsoleThreads
         private double f(double x) => Math.Sin(x);
 
         internal Worker()
-        { 
+        {
             a = random.NextDouble();
-            b = random.NextDouble() +1;
-            n = random.Next(10000000, 100000000);
+            b = random.NextDouble() + 1;
+            n = random.Next(100000000, 500000000);
+            thread = new System.Threading.Thread(Work);
+            number = counter++;
         }
 
         /// <summary>
@@ -50,13 +76,30 @@ namespace ConsoleThreads
         /// </summary>
         internal void Work()
         {
+            // Синхронизация запуска
+            lock (locker) { }
+
+            start = DateTime.Now;
             double summa = 0;
             double x = a;
             double delta = (b - a) / n;
+            int prevPercent = -1;
             for (int i = 0; i < n; i++)
             {
                 summa += f(x) * delta;
                 x += delta;
+                int percent = (int)((i * 100L) / (n - 1));
+                if (prevPercent != percent)
+                {
+                    // Вывод текущего процента
+                    lock (locker)
+                    {
+                        Console.CursorLeft = number * 6;
+                        Console.CursorTop = 0;
+                        Console.Write($"{percent}%");
+                    }
+                    prevPercent = percent;
+                }
             }
             result = summa;
         }
@@ -67,7 +110,7 @@ namespace ConsoleThreads
         /// <returns></returns>
         public override string ToString()
         {
-            return $"a = {a}, b = {b}, N = {n}, интеграл = {result}";
+            return $"start = {start:HH:mm:ss.ffffff} N = {n}";
         }
     }
 }
