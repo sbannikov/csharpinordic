@@ -74,7 +74,7 @@ namespace Calculator
         /// Сохранение списка материалов в базу данных
         /// </summary>
         /// <param name="materials"></param>
-        public void InsertMaterials(Material[] materials)
+        public int InsertMaterials(Material[] materials)
         {
             // Загрузка данных
             foreach (Material m in materials)
@@ -136,6 +136,8 @@ namespace Calculator
                     command.ExecuteNonQuery();
                 }
             }
+
+            return materials.Count();
         }
     }
 }

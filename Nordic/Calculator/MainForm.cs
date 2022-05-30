@@ -98,7 +98,9 @@ namespace Calculator
                     case ".csv":
                         break;
                     case ".json":
-                        LoadJson(name);
+                        // var task = Task.Run(() => LoadJson(name));
+                        // task.Wait();
+                        int result = LoadJson(name).Result;
                         status.Items.Clear();
                         status.Items.Add($"Файл {name} загружен {DateTime.Now}");
                         break;
@@ -260,13 +262,16 @@ namespace Calculator
         /// Загрузка данных из JSON
         /// </summary>
         /// <param name="name"></param>
-        private void LoadJson(string name)
+        private async Task<int> LoadJson(string name)
         {
             string json = System.IO.File.ReadAllText(name);
             data = JsonConvert.DeserializeObject<Data>(json);
             LoadData(data);
+
             // Загрузить список материалов в базу данных
-            db.InsertMaterials(data.Materials);
+            // в отдельном потоке
+            var task = Task.Run(() => db.InsertMaterials(data.Materials));
+            return await task;
         }
 
         /// <summary>
@@ -294,7 +299,7 @@ namespace Calculator
                         LoadXml(open.FileName);
                         break;
                     case FileType.JSON:
-                        LoadJson(open.FileName);
+                        int count = LoadJson(open.FileName).Result;
                         break;
                     default:
                         throw new NotImplementedException();
