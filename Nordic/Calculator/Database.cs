@@ -82,17 +82,24 @@ namespace Calculator
                 using (var command = connection.CreateCommand())
                 {
                     // Проверка на наличие материала в БД
-                    command.CommandText = $"SELECT ID FROM Material WHERE Name = '{m.Name}'";
+                    command.CommandText = "SELECT ID FROM Material WHERE Name = @name";
+                    command.Parameters.AddWithValue("name", m.Name);
                     int? id = (int?)command.ExecuteScalar();
                     if (id == null)
                     {
                         // Добавление нового материала
-                        command.CommandText = $"INSERT INTO Material (Name, Color, Price) VALUES ('{m.Name}', '{m.ColorName}', {m.Price})";
+                        command.CommandText = "INSERT INTO Material (Name, Color, Price) VALUES (@name, @color, @price)";
+                        command.Parameters.AddWithValue("name", m.Name);
+                        command.Parameters.AddWithValue("color", m.ColorName);
+                        command.Parameters.AddWithValue("price", m.Price);
                     }
                     else
                     {
                         // Обновление существующего материала
-                        command.CommandText = $"UPDATE Material SET Color = '{m.ColorName}', Price = {m.Price} WHERE ID = {id}";
+                        command.CommandText = "UPDATE Material SET Color = @color, Price = @price WHERE ID = @id";
+                        command.Parameters.AddWithValue("id", id);
+                        command.Parameters.AddWithValue("color", m.ColorName);
+                        command.Parameters.AddWithValue("price", m.Price);
                     }
                     int result = command.ExecuteNonQuery();
                 }
@@ -104,7 +111,7 @@ namespace Calculator
                 // Список всех материалов в базе данных
                 List<Material> list = new List<Material>();
 
-                command.CommandText = $"SELECT ID, Name FROM Material";
+                command.CommandText = "SELECT ID, Name FROM Material";
                 using (var reader = command.ExecuteReader())
                 {
                     // Обработка всех строк таблицы - результата выполнения запроса
@@ -124,7 +131,8 @@ namespace Calculator
 
                 foreach(var m in toDelete)
                 {
-                    command.CommandText = $"UPDATE Material SET Active = 0 WHERE ID = {m.ID}";
+                    command.CommandText = "UPDATE Material SET Active = 0 WHERE ID = @id";
+                    command.Parameters.AddWithValue("id", m.ID);
                     command.ExecuteNonQuery();
                 }
             }

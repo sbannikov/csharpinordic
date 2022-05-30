@@ -45,9 +45,14 @@ namespace Calculator
         /// </summary>
         private Timer timer;
 
+        private StatusStrip status;
+
         public MainForm()
         {
             InitializeComponent();
+
+            status = new StatusStrip();
+            Controls.Add(status);
 
             watcher = new System.IO.FileSystemWatcher()
             {
@@ -93,10 +98,9 @@ namespace Calculator
                     case ".csv":
                         break;
                     case ".json":
-                        // if (MessageBox.Show($"Перезагрузить файл {name}?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            LoadJson(name);
-                        }
+                        LoadJson(name);
+                        status.Items.Clear();
+                        status.Items.Add($"Файл {name} загружен {DateTime.Now}");
                         break;
                     case ".xml":
                         break;
