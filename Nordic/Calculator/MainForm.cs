@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using Calculator.Storage;
 using Newtonsoft.Json;
 using NLog;
 
@@ -26,9 +26,9 @@ namespace Calculator
         private Data data;
 
         /// <summary>
-        /// База данных
+        /// База данных 
         /// </summary>
-        private Database db;
+        private Storage.DB db;
 
         /// <summary>
         /// Наблюдатель событий файловой системы
@@ -68,7 +68,7 @@ namespace Calculator
             };
             timer.Tick += Timer_Tick;
 
-            db = new Database();
+            db = new DB();
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Calculator
                     case ".json":
                         // var task = Task.Run(() => LoadJson(name));
                         // task.Wait();
-                        int result = LoadJson(name).Result;
+                        int result = LoadJson(name);
                         status.Items.Clear();
                         status.Items.Add($"Файл {name} загружен {DateTime.Now}");
                         break;
@@ -262,16 +262,16 @@ namespace Calculator
         /// Загрузка данных из JSON
         /// </summary>
         /// <param name="name"></param>
-        private async Task<int> LoadJson(string name)
+        private int LoadJson(string name)
         {
             string json = System.IO.File.ReadAllText(name);
             data = JsonConvert.DeserializeObject<Data>(json);
             LoadData(data);
-
+            db.InsertMaterials(data.Materials);
             // Загрузить список материалов в базу данных
             // в отдельном потоке
-            var task = Task.Run(() => db.InsertMaterials(data.Materials));
-            return await task;
+            //  var task = Task.Run(() => db.InsertMaterials(data.Materials));
+            return 0; // await task;
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace Calculator
                         LoadXml(open.FileName);
                         break;
                     case FileType.JSON:
-                        int count = LoadJson(open.FileName).Result;
+                        int count = LoadJson(open.FileName);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -381,7 +381,8 @@ namespace Calculator
         {
             watcher.EnableRaisingEvents = true;
             timer.Start();
-            db.Connect();
+            // Запрос списка материалов приводит к соединению с БД
+            var list = db.Materials.ToList();
             log.Info("Программа запущена");
         }
     }

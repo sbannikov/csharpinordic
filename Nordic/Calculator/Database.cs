@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Calculator.Storage;
 using MySql.Data.MySqlClient;
 using NLog;
 
@@ -119,17 +120,17 @@ namespace Calculator
                     {
                         Material m = new Material()
                         {
-                            ID = reader.GetInt16("ID"),
+                            // [!] ID = reader.GetInt16("ID"),
                             Name = reader.GetString("Name")
                         };
-                        list.Add(m);                        
+                        list.Add(m);
                     }
                 }
 
                 // Список устаревших материалов
                 var toDelete = list.Except(materials, this).ToList();
 
-                foreach(var m in toDelete)
+                foreach (var m in toDelete)
                 {
                     command.CommandText = "UPDATE Material SET Active = 0 WHERE ID = @id";
                     command.Parameters.AddWithValue("id", m.ID);

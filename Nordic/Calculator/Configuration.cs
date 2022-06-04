@@ -14,8 +14,13 @@ namespace Calculator
     public class Configuration : JsonFile
     {       
         /// <summary>
-        /// Строка соединения с базой данных
+        /// Строка соединения с базой данных ADO.NET
         /// </summary>
-        public string ConnectionString;        
+        public string ConnectionString;
+
+        /// <summary>
+        /// Строка соединения с базой данных Code First
+        /// </summary>
+        public string CodeFirstDatabase;
     }
 }
