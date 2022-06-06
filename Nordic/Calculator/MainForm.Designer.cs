@@ -43,7 +43,10 @@
             this.open = new System.Windows.Forms.OpenFileDialog();
             this.save = new System.Windows.Forms.SaveFileDialog();
             this.worker = new System.ComponentModel.BackgroundWorker();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.grid = new System.Windows.Forms.DataGridView();
             this.menu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.SuspendLayout();
             // 
             // menu
@@ -110,6 +113,7 @@
             this.comboMaterial.Location = new System.Drawing.Point(111, 75);
             this.comboMaterial.Name = "comboMaterial";
             this.comboMaterial.Size = new System.Drawing.Size(677, 28);
+            this.comboMaterial.Sorted = true;
             this.comboMaterial.TabIndex = 2;
             this.comboMaterial.SelectedIndexChanged += new System.EventHandler(this.comboMaterial_SelectedIndexChanged);
             // 
@@ -135,6 +139,7 @@
             this.comboColor.Location = new System.Drawing.Point(111, 41);
             this.comboColor.Name = "comboColor";
             this.comboColor.Size = new System.Drawing.Size(677, 28);
+            this.comboColor.Sorted = true;
             this.comboColor.TabIndex = 2;
             this.comboColor.SelectedIndexChanged += new System.EventHandler(this.comboColor_SelectedIndexChanged);
             // 
@@ -163,11 +168,32 @@
             this.worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.worker_ProgressChanged);
             this.worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.worker_RunWorkerCompleted);
             // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(111, 143);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(677, 29);
+            this.buttonAdd.TabIndex = 5;
+            this.buttonAdd.Text = "Включить материал в заказ";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            // 
+            // grid
+            // 
+            this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid.Location = new System.Drawing.Point(114, 179);
+            this.grid.Name = "grid";
+            this.grid.RowHeadersWidth = 51;
+            this.grid.RowTemplate.Height = 29;
+            this.grid.Size = new System.Drawing.Size(674, 259);
+            this.grid.TabIndex = 6;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.grid);
+            this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.textPrice);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboColor);
@@ -181,6 +207,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,5 +230,7 @@
         private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog save;
         private System.ComponentModel.BackgroundWorker worker;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.DataGridView grid;
     }
 }

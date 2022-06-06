@@ -30,11 +30,16 @@ namespace Calculator.Storage
         public DbSet<Color> Colors { get; set; }
 
         /// <summary>
+        /// Строки заказов
+        /// </summary>
+        public DbSet<OrderLine> OrderLines { get; set; }
+
+        /// <summary>
         /// Конструктор - создание и миграция БД
         /// </summary>
         public DB()
         {
-            Database.Migrate();  
+            Database.Migrate();
         }
 
         /// <summary>
