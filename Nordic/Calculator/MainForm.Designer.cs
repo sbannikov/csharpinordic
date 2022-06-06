@@ -42,6 +42,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.open = new System.Windows.Forms.OpenFileDialog();
             this.save = new System.Windows.Forms.SaveFileDialog();
+            this.worker = new System.ComponentModel.BackgroundWorker();
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -155,6 +156,13 @@
             // 
             this.save.Filter = "Файлы CSV|*.csv|Файлы XML|*.xml|Файлы JSON|*.json|Все файлы|*.*";
             // 
+            // worker
+            // 
+            this.worker.WorkerReportsProgress = true;
+            this.worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.worker_DoWork);
+            this.worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.worker_ProgressChanged);
+            this.worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.worker_RunWorkerCompleted);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -194,5 +202,6 @@
         private System.Windows.Forms.OpenFileDialog open;
         private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog save;
+        private System.ComponentModel.BackgroundWorker worker;
     }
 }

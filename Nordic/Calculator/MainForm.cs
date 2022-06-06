@@ -98,11 +98,7 @@ namespace Calculator
                     case ".csv":
                         break;
                     case ".json":
-                        // var task = Task.Run(() => LoadJson(name));
-                        // task.Wait();
                         int result = LoadJson(name);
-                        status.Items.Clear();
-                        status.Items.Add($"Файл {name} загружен {DateTime.Now}");
                         break;
                     case ".xml":
                         break;
@@ -237,12 +233,6 @@ namespace Calculator
                     }
                     material.MaterialColor = color;
                 }
-
-                // Выпадающий список цветов
-                comboColor.Items.AddRange(colors.Values.ToArray());
-
-                // Выпадающий список материалов
-                comboMaterial.Items.AddRange(data.Materials);
             }
         }
 
@@ -264,13 +254,7 @@ namespace Calculator
         /// <param name="name"></param>
         private int LoadJson(string name)
         {
-            string json = System.IO.File.ReadAllText(name);
-            data = JsonConvert.DeserializeObject<Data>(json);
-            LoadData(data);
-            db.InsertMaterials(data.Materials);
-            // Загрузить список материалов в базу данных
-            // в отдельном потоке
-            //  var task = Task.Run(() => db.InsertMaterials(data.Materials));
+            worker.RunWorkerAsync(name);
             return 0; // await task;
         }
 
@@ -381,9 +365,68 @@ namespace Calculator
         {
             watcher.EnableRaisingEvents = true;
             timer.Start();
-            // Запрос списка материалов приводит к соединению с БД
-            var list = db.Materials.ToList();
+            // Запрос списков материалов и цветов
+            LoadCombos();
             log.Info("Программа запущена");
+        }
+
+        /// <summary>
+        /// Асинхронная операция
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            using (var ctx = new DB()) // создаем новый контекст БД
+            {
+                
+                string name = (string)e.Argument;
+                string json = System.IO.File.ReadAllText(name);
+                worker.ReportProgress(5);
+                var data = JsonConvert.DeserializeObject<Data>(json);
+                LoadData(data);
+                worker.ReportProgress(10);
+                ctx.InsertMaterials(data.Materials);
+                e.Result = name;
+            }
+        }
+
+        /// <summary>
+        /// Ход выполнения асинхронной операции
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            status.Items.Clear();
+            status.Items.Add($"Выполнено {e.ProgressPercentage}%");
+        }
+
+        /// <summary>
+        /// Завершение асинхронной операции
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            status.Items.Clear();
+            status.Items.Add($"Файл {e.Result} загружен {DateTime.Now}");
+
+            // Очистить выпадающие списки
+            comboColor.Items.Clear();
+            comboMaterial.Items.Clear();
+
+            LoadCombos();
+        }
+
+        // Загрузка выпадающих списков
+        private void LoadCombos()
+        {
+            // Выпадающий список цветов - из базы данных
+            comboColor.Items.AddRange(db.Colors.ToArray());
+
+            // Выпадающий список материалов - из базы данных
+            comboMaterial.Items.AddRange(db.Materials.ToArray());
         }
     }
 }
