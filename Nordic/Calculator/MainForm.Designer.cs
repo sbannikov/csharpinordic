@@ -46,14 +46,16 @@
             this.worker = new System.ComponentModel.BackgroundWorker();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.grid = new System.Windows.Forms.DataGridView();
+            this.materialBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.orderLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.buttonSave = new System.Windows.Forms.Button();
             this.materialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Summa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.buttonSave = new System.Windows.Forms.Button();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materialBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderLineBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -194,7 +196,6 @@
             // 
             // grid
             // 
-            this.grid.AllowUserToAddRows = false;
             this.grid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -213,6 +214,24 @@
             this.grid.Size = new System.Drawing.Size(674, 259);
             this.grid.TabIndex = 6;
             // 
+            // materialBindingSource
+            // 
+            this.materialBindingSource.DataSource = typeof(Calculator.Storage.Material);
+            // 
+            // orderLineBindingSource
+            // 
+            this.orderLineBindingSource.DataSource = typeof(Calculator.Storage.OrderLine);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(483, 144);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(305, 28);
+            this.buttonSave.TabIndex = 7;
+            this.buttonSave.Text = "Сохранить в БД";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
             // materialDataGridViewTextBoxColumn
             // 
             this.materialDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -220,6 +239,7 @@
             this.materialDataGridViewTextBoxColumn.HeaderText = "Материал";
             this.materialDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.materialDataGridViewTextBoxColumn.Name = "materialDataGridViewTextBoxColumn";
+            this.materialDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Price
             // 
@@ -247,20 +267,6 @@
             this.Summa.Name = "Summa";
             this.Summa.ReadOnly = true;
             // 
-            // orderLineBindingSource
-            // 
-            this.orderLineBindingSource.DataSource = typeof(Calculator.Storage.OrderLine);
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(483, 144);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(305, 28);
-            this.buttonSave.TabIndex = 7;
-            this.buttonSave.Text = "Сохранить в БД";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -283,6 +289,7 @@
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materialBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderLineBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -310,6 +317,7 @@
         private System.Windows.Forms.DataGridView grid;
         private System.Windows.Forms.BindingSource orderLineBindingSource;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.BindingSource materialBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn materialDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;

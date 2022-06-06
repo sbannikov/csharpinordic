@@ -428,6 +428,7 @@ namespace Calculator
 
             // Выпадающий список материалов - из базы данных
             comboMaterial.Items.AddRange(db.Materials.ToArray());
+            materialBindingSource.DataSource = db.Materials.ToArray();
         }
 
         /// <summary>
