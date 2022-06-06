@@ -367,6 +367,7 @@ namespace Calculator
             timer.Start();
             // Запрос списков материалов и цветов
             LoadCombos();
+            orderLineBindingSource.DataSource = db.OrderLines.ToList();
             log.Info("Программа запущена");
         }
 
@@ -427,6 +428,35 @@ namespace Calculator
 
             // Выпадающий список материалов - из базы данных
             comboMaterial.Items.AddRange(db.Materials.ToArray());
+        }
+
+        /// <summary>
+        /// Добавить материал в заказ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            if (comboMaterial.SelectedItem != null)
+            {
+                var order = new OrderLine()
+                {
+                    Material = (Material)comboMaterial.SelectedItem,
+                    Amount = 1
+                };
+                db.OrderLines.Add(order);
+                db.SaveChanges();
+                orderLineBindingSource.DataSource = db.OrderLines.ToList();
+            }
+            else
+            {
+                // [!] дописать какое-то сообщение пользователю
+            }
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            db.SaveChanges();
         }
     }
 }

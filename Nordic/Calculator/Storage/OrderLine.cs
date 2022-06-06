@@ -20,5 +20,15 @@ namespace Calculator.Storage
         /// Количество материала
         /// </summary>
         public double Amount { get; set; }
+
+        /// <summary>
+        /// Цена материала
+        /// </summary>
+        public double Price => (Material != null) ? Material.Price : 0;
+
+        /// <summary>
+        /// Стоимость материала
+        /// </summary>
+        public double Summa => Amount * Price;
     }
 }
