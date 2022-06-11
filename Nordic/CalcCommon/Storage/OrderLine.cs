@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculator.Storage
+namespace Calculator.Common.Storage
 {
     /// <summary>
     /// Строка заказа
@@ -24,7 +24,7 @@ namespace Calculator.Storage
         /// <summary>
         /// Цена материала
         /// </summary>
-        public double Price => (Material != null) ? Material.Price : 0;
+        public double Price => Material != null ? Material.Price : 0;
 
         /// <summary>
         /// Стоимость материала

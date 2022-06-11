@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculator.Storage
+namespace Calculator.Common.Storage
 {
-    public abstract class ActiveEntity :Entity
+    public abstract class ActiveEntity : Entity
     {
         /// <summary>
         /// Признак активности объекта

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NLog;
 
-namespace Calculator
+namespace Calculator.Common
 {
     /// <summary>
     /// Базовый класс для файла JSON

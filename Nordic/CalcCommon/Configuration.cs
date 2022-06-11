@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NLog;
 
-namespace Calculator
+namespace Calculator.Common
 {
     /// <summary>
     /// Конфигурация приложения
     /// </summary>
     public class Configuration : JsonFile
-    {       
+    {
         /// <summary>
         /// Строка соединения с базой данных ADO.NET
         /// </summary>

@@ -4,10 +4,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Calculator.Common;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 
-namespace Calculator.Storage
+namespace Calculator.Common.Storage
 {
     /// <summary>
     /// База данных Code First
@@ -49,7 +50,7 @@ namespace Calculator.Storage
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Конфигурация приложения
-            var config = Configuration.Load<Configuration>();
+            var config = JsonFile.Load<Configuration>();
             // Проверка на корректность настроек
             if (string.IsNullOrEmpty(config.CodeFirstDatabase))
             {
@@ -64,9 +65,9 @@ namespace Calculator.Storage
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public bool Equals(Material? x, Material? y)
+        public bool Equals(Material x, Material y)
         {
-            return (x != null) ? x.Name.Equals(y?.Name) : false;
+            return x != null ? x.Name.Equals(y?.Name) : false;
         }
 
         /// <summary>

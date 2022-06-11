@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculator.Storage
+namespace Calculator.Common.Storage
 {
     /// <summary>
     /// Корневая сущность базы данных

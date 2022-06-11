@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Calculator.Migrations
+namespace Calculator.Common.Migrations
 {
     public partial class _000 : Migration
     {

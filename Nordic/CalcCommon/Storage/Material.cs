@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Calculator.Storage
+namespace Calculator.Common.Storage
 {
     /// <summary>
     /// Материал

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.ComponentModel.DataAnnotations;
 
-namespace Calculator.Storage
+namespace Calculator.Common.Storage
 {
     /// <summary>
     /// Именованная сущность
     /// </summary>
     public abstract class NamedEntity : ActiveEntity
-    {      
+    {
         /// <summary>
         /// Наименование
         /// </summary>

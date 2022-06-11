@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Turnip", "Turnip\Turnip.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{51496877-BDD8-4EBF-B125-3D7116B1A46E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleThreads", "ConsoleThreads\ConsoleThreads.csproj", "{668ABD9B-1CA3-492E-8E7F-CFDBB8C7E57D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleThreads", "ConsoleThreads\ConsoleThreads.csproj", "{668ABD9B-1CA3-492E-8E7F-CFDBB8C7E57D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcCommon", "CalcCommon\CalcCommon.csproj", "{14196E5D-FC4D-41B5-9BE3-A0D6E117500A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,6 +115,10 @@ Global
 		{668ABD9B-1CA3-492E-8E7F-CFDBB8C7E57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{668ABD9B-1CA3-492E-8E7F-CFDBB8C7E57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{668ABD9B-1CA3-492E-8E7F-CFDBB8C7E57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14196E5D-FC4D-41B5-9BE3-A0D6E117500A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14196E5D-FC4D-41B5-9BE3-A0D6E117500A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14196E5D-FC4D-41B5-9BE3-A0D6E117500A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14196E5D-FC4D-41B5-9BE3-A0D6E117500A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
