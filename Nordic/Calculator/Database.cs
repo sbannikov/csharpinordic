@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Calculator.Storage;
+using Calculator.Common.Storage;
 using MySql.Data.MySqlClient;
 using NLog;
 
@@ -28,7 +28,7 @@ namespace Calculator
         public Database()
         {
             // Конфигурация приложения
-            var config = Configuration.Load<Configuration>();
+            var config = Common.Configuration.Load<Common.Configuration>();
             // Проверка на корректность настроек
             if (string.IsNullOrEmpty(config.ConnectionString))
             {

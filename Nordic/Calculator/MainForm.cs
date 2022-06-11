@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using Calculator.Storage;
+using Calculator.Common.Storage;
 using Newtonsoft.Json;
 using NLog;
 
@@ -28,7 +28,7 @@ namespace Calculator
         /// <summary>
         /// База данных 
         /// </summary>
-        private Storage.DB db;
+        private Common.Storage.DB db;
 
         /// <summary>
         /// Наблюдатель событий файловой системы

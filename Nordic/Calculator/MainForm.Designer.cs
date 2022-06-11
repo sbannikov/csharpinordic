@@ -216,11 +216,11 @@
             // 
             // materialBindingSource
             // 
-            this.materialBindingSource.DataSource = typeof(Calculator.Storage.Material);
+            this.materialBindingSource.DataSource = typeof(Calculator.Common.Storage.Material);
             // 
             // orderLineBindingSource
             // 
-            this.orderLineBindingSource.DataSource = typeof(Calculator.Storage.OrderLine);
+            this.orderLineBindingSource.DataSource = typeof(Calculator.Common.Storage.OrderLine);
             // 
             // buttonSave
             // 

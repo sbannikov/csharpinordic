@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CalcCommon\CalcCommon.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Configuration.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
