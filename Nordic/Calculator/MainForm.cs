@@ -423,8 +423,12 @@ namespace Calculator
         // Загрузка выпадающих списков
         private void LoadCombos()
         {
-            // Выпадающий список цветов - из базы данных
-            comboColor.Items.AddRange(db.Colors.ToArray());
+            var client = new System.Net.Http.HttpClient();
+            var api = new RestAPI.ApiClient("https://localhost:5001", client);
+            var colors = api.GetColorsAsync().Result.ToArray();
+
+            // Выпадающий список цветов - от сервиса
+            comboColor.Items.AddRange(colors);
 
             // Выпадающий список материалов - из базы данных
             comboMaterial.Items.AddRange(db.Materials.ToArray());
