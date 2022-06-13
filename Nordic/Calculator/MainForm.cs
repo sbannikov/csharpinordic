@@ -31,6 +31,11 @@ namespace Calculator
         private Common.Storage.DB db;
 
         /// <summary>
+        /// REST Сервис
+        /// </summary>
+        private RestAPI.ApiClient api;
+
+        /// <summary>
         /// Наблюдатель событий файловой системы
         /// </summary>
         private System.IO.FileSystemWatcher watcher;
@@ -69,6 +74,9 @@ namespace Calculator
             timer.Tick += Timer_Tick;
 
             db = new DB();
+
+            var client = new System.Net.Http.HttpClient();
+            api = new RestAPI.ApiClient("https://localhost:5001", client);
         }
 
         /// <summary>
@@ -423,8 +431,6 @@ namespace Calculator
         // Загрузка выпадающих списков
         private void LoadCombos()
         {
-            var client = new System.Net.Http.HttpClient();
-            var api = new RestAPI.ApiClient("https://localhost:5001", client);
             var colors = api.GetColorsAsync().Result.ToArray();
 
             // Выпадающий список цветов - от сервиса
