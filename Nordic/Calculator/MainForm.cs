@@ -430,7 +430,7 @@ namespace Calculator
 
         // Загрузка выпадающих списков
         private void LoadCombos()
-        {
+        {           
             var colors = api.GetColorsAsync().Result.ToArray();
 
             // Выпадающий список цветов - от сервиса

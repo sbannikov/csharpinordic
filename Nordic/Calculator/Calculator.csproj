@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="obj\swaggerClient.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <OpenApiReference Include="OpenAPIs\swagger.json" CodeGenerator="NSwagCSharp" Namespace="Calculator.RestAPI" ClassName="ApiClient">
       <SourceUri>https://localhost:5001/swagger/v1/swagger.json</SourceUri>
     </OpenApiReference>

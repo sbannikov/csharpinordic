@@ -10,7 +10,8 @@ namespace Calculator.Common.Storage
     {
         /// <summary>
         /// Признак активности объекта
+        /// <para>По умолчанию каждый новый объект - активный</para>
         /// </summary>
-        public bool Active { get; set; }
+        public bool Active { get; set; } = true;       
     }
 }

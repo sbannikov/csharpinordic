@@ -81,6 +81,27 @@ namespace Calculator.Common.Storage
             return obj.Name.GetHashCode();
         }
 
+        /// <summary>
+        /// Поиск цвета по имени
+        /// <para>Если цвет не найден, в базе будет создан новый цвет</para>
+        /// </summary>
+        /// <param name="name">Название цвета</param>
+        /// <returns>Цвет как объект</returns>
+        public Color GetColor(string name)
+        {
+            var color = Colors.FirstOrDefault(x => x.Name == name);
+            if (color == null)
+            {
+                color = new Color()
+                {
+                    Name = name
+                };
+                Colors.Add(color);
+                SaveChanges();
+            }
+            return color;
+        }
+
         public int InsertMaterials(Material[] materials)
         {
             // Загрузка данных
