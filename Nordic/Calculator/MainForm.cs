@@ -203,46 +203,15 @@ namespace Calculator
             // Сохранение загруженных данных
             data = new Data()
             {
-                Materials = materials.ToArray()
+                // [!] переделать
+                // Materials = materials.ToArray()
             };
 
             // Выпадающий список материалов
             comboMaterial.Items.AddRange(data.Materials);
         }
 
-        /// <summary>
-        /// Построение списка цветов
-        /// </summary>
-        /// <param name="data"></param>
-        private void LoadData(Data data)
-        {
-            if (data != null)
-            {
-                // Список цветов
-                var colors = new Dictionary<string, Color>();
 
-                foreach (var material in data.Materials)
-                {
-                    string colorName = material.ColorName ?? String.Empty;
-                    Color color;
-                    // Проверка на дубликат
-                    if (!colors.ContainsKey(colorName))
-                    {
-                        // Добавление нового цвета в словарь
-                        color = new Color()
-                        {
-                            Name = colorName
-                        };
-                        colors.Add(colorName, color);
-                    }
-                    else
-                    {
-                        color = colors[colorName];
-                    }
-                    material.MaterialColor = color;
-                }
-            }
-        }
 
         /// <summary>
         /// Загрузка XML-файла десериализацией
@@ -253,7 +222,7 @@ namespace Calculator
             var serializer = new XmlSerializer(typeof(Data));
             var reader = System.Xml.XmlReader.Create(name);
             data = (Data)serializer.Deserialize(reader);
-            LoadData(data);
+            // [!] LoadData(data);
         }
 
         /// <summary>
@@ -386,18 +355,14 @@ namespace Calculator
         /// <param name="e"></param>
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            using (var ctx = new DB()) // создаем новый контекст БД
-            {
-                
-                string name = (string)e.Argument;
-                string json = System.IO.File.ReadAllText(name);
-                worker.ReportProgress(5);
-                var data = JsonConvert.DeserializeObject<Data>(json);
-                LoadData(data);
-                worker.ReportProgress(10);
-                ctx.InsertMaterials(data.Materials);
-                e.Result = name;
-            }
+            string name = (string)e.Argument;
+            string json = System.IO.File.ReadAllText(name);
+            worker.ReportProgress(5);
+            var data = JsonConvert.DeserializeObject<Data>(json);
+            worker.ReportProgress(10);
+            // Синхронный запуск
+            api.LoadAsync(data.Materials).Wait();
+            e.Result = name;
         }
 
         /// <summary>
@@ -430,7 +395,7 @@ namespace Calculator
 
         // Загрузка выпадающих списков
         private void LoadCombos()
-        {           
+        {
             var colors = api.GetColorsAsync().Result.ToArray();
 
             // Выпадающий список цветов - от сервиса

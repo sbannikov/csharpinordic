@@ -84,11 +84,16 @@ namespace Calculator.Common.Storage
         /// <summary>
         /// Поиск цвета по имени
         /// <para>Если цвет не найден, в базе будет создан новый цвет</para>
+        /// <para>При запросе пустого цвета будет null</para>
         /// </summary>
         /// <param name="name">Название цвета</param>
         /// <returns>Цвет как объект</returns>
         public Color GetColor(string name)
         {
+            if (string.IsNullOrEmpty(null))
+            {
+                return null;
+            }
             var color = Colors.FirstOrDefault(x => x.Name == name);
             if (color == null)
             {

@@ -18,7 +18,7 @@ namespace Calculator
         /// Перечень материалов
         /// </summary>
         [XmlElement(ElementName = "Material")]
-        public Material[] Materials;
+        public RestAPI.Material[] Materials;
 
         /// <summary>
         /// Сохранение в формате CSV
