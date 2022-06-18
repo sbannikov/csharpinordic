@@ -60,6 +60,7 @@ namespace Calculator
         /// Сохранение в формате JSON
         /// </summary>
         /// <param name="name"></param>
+        /// Тест для GitHub
         public void SaveToJson(string name)
         {
             string json = JsonConvert.SerializeObject(this, Formatting.Indented);
