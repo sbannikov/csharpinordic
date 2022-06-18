@@ -1,6 +1,11 @@
 {
   "Materials": [
     {
+      "Name": "Sivec Extra t-30",
+      "Color": "желтый",
+      "Price": 8550.0
+    },
+    {
       "Name": "Amarillo Sol t-30",
       "Color": "желтый",
       "Price": 8550.0

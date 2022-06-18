@@ -46,7 +46,7 @@ namespace Calculator
 
             watcher = new System.IO.FileSystemWatcher()
             {
-                Path = @"C:\FILE"
+                Path = @"C:\Users\Pavel\Desktop\C#\NordicSchool\Repos_Sergey\Nordic\Calculator"
             };
             watcher.Created += WatchFile;
             watcher.Changed += WatchFile;
@@ -57,6 +57,7 @@ namespace Calculator
                 Interval = 1000
             };
             timer.Tick += Timer_Tick;
+
         }
 
         /// <summary>
@@ -84,6 +85,10 @@ namespace Calculator
                 switch (ext)
                 {
                     case ".csv":
+                        if (MessageBox.Show($"Перезагрузить файл {name}?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            LoadCsv(name);
+                        }
                         break;
                     case ".json":
                         if (MessageBox.Show($"Перезагрузить файл {name}?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -92,6 +97,10 @@ namespace Calculator
                         }
                         break;
                     case ".xml":
+                        if (MessageBox.Show($"Перезагрзить файл {name}?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            LoadXml(name);
+                        }
                         break;
                     default:
                         log.Trace($"Файл {name} не обрабатывается");

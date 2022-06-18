@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Data>
+	<Material Name="Lilac Extra" Color="желтый" Price="8550" />
 	<Material Name="Amarillo Sol t-30" Color="желтый" Price="8550" />
 	<Material Name="Arabescato Black Orobico t-20" Color="черный" Price="14040" />
 	<Material Name="Arabescato Corchia t-20" Color="белый" Price="18270" />
