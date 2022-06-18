@@ -31,10 +31,10 @@ namespace Calculator
         public Database()
         {
             // Конфигурация приложения
-            var cfg = Common.Configuration.Load<Common.Configuration>();
+            var config2 = Common.Configuration.Load<Common.Configuration>();
            
             // Проверка на корректность настроек
-            if (string.IsNullOrEmpty(cfg.ConnectionString))
+            if (string.IsNullOrEmpty(config2.ConnectionString))
             {
                 log.Warn("Строка соединения не задана в конфигурации");
             }
@@ -43,7 +43,7 @@ namespace Calculator
             connection = new MySqlConnection();
             
             // Параметры соединения
-            connection.ConnectionString = cfg.ConnectionString;
+            connection.ConnectionString = config2.ConnectionString;
         }
 
         /// <summary>
