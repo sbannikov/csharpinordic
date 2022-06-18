@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 using NLog;
 
 namespace Calculator
-{
+{ // Комментарий для теста GIT
     /// <summary>
     /// Методы для работы с базой данных
     /// </summary>
