@@ -1,11 +1,101 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Queens
 {
     class Program
     {
-        // Положение ферзей по вертикали от 0 до 7
-        static int[] queens = new int[8];
+        const int Size = 8;
+
+        /// <summary>
+        /// Пустая клетка доски
+        /// </summary>
+        const string Cell = "  ";
+
+        /// <summary>
+        /// Положение ферзей по вертикали от 0 до <see cref="Size"/>
+        /// </summary>
+        static int[] queens = new int[Size];
+
+        /// <summary>
+        /// Список решений
+        /// </summary>
+        static List<int[]> result = new List<int[]>();
+
+        /// <summary>
+        /// Проверка, что n-ферзь под ударом одного из предыдущих
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        static bool Checked(int n)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                // отсекаем комбинации, когда ферзи стоят по одной вертикали
+                if (queens[n] == queens[i]) { return true; }
+
+                // отсекаем комбинации, когда ферзи стоят по одной диагонали
+                if (Math.Abs(queens[n] - queens[i]) == (n - i)) { return true; }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Сохранение решения
+        /// </summary>
+        static void Save()
+        {          
+            int[] a = new int[Size];
+            Array.Copy(queens, a, Size);
+            result.Add(a);
+        }
+
+        static void Print()
+        {
+            // Сохранение исходного цвета фона
+            ConsoleColor saveBack = Console.BackgroundColor;
+            ConsoleColor saveFore = Console.ForegroundColor;          
+
+            // Это формирование всего шахматного поля           
+            for (int row = 0; row < Size; row++)
+            {
+                // Интерполяция строки
+                // вместо {row} подставляется строковый эквивалент переменной row
+                // то есть неявно вызывается метод row.ToString()
+                Console.Write($" {row + 1,2} ");
+                // Это формирование одной строки шахматного поля
+                for (int col = 0; col < Size; col++)
+                {
+                    // Определяем, чётная эта строка или нечётная
+                    if ((row + col) % 2 == 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.White;
+                    }
+                    if (queens[row] == col)
+                    {
+                        Console.Write("()");
+                    }
+                    else
+                    {
+                        Console.Write(Cell);
+                    }
+                }
+                // Восстановление исходного цвета
+                Console.ForegroundColor = saveFore;
+                Console.BackgroundColor = saveBack;
+
+                Console.Write($" {row+1} ");
+
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
 
         /// <summary>
         /// Перемещение n-го ферзя
@@ -13,67 +103,37 @@ namespace Queens
         /// <param name="n">Номер ферзя</param>
         static void Move(int n)
         {
-            for (int col = 0; col < 8; col++)
+            for (int col = 0; col < Size; col++)
             {
                 queens[n] = col;
-                if (n < 7)
+                // Print();
+
+                // Проверка на корректность расположения ферзей
+                if (n > 0)
+                {
+                    if (Checked(n))
+                    {
+                        continue;
+                    }
+                }
+
+                if (n < Size - 1)
                 {
                     Move(n + 1);
                 }
                 else
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        Console.Write(queens[i]);
-                    }
-                    Console.WriteLine();
+                {                   
+                    Print();
+                    Save();
                 }
             }
         }
 
         static void Main(string[] args)
         {
-            // Move(0);
+            Move(0);
 
-            // Цикл по первому ферзю
-            for (int q1 = 0; q1 < 8; q1++)
-            {
-                queens[0] = q1;
-
-                // Цикл по второму ферзю
-                for (int q2 = 0; q2 < 8; q2++)
-                {
-                    queens[1] = q2;
-
-                    // отсекаем комбинации, когда ферзи стоят по одной вертикали
-                    if (queens[0] == queens[1]) { continue; }
-
-                    // отсекаем комбинации, когда ферзи стоят по одной диагонали
-                    if (Math.Abs(queens[0] - queens[1]) == 1) { continue; }
-
-                    // Цикл по третьему ферзю
-                    for (int q3 = 0; q3 < 8; q3++)
-                    {
-                        queens[2] = q3;
-
-                        // отсекаем комбинации, когда ферзи стоят по одной вертикали
-                        if (queens[0] == queens[2]) { continue; }
-                        if (queens[1] == queens[2]) { continue; }
-
-                        // отсекаем комбинации, когда ферзи стоят по одной диагонали
-                        if (Math.Abs(queens[0] - queens[2]) == 2) { continue; }
-                        if (Math.Abs(queens[1] - queens[2]) == 1) { continue; }
-
-
-                        // Вывести содержимое массива на экран
-                        for (int i = 0; i < 8; i++)
-                        {
-                            Console.Write($"{queens[i]} ");
-                        }
-                        Console.WriteLine();
-                    }
-                }
-            }
+            Console.WriteLine($"Количество решений: {result.Count}");
         }
     }
 }
