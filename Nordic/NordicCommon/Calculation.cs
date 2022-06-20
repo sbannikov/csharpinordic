@@ -85,5 +85,36 @@ namespace NordicCommon
             }
             return factorial;
         }
+
+        public static int Fibonacci(int n)
+        {
+            // Console.WriteLine($"Fibonacci({n})");
+            if (n < 0)
+            {
+                throw new ArgumentException($"Отрицательные значения n не поддерживаются: {n}");
+            }
+            if (n == 0)
+            {
+                return 0;
+            }
+            else if (n == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                int n1 = Fibonacci(n - 1);
+                int n2 = Fibonacci(n - 2);
+                return n1 + n2;
+            }
+        }
+
+        public static int FibonacciD(int n)
+        {
+            double five = Math.Sqrt(5);
+            double d1 = Math.Pow((1 + five) / 2, n);
+            double d2 = Math.Pow((1 - five) / 2, n);
+            return (int)((d1 - d2) / five);
+        }
     }
 }
