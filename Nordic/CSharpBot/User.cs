@@ -21,6 +21,22 @@ namespace CSharpBot
         /// </summary>
         public DateTime TimeStamp;
 
+        public DateTime timestamp
+        {
+            get
+            {
+                return TimeStamp;
+            }
+            set
+            {
+                if (UpdateHandler.BotState.Users != null)
+                {
+                    UpdateHandler.BotState.Dirty = true;
+                }
+                TimeStamp = value;
+            }
+        }
+
         /// <summary>
         /// Номер текущей комнаты
         /// </summary>
