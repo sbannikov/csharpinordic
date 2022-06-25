@@ -145,7 +145,76 @@ namespace CSharpBot
             }
 
             // Вызов метода с заданными параметрами
-            method.Invoke(this, new object[] { client, message } );            
+            method.Invoke(this, new object[] { client, message });
+        }
+
+        private void CommandStart(ITelegramBotClient client, Message message)
+        {
+            if (!BotState.Users.ContainsKey(message.Chat.Id))
+            {
+                // Добавление пользователя в словарь
+                var user = new User()
+                {
+                    ID = message.Chat.Id
+                };
+                BotState.Users.Add(message.Chat.Id, user);
+                BotState.Dirty = true;
+                client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, я вас зарегистрировал");
+            }
+            else
+            {
+                client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, вы уже зарегистрированы");
+            }
+        }
+
+        private void CommandAbout(ITelegramBotClient client, Message message)
+        {
+            client.SendTextMessageAsync(message.Chat.Id, "Учебный бот на C# - текстовый квест");
+        }
+
+        private void CommandHelp(ITelegramBotClient client, Message message)
+        {
+            client.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж", replyMarkup: null);
+        }
+
+        private void CommandPlay(ITelegramBotClient client, Message message)
+        {
+            if (!BotState.Users.ContainsKey(message.Chat.Id))
+            {
+                client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, для начала работы надо зарегистрироваться при помощи команды /start");
+                return;
+            }
+
+            var user = BotState.Users[message.Chat.Id];
+            int number; // номер комнаты
+            if (game.Rooms.ContainsKey(user.Room))
+            {
+                number = user.Room;
+            }
+            else
+            {
+                // начинаем с комнаты с минимальным номером
+                number = game.Rooms.Keys.Min(x => x);
+                user.Room = number;
+            }
+            Quest.Room room = game.Rooms[number];
+            room.Show(client, message.Chat.Id);
+        }
+
+        private void CommandReset(ITelegramBotClient client, Message message)
+        {
+            if (!BotState.Users.ContainsKey(message.Chat.Id))
+            {
+                client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, для начала работы надо зарегистрироваться при помощи команды /start");
+                return;
+            }
+
+            var user = BotState.Users[message.Chat.Id];
+            // начинаем с комнаты с минимальным номером
+            user.Room = game.Rooms.Keys.Min(x => x);
+            // Очистка пользовательских переменных
+            user.Variables.Clear();
+            client.SendTextMessageAsync(message.Chat.Id, "Состояние игры сброшено");
         }
 
         /// <summary>
@@ -155,82 +224,28 @@ namespace CSharpBot
         /// <param name="message"></param>
         private void DispatchCommand(ITelegramBotClient client, Message message)
         {
-            // Команда
-            string command = message.Text.Substring(1).ToLower();
-            User user;
+            // Определение имени команды (отсекаем символ /)
+            string command = message.Text.Substring(1);
+            // Первый символ - прописной, остальные строчные
+            command = command.Substring(0, 1).ToUpper() + command.Substring(1).ToLower();
 
-            // Команда start выполняется для любого, в том числе и 
-            // незарегистрированного пользователя
-            if (command == "start")
+            // Имя метода-обработчика
+            // Commandstart
+            string name = $"Command{command}";
+
+            // Получение метода-обработчика
+            var type = this.GetType();
+            var method = type.GetMethod(name, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (method == null)
             {
-                if (!BotState.Users.ContainsKey(message.Chat.Id))
-                {
-                    // Добавление пользователя в словарь
-                    user = new User()
-                    {
-                        ID = message.Chat.Id
-                    };
-                    BotState.Users.Add(message.Chat.Id, user);
-                    BotState.Dirty = true;
-                    client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, я вас зарегистрировал");
-                }
-                else
-                {
-                    client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, вы уже зарегистрированы");
-                }
+                string s = $"Команда типа {message.Text} пока не обрабатываются";
+                client.SendTextMessageAsync(message.Chat.Id, s);
+                log.Warn(s);
+                return;
             }
-            else
-            {
-                // Проверка на существование зарегистрированного пользователя
-                if (!BotState.Users.ContainsKey(message.Chat.Id))
-                {
-                    client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, для начала работы надо зарегистрироваться при помощи команды /start");
-                    return;
-                }
 
-                switch (command)
-                {
-                    case "reset": // Сброс игры
-                        user = BotState.Users[message.Chat.Id];
-                        // начинаем с комнаты с минимальным номером
-                        user.Room = game.Rooms.Keys.Min(x => x);
-                        // Очистка пользовательских переменных
-                        user.Variables.Clear();
-                        client.SendTextMessageAsync(message.Chat.Id, "Состояние игры сброшено");
-                        break;
-
-                    case "play":
-                        user = BotState.Users[message.Chat.Id];
-                        int number; // номер комнаты
-                        if (game.Rooms.ContainsKey(user.Room))
-                        {
-                            number = user.Room;
-                        }
-                        else
-                        {
-                            // начинаем с комнаты с минимальным номером
-                            number = game.Rooms.Keys.Min(x => x);
-                            user.Room = number;
-                        }
-                        Quest.Room room = game.Rooms[number];
-                        room.Show(client, message.Chat.Id);
-                        break;
-
-                    case "help":
-                        client.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж", replyMarkup: null);
-                        break;
-
-                    case "about":
-                        client.SendTextMessageAsync(message.Chat.Id, "Учебный бот на C# - текстовый квест");
-                        break;
-
-                    default:
-                        string s = $"Команда {command} пока не обрабатываются";
-                        client.SendTextMessageAsync(message.Chat.Id, s);
-                        log.Warn(s);
-                        break;
-                }
-            }
+            // Вызов метода с заданными параметрами
+            method.Invoke(this, new object[] { client, message });
         }
 
         /// <summary>
