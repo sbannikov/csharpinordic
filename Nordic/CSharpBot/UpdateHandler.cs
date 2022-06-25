@@ -97,7 +97,7 @@ namespace CSharpBot
             switch (update.Type)
             {
                 case UpdateType.Message:
-                    ProcessMessage(client, update.Message);
+                    DispatchMessage(client, update.Message);
                     break;
 
                 default:
@@ -110,39 +110,42 @@ namespace CSharpBot
             return Task.CompletedTask;
         }
 
+        private void ProcessSticker(ITelegramBotClient client, Message message)
+        {
+            client.SendStickerAsync(message.Chat.Id, message.Sticker.FileId);
+            if (string.IsNullOrEmpty(message.Sticker.Emoji))
+            {
+                client.SendTextMessageAsync(message.Chat.Id, message.Sticker.Emoji);
+            }
+        }
+
+        private void ProcessPhoto(ITelegramBotClient client, Message message)
+        {
+            client.SendTextMessageAsync(message.Chat.Id, $"Классная фотка, жаль, что не могу разглядеть детали");
+        }
+
         /// <summary>
-        /// Обработка сообщения
+        /// Диспетчеризация сообщения
         /// </summary>
         /// <param name="message"></param>
-        private void ProcessMessage(ITelegramBotClient client, Message message)
+        private void DispatchMessage(ITelegramBotClient client, Message message)
         {
-            switch (message.Type)
+            // Имя метода-обработчика
+            string name = $"Process{message.Type}";
+
+            // Получение метода-обработчика
+            var type = this.GetType();
+            var method = type.GetMethod(name, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (method == null)
             {
-                case MessageType.Text:
-                    if (message.Text[0] == '/')
-                    {
-                        ProcessCommand(client, message);
-                    }
-                    else
-                    {
-                        ProcessText(client, message);
-                    }
-                    break;
-
-                case MessageType.Sticker:
-                    client.SendStickerAsync(message.Chat.Id, message.Sticker.FileId);
-                    if (string.IsNullOrEmpty(message.Sticker.Emoji))
-                    {
-                        client.SendTextMessageAsync(message.Chat.Id, message.Sticker.Emoji);
-                    }
-                    break;
-
-                default:
-                    string s = $"Сообщения типа {message.Type} пока не обрабатываются";
-                    client.SendTextMessageAsync(message.Chat.Id, s);
-                    log.Warn(s);
-                    break;
+                string s = $"Сообщения типа {message.Type} пока не обрабатываются";
+                client.SendTextMessageAsync(message.Chat.Id, s);
+                log.Warn(s);
+                return;
             }
+
+            // Вызов метода с заданными параметрами
+            method.Invoke(this, new object[] { client, message } );            
         }
 
         /// <summary>
@@ -150,7 +153,7 @@ namespace CSharpBot
         /// </summary>
         /// <param name="client"></param>
         /// <param name="message"></param>
-        private void ProcessCommand(ITelegramBotClient client, Message message)
+        private void DispatchCommand(ITelegramBotClient client, Message message)
         {
             // Команда
             string command = message.Text.Substring(1).ToLower();
@@ -186,7 +189,7 @@ namespace CSharpBot
                 }
 
                 switch (command)
-                {                   
+                {
                     case "reset": // Сброс игры
                         user = BotState.Users[message.Chat.Id];
                         // начинаем с комнаты с минимальным номером
@@ -238,6 +241,13 @@ namespace CSharpBot
         private void ProcessText(ITelegramBotClient client, Message message)
         {
             log.Trace(message.Text);
+
+            // Проверка на команду
+            if (message.Text[0] == '/')
+            {
+                DispatchCommand(client, message);
+                return;
+            }
 
             // Проверка на существование зарегистрированного пользователя
             if (!BotState.Users.ContainsKey(message.Chat.Id))
