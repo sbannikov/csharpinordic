@@ -32,7 +32,7 @@ namespace CSharpBot
             }
             set
             {
-                if (UpdateHandler.BotState.Users != null)
+                if (UpdateHandler.BotState != null)
                 {
                     UpdateHandler.BotState.Dirty = true;
                 }
@@ -44,7 +44,6 @@ namespace CSharpBot
         /// Номер текущей комнаты
         /// </summary>
         private int room;
-
 
         /// <summary>
         /// Номер текущей комнаты
