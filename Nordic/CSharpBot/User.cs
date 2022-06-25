@@ -19,7 +19,26 @@ namespace CSharpBot
         /// <summary>
         /// Дата и время последней активности пользователя
         /// </summary>
-        public DateTime TimeStamp;
+        private DateTime timestamp;
+
+        /// <summary>
+        /// Дата и время последней активности пользователя
+        /// </summary>
+        public DateTime TimeStamp
+        {
+            get
+            {
+                return timestamp;
+            }
+            set
+            {
+                if (UpdateHandler.BotState.Users != null)
+                {
+                    UpdateHandler.BotState.Dirty = true;
+                }
+                timestamp = value;
+            }
+        }
 
         /// <summary>
         /// Номер текущей комнаты
