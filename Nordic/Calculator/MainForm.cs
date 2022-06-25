@@ -104,11 +104,19 @@ namespace Calculator
                 switch (ext)
                 {
                     case ".csv":
+                        if (MessageBox.Show($"Перезагрузить файл {name}?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            LoadCsv(name);
+                        }
                         break;
                     case ".json":
                         int result = LoadJson(name);
                         break;
                     case ".xml":
+                        if (MessageBox.Show($"Перезагрзить файл {name}?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            LoadXml(name);
+                        }
                         break;
                     default:
                         log.Trace($"Файл {name} не обрабатывается");
