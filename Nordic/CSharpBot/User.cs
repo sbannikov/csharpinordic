@@ -19,13 +19,16 @@ namespace CSharpBot
         /// <summary>
         /// Дата и время последней активности пользователя
         /// </summary>
-        public DateTime TimeStamp;
+        private DateTime timestamp;
 
-        public DateTime timestamp
+        /// <summary>
+        /// Дата и время последней активности пользователя
+        /// </summary>
+        public DateTime TimeStamp
         {
             get
             {
-                return TimeStamp;
+                return timestamp;
             }
             set
             {
@@ -33,7 +36,7 @@ namespace CSharpBot
                 {
                     UpdateHandler.BotState.Dirty = true;
                 }
-                TimeStamp = value;
+                timestamp = value;
             }
         }
 
