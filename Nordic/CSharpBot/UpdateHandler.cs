@@ -10,6 +10,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot.Types.Enums;
 using NLog;
+using System.Reflection;
 
 namespace CSharpBot
 {
@@ -148,6 +149,7 @@ namespace CSharpBot
             method.Invoke(this, new object[] { client, message });
         }
 
+        [AllowUnregistered(Allow = true)]       
         private void CommandStart(ITelegramBotClient client, Message message)
         {
             if (!BotState.Users.ContainsKey(message.Chat.Id))
@@ -167,24 +169,21 @@ namespace CSharpBot
             }
         }
 
+        [AllowUnregistered]
         private void CommandAbout(ITelegramBotClient client, Message message)
         {
             client.SendTextMessageAsync(message.Chat.Id, "Учебный бот на C# - текстовый квест");
         }
 
+        [AllowUnregistered]
         private void CommandHelp(ITelegramBotClient client, Message message)
         {
             client.SendTextMessageAsync(message.Chat.Id, "Цель игры - разблокировать 12-й этаж", replyMarkup: null);
         }
 
+        [AllowUnregistered(Allow = false)]
         private void CommandPlay(ITelegramBotClient client, Message message)
         {
-            if (!BotState.Users.ContainsKey(message.Chat.Id))
-            {
-                client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, для начала работы надо зарегистрироваться при помощи команды /start");
-                return;
-            }
-
             var user = BotState.Users[message.Chat.Id];
             int number; // номер комнаты
             if (game.Rooms.ContainsKey(user.Room))
@@ -203,12 +202,6 @@ namespace CSharpBot
 
         private void CommandReset(ITelegramBotClient client, Message message)
         {
-            if (!BotState.Users.ContainsKey(message.Chat.Id))
-            {
-                client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, для начала работы надо зарегистрироваться при помощи команды /start");
-                return;
-            }
-
             var user = BotState.Users[message.Chat.Id];
             // начинаем с комнаты с минимальным номером
             user.Room = game.Rooms.Keys.Min(x => x);
@@ -234,7 +227,7 @@ namespace CSharpBot
             string name = $"Command{command}";
 
             // Получение метода-обработчика
-            var type = this.GetType();
+            var type = this.GetType();            
             var method = type.GetMethod(name, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             if (method == null)
             {
@@ -242,6 +235,17 @@ namespace CSharpBot
                 client.SendTextMessageAsync(message.Chat.Id, s);
                 log.Warn(s);
                 return;
+            }
+
+            // Поиск конкретного атрибута метода
+            var attr = method.GetCustomAttribute<AllowUnregisteredAttribute>();
+            if (attr == null || !attr.Allow) // проверка регистрации пользователя
+            {
+                if (!BotState.Users.ContainsKey(message.Chat.Id))
+                {
+                    client.SendTextMessageAsync(message.Chat.Id, $"{message.Chat.FirstName}, для начала работы надо зарегистрироваться при помощи команды /start");
+                    return;
+                }
             }
 
             // Вызов метода с заданными параметрами
