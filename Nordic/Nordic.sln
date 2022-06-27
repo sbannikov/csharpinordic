@@ -43,13 +43,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcCommon", "CalcCommon\Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcRestAPI", "CalcRestAPI\CalcRestAPI.csproj", "{0BF412FC-D49B-4B46-BF04-7D02ED4FAC8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NordicCommon", "NordicCommon\NordicCommon.csproj", "{5885A3E1-09D4-4AD6-BC91-B35A640EAF3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NordicCommon", "NordicCommon\NordicCommon.csproj", "{5885A3E1-09D4-4AD6-BC91-B35A640EAF3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson24", "Lesson24\Lesson24.csproj", "{91513A8B-6445-4EC7-8EF0-53248F9C1B73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson24", "Lesson24\Lesson24.csproj", "{91513A8B-6445-4EC7-8EF0-53248F9C1B73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NordicTests", "NordicTests\NordicTests.csproj", "{ED974233-5E2C-4C1B-8FF7-D7D14EF81187}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NordicTests", "NordicTests\NordicTests.csproj", "{ED974233-5E2C-4C1B-8FF7-D7D14EF81187}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NordicNUnits", "NordicNUnits\NordicNUnits.csproj", "{9F48A046-CB1E-421F-8C22-C19D4713B2B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NordicNUnits", "NordicNUnits\NordicNUnits.csproj", "{9F48A046-CB1E-421F-8C22-C19D4713B2B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tranfusion", "Tranfusion\Tranfusion.csproj", "{A14FED33-B352-4B27-9DB7-76A685368EFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -149,6 +151,10 @@ Global
 		{9F48A046-CB1E-421F-8C22-C19D4713B2B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F48A046-CB1E-421F-8C22-C19D4713B2B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F48A046-CB1E-421F-8C22-C19D4713B2B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14FED33-B352-4B27-9DB7-76A685368EFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14FED33-B352-4B27-9DB7-76A685368EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14FED33-B352-4B27-9DB7-76A685368EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14FED33-B352-4B27-9DB7-76A685368EFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
