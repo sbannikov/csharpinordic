@@ -25,6 +25,11 @@ namespace Tranfusion.Entities
         public Puzzle Puzzle { get; set; }
 
         /// <summary>
+        /// Признак обработки состояния
+        /// </summary>
+        public bool Processed { get; set; } = false;
+
+        /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
         public State() { }
