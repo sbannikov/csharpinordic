@@ -20,7 +20,7 @@ namespace Tranfusion.Entities
         /// <summary>
         /// Множество возможных состояния
         /// </summary>
-        public HashSet<State> States { get; set; } 
+        public HashSet<State> States { get; set; }
 
         /// <summary>
         /// Множество ходов
@@ -70,33 +70,24 @@ namespace Tranfusion.Entities
             return hash;
         }
 
-        public void Solve()
+        public bool Solve()
         {
+            // Построение множества возможных состояний
             var state = States.First(x => x.StateType == Enums.StateType.Start);
-
-            foreach (var turn in state.PossibleTurns())
-            {
-                var newState = new State(state, turn);
-                States.Add(newState);
-                Turns.Add(turn);
-            }
-            state.Processed = true;
-
+            state.MakeTurns();
             do
             {
                 state = States.FirstOrDefault(x => !x.Processed && x.StateType == Enums.StateType.Intermediate);
                 if (state != null)
                 {
-                    foreach (var turn in state.PossibleTurns())
-                    {
-                        var newState = new State(state, turn);
-                        States.Add(newState);
-                        Turns.Add(turn);
-                    }
-                    state.Processed = true;
+                    state.MakeTurns();
                 }
             }
             while (state != null);
+
+            bool solved = States.Where(x => x.StateType != Enums.StateType.Finish).Any(x => x.IsFinal());
+            return solved;
+
         }
     }
 }

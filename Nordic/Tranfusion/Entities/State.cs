@@ -89,11 +89,44 @@ namespace Tranfusion.Entities
                     // Похоже, это легитимный ход
                     yield return new Turn()
                     {
+                        FromState = this,
                         FromJar = fromJar,
                         ToJar = toJar,
                     };
                 }
             }
+        }
+
+        /// <summary>
+        /// Создание новых состояний, в которые мы можем попасть из текущего
+        /// </summary>
+        public void MakeTurns()
+        {
+            foreach (var turn in PossibleTurns())
+            {
+                var newState = new State(this, turn);
+                turn.ToState = newState;
+                Puzzle.States.Add(newState);
+                Puzzle.Turns.Add(turn);
+            }
+            Processed = true;
+        }
+
+        /// <summary>
+        /// Проверка на финальное состояние
+        /// </summary>
+        /// <returns></returns>
+        public bool IsFinal()
+        {
+            var final = Puzzle.States.First(x => x.StateType == Enums.StateType.Finish);
+            foreach (int number in Jars.Keys)
+            {
+                if ((Jars[number] != final.Jars[number]) && final.Jars[number].HasValue)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         /// <summary>

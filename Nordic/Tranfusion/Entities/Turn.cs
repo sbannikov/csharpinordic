@@ -20,5 +20,15 @@ namespace Tranfusion.Entities
         /// Номер сосуда, в который мы переливаем
         /// </summary>
         public int ToJar { get; set; }
+
+        /// <summary>
+        /// Исходное состояние
+        /// </summary>
+        public State FromState { get; set; }
+
+        /// <summary>
+        /// Новое состояние
+        /// </summary>
+        public State ToState { get; set; }
     }
 }
