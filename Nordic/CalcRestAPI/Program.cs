@@ -22,6 +22,7 @@ namespace Calculator.RestAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
+                    .UseUrls(new string[] { "http://localhost:5000/", "https://localhost:5001/" })
                     .UseStartup<Startup>();
                 });
     }

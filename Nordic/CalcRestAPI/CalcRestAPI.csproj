@@ -7,11 +7,15 @@
 
   <ItemGroup>
     <Content Remove="Configuration.json" />
+    <Content Remove="Nlog.config" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Configuration.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

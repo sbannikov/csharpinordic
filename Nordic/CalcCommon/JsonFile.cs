@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -35,8 +36,14 @@ namespace Calculator.Common
             {
                 // Краткое имя типа данных
                 name = $"{typeof(T).Name}.json";
+                // Информация о сборке (DLL)
+                Assembly asm = Assembly.GetExecutingAssembly();
+                // C:\GitHub\sbannikov\csharpnordic\Nordic\CalcRestAPI\bin\Debug\net5.0
+                string path = System.IO.Path.GetDirectoryName(asm.Location);
+                // Вариант: @$"{path}{System.IO.Path.PathSeparator}{name}";
+                string fullName = System.IO.Path.Combine(path, name);
                 // Чтение JSON-файла
-                string json = System.IO.File.ReadAllText(name);
+                string json = System.IO.File.ReadAllText(fullName);
                 // Десериализация в объект
                 entity = JsonConvert.DeserializeObject<T>(json);
             }

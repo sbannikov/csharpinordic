@@ -26,7 +26,6 @@ namespace Calculator.RestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -40,10 +39,13 @@ namespace Calculator.RestAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Calculator.RestAPI v1"));
             }
 
+            // –азрешение документации всегда
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Calculator.RestAPI v1"));
+
+            // ¬ыполн€етс€ автоматическое перенаправление на HTTPS
             app.UseHttpsRedirection();
 
             app.UseRouting();
