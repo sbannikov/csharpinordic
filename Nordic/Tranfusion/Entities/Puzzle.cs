@@ -70,10 +70,75 @@ namespace Tranfusion.Entities
             return hash;
         }
 
-        public bool Solve()
+        /// <summary>
+        /// Начальное состояние головоломки
+        /// </summary>
+        public Entities.State StartingState => 
+            States.First(x => x.StateType == Enums.StateType.Start);
+
+        /// <summary>
+        /// Рекурсивый перебор всех возможных ходов с контролем циклов
+        /// (возврат в состояние, в котором мы уже были)
+        /// </summary>
+        /// <param name="state">Текущее состояние</param>
+        /// <param name="stack">Стек сделанных ходов</param>
+        /// <returns></returns>
+        private bool PerformTurns(Entities.State state, Stack<Entities.Turn> stack)
+        {
+            // Все ходы из текущего состояния
+            var outgoing = Turns.Where(x => x.FromState == state).ToList();
+            foreach (var turn in outgoing)
+            {
+                // Проверка на вхождение в состояние, где мы уже были
+                if (stack.Any(x => x.FromState == turn.ToState)) continue;
+
+                // Проверка на финальное состояние
+                if (turn.ToState.IsFinal())
+                { 
+                    // Записываем последний ход
+                    stack.Push(turn);
+                    return true;
+                }
+
+                // Сохраняем сделанный ход
+                stack.Push(turn);
+                // Перебираем все новые варианты
+                if (PerformTurns(turn.ToState, stack))
+                {
+                    return true;
+                }
+                // И если ничего не нашли, забываем, что мы тут были
+                // Значит, нам сюда было не надо
+                stack.Pop();
+            }
+            // Решение не найдено, печалька!
+            return false;
+        }
+
+        /// <summary>
+        /// Последовательность ходов, ведущих к решению
+        /// </summary>
+        /// <returns>Последовательность ходов или null, если нет решения</returns>
+        public IEnumerable<Entities.Turn>? GetTurns()
+        {
+            var state = StartingState;
+            var stack = new Stack<Entities.Turn>();
+            if (PerformTurns(state, stack))
+            {
+                // Вернуть стек в обратном порядке
+                return stack.Reverse().ToList();
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Решение задачи
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Entities.Turn>? Solve()
         {
             // Построение множества возможных состояний
-            var state = States.First(x => x.StateType == Enums.StateType.Start);
+            var state = StartingState;
             state.MakeTurns();
             do
             {
@@ -85,9 +150,8 @@ namespace Tranfusion.Entities
             }
             while (state != null);
 
-            bool solved = States.Where(x => x.StateType != Enums.StateType.Finish).Any(x => x.IsFinal());
-            return solved;
-
+            var result = GetTurns();
+            return result;
         }
     }
 }
