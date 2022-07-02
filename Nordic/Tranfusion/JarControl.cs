@@ -14,11 +14,28 @@ namespace Tranfusion
     {
         public const int HeightRatio = 50;
 
+        /// <summary>
+        /// Высота кувшина в условных единицах
+        /// </summary>
+        private int size;
+
+        public int Level
+        {
+            set
+            {
+                level.Top = (size - value) * HeightRatio;
+                level.Height = value * HeightRatio;
+                text.Text = value.ToString();
+            }
+        }
+
         public JarControl(int size = 5)
         {
             InitializeComponent();
 
-            panel.Height = HeightRatio * size;
+            this.size = size;
+            jar.Height = HeightRatio * size;
+            Level = 1;
             AutoSize = true;
         }
     }

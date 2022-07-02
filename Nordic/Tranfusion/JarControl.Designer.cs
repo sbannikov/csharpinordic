@@ -28,30 +28,63 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel = new System.Windows.Forms.Panel();
+            this.jar = new System.Windows.Forms.Panel();
+            this.level = new System.Windows.Forms.Panel();
+            this.text = new System.Windows.Forms.Label();
+            this.jar.SuspendLayout();
+            this.level.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel
+            // jar
             // 
-            this.panel.BackColor = System.Drawing.Color.SaddleBrown;
-            this.panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel.Location = new System.Drawing.Point(3, 3);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(144, 144);
-            this.panel.TabIndex = 0;
+            this.jar.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.jar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.jar.Controls.Add(this.level);
+            this.jar.Location = new System.Drawing.Point(3, 3);
+            this.jar.Name = "jar";
+            this.jar.Size = new System.Drawing.Size(144, 144);
+            this.jar.TabIndex = 0;
+            // 
+            // level
+            // 
+            this.level.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.level.BackColor = System.Drawing.Color.SaddleBrown;
+            this.level.Controls.Add(this.text);
+            this.level.Location = new System.Drawing.Point(3, 59);
+            this.level.Name = "level";
+            this.level.Size = new System.Drawing.Size(136, 80);
+            this.level.TabIndex = 0;
+            // 
+            // text
+            // 
+            this.text.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.text.AutoSize = true;
+            this.text.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.text.ForeColor = System.Drawing.SystemColors.Control;
+            this.text.Location = new System.Drawing.Point(0, 34);
+            this.text.Name = "text";
+            this.text.Size = new System.Drawing.Size(38, 45);
+            this.text.TabIndex = 1;
+            this.text.Text = "0";
             // 
             // JarControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panel);
+            this.Controls.Add(this.jar);
             this.Name = "JarControl";
+            this.jar.ResumeLayout(false);
+            this.level.ResumeLayout(false);
+            this.level.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Panel panel;
+        private Panel jar;
+        private Panel level;
+        private Label text;
     }
 }

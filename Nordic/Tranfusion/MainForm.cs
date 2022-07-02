@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Tranfusion
 {
     public partial class MainForm : Form
@@ -19,8 +21,8 @@ namespace Tranfusion
                 Jars = new Dictionary<int, int?>() {
                     { 1, 10 },
                     { 2, 0 },
-                    { 3, 0 } 
-                }                
+                    { 3, 0 }
+                }
             });
             puzzle.AddState(new Entities.State()
             {
@@ -38,10 +40,52 @@ namespace Tranfusion
                 var control = new JarControl(jar.Value.Size);
                 control.Left = jar.Value.Number * 200;
                 control.Top = (max - jar.Value.Size) * JarControl.HeightRatio;
-                Controls.Add(control);
+                control.Tag = jar.Value.Number;
+                panel.Controls.Add(control);
             }
+        }
 
-            puzzle.Solve();
+        /// <summary>
+        /// Отобразить состояние на экране
+        /// </summary>
+        /// <param name="state"></param>
+        private void DrawState(Entities.State state)
+        {
+            foreach (JarControl jar in panel.Controls)
+            {
+                int number = (int)jar.Tag;
+                int level = state.Jars[number].Value;
+                jar.Level = level;
+            }           
+        }
+
+        /// <summary>
+        /// Анимация решения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void solveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var turns = puzzle.Solve();
+            var state = turns.First().FromState;
+            DrawState(state);
+           
+            foreach (var turn in turns)
+            {
+                System.Threading.Thread.Sleep(1000);
+                DrawState(turn.ToState);               
+            }
+            
+        }
+
+        /// <summary>
+        /// Выход из приложения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
