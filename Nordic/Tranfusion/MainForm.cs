@@ -6,9 +6,20 @@ namespace Tranfusion
     {
         private Entities.Puzzle puzzle;
 
+        private System.Windows.Forms.Timer timer;
+
+        /// <summary>
+        /// Очередь состояний для визуализации
+        /// </summary>
+        private Queue<Entities.State> queue = new Queue<Entities.State>();
+
         public MainForm()
         {
             InitializeComponent();
+
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = 1000;
+            timer.Tick += Timer_Tick;
 
             // Инициализация данных головоломки
             puzzle = new Entities.Puzzle();
@@ -46,6 +57,24 @@ namespace Tranfusion
         }
 
         /// <summary>
+        /// Отображение решения головоломки покадрово
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            if (queue.TryDequeue(out Entities.State? state))
+            {
+                DrawState(state);
+            }
+            else
+            {
+                solveToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        /// <summary>
         /// Отобразить состояние на экране
         /// </summary>
         /// <param name="state"></param>
@@ -56,7 +85,7 @@ namespace Tranfusion
                 int number = (int)jar.Tag;
                 int level = state.Jars[number].Value;
                 jar.Level = level;
-            }           
+            }
         }
 
         /// <summary>
@@ -67,15 +96,14 @@ namespace Tranfusion
         private void solveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var turns = puzzle.Solve();
-            var state = turns.First().FromState;
-            DrawState(state);
-           
+            queue.Enqueue(turns.First().FromState);
+
             foreach (var turn in turns)
             {
-                System.Threading.Thread.Sleep(1000);
-                DrawState(turn.ToState);               
+                queue.Enqueue(turn.ToState);
             }
-            
+            // Блокирование пункта меню
+            solveToolStripMenuItem.Enabled = false;
         }
 
         /// <summary>
@@ -86,6 +114,16 @@ namespace Tranfusion
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        /// <summary>
+        /// Запуск логики после загрузки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            timer.Start();
         }
     }
 }
