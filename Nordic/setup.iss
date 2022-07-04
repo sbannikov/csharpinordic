@@ -32,6 +32,7 @@ Name: "custom"; Description: "Выборочная установка"; Flags: iscustom
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
+; Клиентское приложение
 Source: "Calculator\bin\Debug\net5.0-windows\Calculator.exe"; DestDir: "{app}\Calculator"; Flags: ignoreversion; Components: calc
 Source: "Calculator\bin\Debug\net5.0-windows\*.dll"; DestDir: "{app}\Calculator"; Flags: ignoreversion; Components: calc
 Source: "Calculator\bin\Debug\net5.0-windows\Configuration.json"; DestDir: "{app}\Calculator"; Flags: ignoreversion onlyifdoesntexist; Components: calc
@@ -40,6 +41,15 @@ Source: "Calculator\bin\Debug\net5.0-windows\Sample.*"; DestDir: "{app}\Calculat
 Source: "Calculator\bin\Debug\net5.0-windows\Nlog.config"; DestDir: "{app}\Calculator"; Flags: ignoreversion onlyifdoesntexist; Components: calc
 Source: "Calculator\bin\Debug\net5.0-windows\Calculator.deps.json"; DestDir: "{app}\Calculator"; Flags: ignoreversion; Components: calc
 Source: "Calculator\bin\Debug\net5.0-windows\Calculator.runtimeconfig.json"; DestDir: "{app}\Calculator"; Flags: ignoreversion; Components: calc
+; Служба REST API
+Source: "CalcRestAPI\bin\Debug\net5.0-windows\CalcRestAPI.exe"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0-windows\*.dll"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0-windows\*.pdb"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0-windows\Nlog.config"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0-windows\appsettings.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0-windows\CalcRestAPI.deps.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0-windows\CalcRestAPI.runtimeconfig.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0-windows\Configuration.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
 
 [Icons]
 Name: "{group}\Calculator"; Filename: "{app}\Calculator\Calculator.exe"
