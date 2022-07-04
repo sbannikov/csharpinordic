@@ -30,6 +30,7 @@ Name: "custom"; Description: "Выборочная установка"; Flags: iscustom
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "regsvc"; Description: "Регистрация службы Windows"; Flags: unchecked; Components: rest
 
 [Files]
 ; Клиентское приложение
@@ -42,21 +43,26 @@ Source: "Calculator\bin\Debug\net5.0-windows\Nlog.config"; DestDir: "{app}\Calcu
 Source: "Calculator\bin\Debug\net5.0-windows\Calculator.deps.json"; DestDir: "{app}\Calculator"; Flags: ignoreversion; Components: calc
 Source: "Calculator\bin\Debug\net5.0-windows\Calculator.runtimeconfig.json"; DestDir: "{app}\Calculator"; Flags: ignoreversion; Components: calc
 ; Служба REST API
-Source: "CalcRestAPI\bin\Debug\net5.0-windows\CalcRestAPI.exe"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
-Source: "CalcRestAPI\bin\Debug\net5.0-windows\*.dll"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
-Source: "CalcRestAPI\bin\Debug\net5.0-windows\*.pdb"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
-Source: "CalcRestAPI\bin\Debug\net5.0-windows\Nlog.config"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
-Source: "CalcRestAPI\bin\Debug\net5.0-windows\appsettings.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
-Source: "CalcRestAPI\bin\Debug\net5.0-windows\CalcRestAPI.deps.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
-Source: "CalcRestAPI\bin\Debug\net5.0-windows\CalcRestAPI.runtimeconfig.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
-Source: "CalcRestAPI\bin\Debug\net5.0-windows\Configuration.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0\CalcRestAPI.exe"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0\*.dll"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion recursesubdirs; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0\*.pdb"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion recursesubdirs; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0\Nlog.config"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion onlyifdoesntexist; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0\appsettings.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0\CalcRestAPI.deps.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0\CalcRestAPI.runtimeconfig.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\bin\Debug\net5.0\Configuration.json"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion onlyifdoesntexist; Components: rest
+Source: "CalcRestAPI\install.ps1"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
+Source: "CalcRestAPI\install.cmd"; DestDir: "{app}\CalcRestAPI"; Flags: ignoreversion; Components: rest
 
 [Icons]
 Name: "{group}\Calculator"; Filename: "{app}\Calculator\Calculator.exe"
 Name: "{commondesktop}\Calculator"; Filename: "{app}\Calculator\Calculator.exe"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\Calculator\Calculator.exe"; Description: "{cm:LaunchProgram,Calculator}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\Calculator\Calculator.exe"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,Calculator}"
+; Filename: "powershell.exe"; Parameters: "-Command Set-ExecutionPolicy RemoteSigned"; WorkingDir: "{tmp}"; Flags: waituntilterminated; Description: "Настройка PowerShell"; StatusMsg: "Настройка PowerShell"; Tasks: regsvc
+; Filename: "powershell.exe"; Parameters: ".\install.ps1 '{app}\CalcRestAPI\CalcRestAPI.exe'"; WorkingDir: "{app}\CalcRestAPI"; Flags: waituntilterminated; Tasks: regsvc
+Filename: "install.cmd"; Parameters: """{app}\CalcRestAPI\CalcRestAPI.exe"""; WorkingDir: "{app}\CalcRestAPI"; Flags: waituntilterminated shellexec; Tasks: regsvc
 
 [Components]
 Name: "calc"; Description: "Калькулятор"
@@ -64,3 +70,6 @@ Name: "rest"; Description: "Сервис REST API"
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}"
+
+[UninstallRun]
+Filename: "sc.exe"; Parameters: "delete nordic"; Flags: waituntilterminated; Components: rest
