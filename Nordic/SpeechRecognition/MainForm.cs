@@ -9,11 +9,13 @@ namespace SpeechRecognition
 
         private Color recordingColor;
         private Recorder? recorder;
+        private Recognizer recognizer;
 
         public MainForm()
         {
             InitializeComponent();
             recordingColor = recording.BackColor;
+            recognizer = new Recognizer();
         }
 
         /// <summary>
@@ -33,6 +35,7 @@ namespace SpeechRecognition
             recording.BackColor = recordingColor;
             recorder.Stop();
             recorder = null;
+            text.Text = recognizer.Recognize();
         }
     }
 }
