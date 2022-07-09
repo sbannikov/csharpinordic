@@ -28,12 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.recording = new System.Windows.Forms.Button();
+            this.text = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // recording
+            // 
+            this.recording.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.recording.Font = new System.Drawing.Font("Segoe UI", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.recording.Location = new System.Drawing.Point(12, 12);
+            this.recording.Name = "recording";
+            this.recording.Size = new System.Drawing.Size(776, 213);
+            this.recording.TabIndex = 0;
+            this.recording.Text = "Записывать звук";
+            this.recording.UseVisualStyleBackColor = true;
+            this.recording.MouseDown += new System.Windows.Forms.MouseEventHandler(this.recording_MouseDown);
+            this.recording.MouseUp += new System.Windows.Forms.MouseEventHandler(this.recording_MouseUp);
+            // 
+            // text
+            // 
+            this.text.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.text.Font = new System.Drawing.Font("Segoe UI", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.text.Location = new System.Drawing.Point(12, 231);
+            this.text.Multiline = true;
+            this.text.Name = "text";
+            this.text.Size = new System.Drawing.Size(776, 207);
+            this.text.TabIndex = 1;
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.Controls.Add(this.text);
+            this.Controls.Add(this.recording);
+            this.Name = "MainForm";
+            this.Text = "Распознавание речи";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private Button recording;
+        private TextBox text;
     }
 }
