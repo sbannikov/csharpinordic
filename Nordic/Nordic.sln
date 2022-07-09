@@ -51,7 +51,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NordicTests", "NordicTests\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NordicNUnits", "NordicNUnits\NordicNUnits.csproj", "{9F48A046-CB1E-421F-8C22-C19D4713B2B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tranfusion", "Tranfusion\Tranfusion.csproj", "{A14FED33-B352-4B27-9DB7-76A685368EFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tranfusion", "Tranfusion\Tranfusion.csproj", "{A14FED33-B352-4B27-9DB7-76A685368EFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechRecognition", "SpeechRecognition\SpeechRecognition.csproj", "{9C2FA6C4-3A16-43C3-AEB2-4D3F26DA2BB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,6 +157,10 @@ Global
 		{A14FED33-B352-4B27-9DB7-76A685368EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A14FED33-B352-4B27-9DB7-76A685368EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A14FED33-B352-4B27-9DB7-76A685368EFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C2FA6C4-3A16-43C3-AEB2-4D3F26DA2BB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C2FA6C4-3A16-43C3-AEB2-4D3F26DA2BB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C2FA6C4-3A16-43C3-AEB2-4D3F26DA2BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C2FA6C4-3A16-43C3-AEB2-4D3F26DA2BB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
