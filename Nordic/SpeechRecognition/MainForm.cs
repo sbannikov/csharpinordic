@@ -25,17 +25,17 @@ namespace SpeechRecognition
         /// <param name="e"></param>
         private void recording_MouseDown(object sender, MouseEventArgs e)
         {
-            recording.BackColor = Color.OrangeRed;
             recorder = new Recorder(FileName);
             recorder.Start();
+            recording.BackColor = Color.OrangeRed;
         }
 
         private void recording_MouseUp(object sender, MouseEventArgs e)
         {
             recording.BackColor = recordingColor;
             recorder.Stop();
+            text.Text = recognizer.Recognize(recorder);
             recorder = null;
-            text.Text = recognizer.Recognize();
         }
     }
 }

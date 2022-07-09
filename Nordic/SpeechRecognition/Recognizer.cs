@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http;
+﻿using System.Text.Json;
+using System.Web;
 
 namespace SpeechRecognition
 {
@@ -16,12 +12,54 @@ namespace SpeechRecognition
             client = new HttpClient();
         }
 
-        public string Recognize()
+        /// <summary>
+        /// Распознать записанный звук
+        /// </summary>
+        /// <param name="recorder"></param>
+        /// <returns></returns>
+        public string Recognize(Recorder recorder)
         {
+            // Загрузка конфигурации из файла
             var config = JsonFile.Load<Configuration>();
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://stt.api.cloud.yandex.net/speech/v1/stt:recognize");
+
+            UriBuilder uri = new UriBuilder("https://stt.api.cloud.yandex.net/speech/v1/stt:recognize");
+            var parameters = HttpUtility.ParseQueryString(string.Empty);
+            parameters["lang"] = "ru-RU";
+            parameters["format"] = "lpcm";
+            parameters["sampleRateHertz"] = recorder.SampleRate.ToString();
+            parameters["folderId"] = config.FolderID;
+            uri.Query = parameters.ToString();
+
+            // Содержимое запроса в виде файла
+            var content = new ByteArrayContent(recorder.Sound());
+            // Необязательно для данного случая, но полезно
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("audio/vnd.wave");
+          
+            // Запрос к облаку
+            var request = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri.ToString()),
+                Content = content
+            };
+
+            // Авторизация запроса к облаку
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Api-Key", config.ApiKey);
+
+            // Выполнение запроса
             HttpResponseMessage response = client.Send(request);
-            return response.ReasonPhrase;
+
+            string result;
+            if (!response.IsSuccessStatusCode)
+            {
+                result = response.ReasonPhrase;
+            }
+            else
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                result = JsonSerializer.Deserialize<Response>(json).Result;
+            }
+            return result;
         }
     }
 }

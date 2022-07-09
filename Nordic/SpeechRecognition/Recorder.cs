@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NAudio.Wave;
+﻿using NAudio.Wave;
 
 namespace SpeechRecognition
 {
@@ -11,6 +6,13 @@ namespace SpeechRecognition
     {
         private WaveIn waveIn;
         private WaveFileWriter writer;
+        private string name;
+        private List<byte> sound;
+
+        /// <summary>
+        /// Частота дискретизации в Гц
+        /// </summary>
+        public int SampleRate => waveIn.WaveFormat.SampleRate;
 
         /// <summary>
         /// Подготовка к запиcи звука
@@ -18,6 +20,8 @@ namespace SpeechRecognition
         /// <param name="name">Имя файла для сохранения</param>
         public Recorder(string name)
         {
+            sound = new List<byte>();
+
             // Объект для захвата звука
             waveIn = new WaveIn();
             // Дискретизация 8КГц, 1 канал звука
@@ -25,6 +29,8 @@ namespace SpeechRecognition
             waveIn.DataAvailable += WaveIn_DataAvailable;
             waveIn.RecordingStopped += WaveIn_RecordingStopped;
 
+            // Запомнить имя файла
+            this.name = name;
             // Объект для записи звука в файл
             writer = new WaveFileWriter(name, waveIn.WaveFormat);
         }
@@ -46,6 +52,15 @@ namespace SpeechRecognition
         }
 
         /// <summary>
+        /// Массив байт со звуком внутри
+        /// </summary>
+        /// <returns></returns>
+        public byte[] Sound()
+        {
+            return sound.ToArray();
+        }
+
+        /// <summary>
         /// Обработка поступающих звуковых данных
         /// </summary>
         /// <param name="sender"></param>
@@ -55,6 +70,8 @@ namespace SpeechRecognition
         {
             // Запись фрагмента звука в выходной файл
             writer.Write(e.Buffer, 0, e.BytesRecorded);
+            // Запись фрагмента звука в список в памяти
+            sound.AddRange(e.Buffer);
         }
 
         /// <summary>
@@ -64,7 +81,7 @@ namespace SpeechRecognition
         /// <param name="e"></param>
         private void WaveIn_RecordingStopped(object? sender, StoppedEventArgs e)
         {
-            writer.Close();
+            writer.Dispose();
             writer = null;
             waveIn.Dispose();
             waveIn = null;
