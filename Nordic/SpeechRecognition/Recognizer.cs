@@ -20,7 +20,7 @@ namespace SpeechRecognition
         /// </summary>
         /// <param name="recorder"></param>
         /// <returns></returns>
-        public string Recognize(GenericSound recorder)
+        public string Recognize(ISound recorder)
         {
             // Загрузка конфигурации из файла
             var config = JsonFile.Load<Configuration>();

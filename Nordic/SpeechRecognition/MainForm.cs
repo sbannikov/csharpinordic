@@ -10,7 +10,7 @@ namespace SpeechRecognition
         private Color recordingColor;
         private Recorder? recorder;
         private Recognizer recognizer;
-       
+
         public MainForm()
         {
             InitializeComponent();
@@ -42,6 +42,21 @@ namespace SpeechRecognition
         {
             var reader = new Reader(FileName);
             text.Text = recognizer.Recognize(reader);
+        }
+
+        private void syntesize_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var s = new Syntesizer();
+                var sound = s.Syntez(text.Text);
+                var player = new Player();
+                player.Play(sound);
+            }
+            catch (Exception ex)
+            {
+                text.Text = ex.Message;
+            }
         }
     }
 }
