@@ -3,6 +3,9 @@ using System.Web;
 
 namespace SpeechRecognition
 {
+    /// <summary>
+    /// Распознавание речи
+    /// </summary>
     public class Recognizer
     {
         private HttpClient client;
@@ -17,7 +20,7 @@ namespace SpeechRecognition
         /// </summary>
         /// <param name="recorder"></param>
         /// <returns></returns>
-        public string Recognize(Recorder recorder)
+        public string Recognize(ISound recorder)
         {
             // Загрузка конфигурации из файла
             var config = JsonFile.Load<Configuration>();

@@ -2,7 +2,10 @@
 
 namespace SpeechRecognition
 {
-    public class Recorder
+    /// <summary>
+    /// Запись звука, произнесённого пользователем
+    /// </summary>
+    public class Recorder : ISound
     {
         private WaveIn waveIn;
         private WaveFileWriter writer;

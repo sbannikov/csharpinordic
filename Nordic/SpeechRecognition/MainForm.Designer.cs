@@ -30,6 +30,7 @@
         {
             this.recording = new System.Windows.Forms.Button();
             this.text = new System.Windows.Forms.TextBox();
+            this.reading = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // recording
@@ -39,7 +40,7 @@
             this.recording.Font = new System.Drawing.Font("Segoe UI", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.recording.Location = new System.Drawing.Point(12, 12);
             this.recording.Name = "recording";
-            this.recording.Size = new System.Drawing.Size(776, 213);
+            this.recording.Size = new System.Drawing.Size(400, 213);
             this.recording.TabIndex = 0;
             this.recording.Text = "Записывать звук";
             this.recording.UseVisualStyleBackColor = true;
@@ -57,11 +58,23 @@
             this.text.Size = new System.Drawing.Size(776, 207);
             this.text.TabIndex = 1;
             // 
+            // reading
+            // 
+            this.reading.Font = new System.Drawing.Font("Segoe UI", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reading.Location = new System.Drawing.Point(420, 15);
+            this.reading.Name = "reading";
+            this.reading.Size = new System.Drawing.Size(368, 210);
+            this.reading.TabIndex = 2;
+            this.reading.Text = "Распознать записанный звук";
+            this.reading.UseVisualStyleBackColor = true;
+            this.reading.Click += new System.EventHandler(this.reading_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.reading);
             this.Controls.Add(this.text);
             this.Controls.Add(this.recording);
             this.Name = "MainForm";
@@ -75,5 +88,6 @@
 
         private Button recording;
         private TextBox text;
+        private Button reading;
     }
 }
