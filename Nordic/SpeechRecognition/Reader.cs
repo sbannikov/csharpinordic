@@ -2,7 +2,7 @@
 
 namespace SpeechRecognition
 {
-    public class Reader : ISound
+    public class Reader : GenericSound, ISound
     {
         private WaveFileReader reader;
 
@@ -19,7 +19,7 @@ namespace SpeechRecognition
         /// Чтение звука из файла
         /// </summary>
         /// <returns></returns>
-        public byte[] Sound()
+        override public byte[] Sound()
         {
             byte[] sound = new byte[reader.Length];
             reader.Read(sound, 0, sound.Length);
@@ -29,6 +29,6 @@ namespace SpeechRecognition
         /// <summary>
         /// Частота дискретизации в Гц
         /// </summary>
-        public int SampleRate => reader.WaveFormat.SampleRate;
+        override public int SampleRate => reader.WaveFormat.SampleRate;
     }
 }

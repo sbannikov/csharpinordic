@@ -5,7 +5,7 @@ namespace SpeechRecognition
     /// <summary>
     /// Запись звука, произнесённого пользователем
     /// </summary>
-    public class Recorder : ISound
+    public class Recorder : GenericSound, ISound
     {
         private WaveIn waveIn;
         private WaveFileWriter writer;
@@ -15,7 +15,7 @@ namespace SpeechRecognition
         /// <summary>
         /// Частота дискретизации в Гц
         /// </summary>
-        public int SampleRate => waveIn.WaveFormat.SampleRate;
+     override   public int SampleRate => waveIn.WaveFormat.SampleRate;
 
         /// <summary>
         /// Подготовка к запиcи звука
@@ -58,7 +58,7 @@ namespace SpeechRecognition
         /// Массив байт со звуком внутри
         /// </summary>
         /// <returns></returns>
-        public byte[] Sound()
+       override public byte[] Sound()
         {
             return sound.ToArray();
         }
