@@ -23,6 +23,11 @@ namespace Weather
         public string OpenWeatherKey { get; set; }
 
         /// <summary>
+        /// Полное имя класса для сбора данных
+        /// </summary>
+        public string Driver { get; set; }
+
+        /// <summary>
         /// Широта
         /// </summary>
         public double Latitude { get; set; }

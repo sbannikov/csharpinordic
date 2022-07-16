@@ -12,15 +12,13 @@ namespace Weather
     {
         private System.Timers.Timer timer;
 
-        private IWeather weather;
+        private NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
 
         public Worker()
         {
             var config = JsonFile.Load<Configuration>();
             timer = new System.Timers.Timer(config.IntervalInSeconds * 1000);
             timer.Elapsed += Timer_Elapsed;
-            // weather = new Yandex.YandexWeather();
-            weather = new OpenWeatherMap.OpenWeather();
         }
 
         /// <summary>
@@ -33,6 +31,9 @@ namespace Weather
             try
             {
                 timer.Stop();
+
+                var config = JsonFile.Load<Configuration>();
+                var weather = (IWeather)Activator.CreateInstance(null, config.Driver).Unwrap();
                 var meteo = weather.GetData();
                 if (meteo != null)
                 {
@@ -43,7 +44,7 @@ namespace Weather
             }
             catch (Exception ex)
             {
-                // [!] дописать на досуге
+                log.Error(ex);
             }
             finally
             {
