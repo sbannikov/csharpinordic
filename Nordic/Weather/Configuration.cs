@@ -15,7 +15,17 @@ namespace Weather
         /// <summary>
         /// Ключ доступа к API Yandex Погода
         /// </summary>
-        public string ApiKey { get; set; }
+        public string YandexKey { get; set; }
+
+        /// <summary>
+        /// Широта
+        /// </summary>
+        public double Latitude { get; set; }
+
+        /// <summary>
+        /// Долгота
+        /// </summary>
+        public double Longitude { get; set; }
 
         /// <summary>
         /// Интервал в секундах
