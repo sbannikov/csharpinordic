@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -70,7 +71,11 @@ namespace Weather
                 else
                 {
                     string json = response.Content.ReadAsStringAsync().Result;
-                    //              result = JsonSerializer.Deserialize<Response>(json).Result;
+                    var data = JsonSerializer.Deserialize<Yandex.YandexData>(json);
+                    var meteo = data.GetData();
+                    json = JsonSerializer.Serialize(meteo);
+                    string name = $@"C:\FOLDER\{meteo.TimeStamp.Ticks}.json";
+                    System.IO.File.WriteAllText(name, json);
                 }
             }
             catch (Exception ex)
@@ -103,4 +108,3 @@ namespace Weather
             timer.Start();
         }
     }
-}
