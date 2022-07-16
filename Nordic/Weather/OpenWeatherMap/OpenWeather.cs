@@ -1,15 +1,15 @@
 ﻿using System.Text.Json;
 using System.Web;
 
-namespace Weather.Yandex
+namespace Weather.OpenWeatherMap
 {
-    public class YandexWeather : IWeather
+    public class OpenWeather : IWeather
     {
         private HttpClient client;
 
         private NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
 
-        public YandexWeather()
+        public OpenWeather()
         {
             client = new HttpClient();
         }
@@ -18,17 +18,15 @@ namespace Weather.Yandex
         {
             var config = JsonFile.Load<Configuration>();
 
-            UriBuilder uri = new UriBuilder("https://api.weather.yandex.ru/v2/forecast");
+            UriBuilder uri = new UriBuilder("https://api.openweathermap.org/data/2.5/weather");
             var parameters = HttpUtility.ParseQueryString(string.Empty);
 
             // Инвариантные региональные настройки
             IFormatProvider format = System.Globalization.CultureInfo.InvariantCulture;
             parameters["lat"] = config.Latitude.ToString(format);
             parameters["lon"] = config.Longitude.ToString(format);
-            parameters["lang"] = "ru_RU";
-            parameters["limit"] = "7";
-            parameters["hours"] = "true";
-            parameters["extra"] = "true";
+            parameters["appid"] = config.OpenWeatherKey;
+           
             uri.Query = parameters.ToString();
 
             // Запрос к облаку
@@ -37,9 +35,6 @@ namespace Weather.Yandex
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(uri.ToString())
             };
-
-            // Авторизация запроса 
-            request.Headers.Add("X-Yandex-API-Key", config.YandexKey);
 
             // Выполнение запроса
             HttpResponseMessage response = client.Send(request);
@@ -55,7 +50,7 @@ namespace Weather.Yandex
             else
             {
                 string json = response.Content.ReadAsStringAsync().Result;
-                var data = JsonSerializer.Deserialize<Yandex.YandexData>(json);
+                var data = JsonSerializer.Deserialize<OpenWeatherData>(json);
                 if (data == null)
                 {
                     log.Warn($"Ошибка десериализации: {json}");

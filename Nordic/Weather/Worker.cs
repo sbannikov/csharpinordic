@@ -19,7 +19,8 @@ namespace Weather
             var config = JsonFile.Load<Configuration>();
             timer = new System.Timers.Timer(config.IntervalInSeconds * 1000);
             timer.Elapsed += Timer_Elapsed;
-            weather = new Yandex.YandexWeather();
+            // weather = new Yandex.YandexWeather();
+            weather = new OpenWeatherMap.OpenWeather();
         }
 
         /// <summary>

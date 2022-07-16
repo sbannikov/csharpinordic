@@ -18,6 +18,11 @@ namespace Weather
         public string YandexKey { get; set; }
 
         /// <summary>
+        /// Ключ доступа к API OpenWeatherMap
+        /// </summary>
+        public string OpenWeatherKey { get; set; }
+
+        /// <summary>
         /// Широта
         /// </summary>
         public double Latitude { get; set; }
