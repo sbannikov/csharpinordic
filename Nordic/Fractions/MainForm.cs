@@ -17,10 +17,10 @@ namespace Fractions
             InitializeComponent();
         }
 
-
-
-        private void buttonPlus_Click(object sender, EventArgs e)
+        private void buttonOperation_Click(object sender, EventArgs e)
         {
+            Button button = (Button)sender;
+
             int aN = textNumber1.Text.ToInt();
             int an = textNumerator1.Text.ToInt();
             int ad = textDenominator1.Text.ToInt();
@@ -32,7 +32,16 @@ namespace Fractions
             var a = new Fraction(aN, an, ad);
             var b = new Fraction(bN, bn, bd);
 
-            Fraction summa = a + b;
+            Fraction summa;
+            switch (button.Text)
+            {
+                case "+": summa = a + b; break;
+                case "-": summa = a - b; break;
+                case "*": summa = a * b; break;
+                case "/": summa = a / b; break;
+                default: summa = new Fraction(0, 0); break;
+            }
+
 
             textNumber.Text = summa.Number.ToString();
 

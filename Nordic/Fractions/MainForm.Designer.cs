@@ -60,7 +60,7 @@
             this.buttonPlus.TabIndex = 1;
             this.buttonPlus.Text = "+";
             this.buttonPlus.UseVisualStyleBackColor = true;
-            this.buttonPlus.Click += new System.EventHandler(this.buttonPlus_Click);
+            this.buttonPlus.Click += new System.EventHandler(this.buttonOperation_Click);
             // 
             // textDenominator1
             // 
@@ -111,6 +111,7 @@
             this.buttonMinus.TabIndex = 1;
             this.buttonMinus.Text = "-";
             this.buttonMinus.UseVisualStyleBackColor = true;
+            this.buttonMinus.Click += new System.EventHandler(this.buttonOperation_Click);
             // 
             // buttonMul
             // 
@@ -121,6 +122,7 @@
             this.buttonMul.TabIndex = 1;
             this.buttonMul.Text = "*";
             this.buttonMul.UseVisualStyleBackColor = true;
+            this.buttonMul.Click += new System.EventHandler(this.buttonOperation_Click);
             // 
             // buttonDiv
             // 
@@ -131,6 +133,7 @@
             this.buttonDiv.TabIndex = 1;
             this.buttonDiv.Text = "/";
             this.buttonDiv.UseVisualStyleBackColor = true;
+            this.buttonDiv.Click += new System.EventHandler(this.buttonOperation_Click);
             // 
             // textNumber2
             // 
