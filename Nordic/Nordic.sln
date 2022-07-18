@@ -57,7 +57,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeechRecognition", "Speech
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelSample", "ExcelSample\ExcelSample.csproj", "{54752DCA-6750-4986-AC64-098659E69051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather", "Weather\Weather.csproj", "{27CCFF17-0833-4670-A315-EE701EC59E24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather", "Weather\Weather.csproj", "{27CCFF17-0833-4670-A315-EE701EC59E24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fractions", "Fractions\Fractions.csproj", "{3C5EB84C-18B4-4145-92B7-DC6AC6F3524E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -173,6 +175,10 @@ Global
 		{27CCFF17-0833-4670-A315-EE701EC59E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27CCFF17-0833-4670-A315-EE701EC59E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27CCFF17-0833-4670-A315-EE701EC59E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C5EB84C-18B4-4145-92B7-DC6AC6F3524E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C5EB84C-18B4-4145-92B7-DC6AC6F3524E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C5EB84C-18B4-4145-92B7-DC6AC6F3524E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C5EB84C-18B4-4145-92B7-DC6AC6F3524E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
