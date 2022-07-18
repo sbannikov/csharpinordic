@@ -17,17 +17,38 @@ namespace Fractions
             InitializeComponent();
         }
 
+
+
         private void buttonPlus_Click(object sender, EventArgs e)
         {
-            int an = int.Parse(textNumerator1.Text);
-            int ad = int.Parse(textDenominator1.Text);
-            int bn = int.Parse(textNumerator2.Text);
-            int bd = int.Parse(textDenominator2.Text);
+            int aN = textNumber1.Text.ToInt();
+            int an = textNumerator1.Text.ToInt();
+            int ad = textDenominator1.Text.ToInt();
+
+            int bN = textNumber2.Text.ToInt();
+            int bn = textNumerator2.Text.ToInt();
+            int bd = textDenominator2.Text.ToInt();
+
             var a = new Fraction(an, ad);
-            var b = new Fraction(bn, bd);           
+            var b = new Fraction(bn, bd);
+
             Fraction summa = a + b;
-            textNumerator.Text = summa.Numerator.ToString();
-            textDenominator.Text = summa.Denominator.ToString();
+            summa += aN;
+            summa += bN;
+
+            textNumber.Text = summa.Number.ToString();
+            if (summa.Numerator != 0)
+            {
+                textNumerator.Visible = true;
+                textDenominator.Visible = true;
+                textNumerator.Text = summa.Numerator.ToString();
+                textDenominator.Text = summa.Denominator.ToString();
+            }
+            else
+            {
+                textNumerator.Visible = false;
+                textDenominator.Visible = false;
+            }
         }
     }
 }

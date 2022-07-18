@@ -8,15 +8,60 @@ namespace Fractions
 {
     public class Fraction
     {
+        /// <summary>
+        /// Целая часть
+        /// </summary>
+        public int Number { get; }
+        /// <summary>
+        /// Числитель
+        /// </summary>
         public int Numerator { get; }
-
+        /// <summary>
+        /// Знаменатель
+        /// </summary>
         public int Denominator { get; }
 
-        public Fraction(int numerator, int denominator)
+        /// <summary>
+        /// Конструктор дроби
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="numerator"></param>
+        /// <param name="denominator"></param>
+        public Fraction(int number, int numerator, int denominator)
         {
+            // Поиск общих делителей
+            for (int i = 2; i <= Math.Min(numerator, denominator) / 2; i++)
+            {
+                while ((numerator % i == 0) && (denominator % i == 0))
+                {
+                    numerator /= i;
+                    denominator /= i;
+                }
+            }
+
+            // Преобразование неправильной дроби в правильную
+            while (numerator >= denominator)
+            {
+                numerator -= denominator;
+                number++;
+            }
+
+            // Сохранение данных
+            Number = number;
             Numerator = numerator;
             Denominator = denominator;
         }
+
+
+        /// <summary>
+        /// Конструктор правильной дроби
+        /// </summary>
+        /// <param name="numerator"></param>
+        /// <param name="denominator"></param>
+        public Fraction(int numerator, int denominator) :
+            this(0, numerator, denominator)
+        { }
+
 
         /// <summary>
         /// Сложение натуральных дробей
@@ -28,9 +73,36 @@ namespace Fractions
         {
             int numerator = a.Numerator * b.Denominator + b.Numerator * a.Denominator;
             int denominator = a.Denominator * b.Denominator;
-            var result = new Fraction(numerator, denominator);
+            var result = new Fraction(a.Number + b.Number, numerator, denominator);
             return result;
         }
 
+        /// <summary>
+        /// Сложение дроби и целого числа
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static Fraction operator +(Fraction a, int b)
+        {
+            var result = new Fraction(a.Number + b, a.Numerator, a.Denominator);
+            return result;
+        }
+
+        /// <summary>
+        /// Сложение целого числа и дроби
+        /// </summary>
+        /// <param name="b"></param>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public static Fraction operator +(int b, Fraction a) => a + b;
+
+        public override string ToString()
+        {
+            string s1 = (Number != 0) ? $"{Number}" : string.Empty;
+            string s2 = (Numerator != 0) ? $"{Numerator}/{Denominator}" : string.Empty;
+            string s = string.Join(' ', s1, s2);
+            return string.IsNullOrWhiteSpace(s) ? "0": s;
+        }
     }
 }
