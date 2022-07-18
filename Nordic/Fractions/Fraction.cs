@@ -29,21 +29,24 @@ namespace Fractions
         /// <param name="denominator"></param>
         public Fraction(int number, int numerator, int denominator)
         {
-            // Поиск общих делителей
-            for (int i = 2; i <= Math.Min(numerator, denominator) / 2; i++)
+            if (denominator != 0)
             {
-                while ((numerator % i == 0) && (denominator % i == 0))
+                // Поиск общих делителей
+                for (int i = 2; i <= Math.Min(numerator, denominator); i++)
                 {
-                    numerator /= i;
-                    denominator /= i;
+                    while ((numerator % i == 0) && (denominator % i == 0))
+                    {
+                        numerator /= i;
+                        denominator /= i;
+                    }
                 }
-            }
 
-            // Преобразование неправильной дроби в правильную
-            while (numerator >= denominator)
-            {
-                numerator -= denominator;
-                number++;
+                // Преобразование неправильной дроби в правильную
+                while (numerator >= denominator)
+                {
+                    numerator -= denominator;
+                    number++;
+                }
             }
 
             // Сохранение данных
@@ -71,8 +74,23 @@ namespace Fractions
         /// <returns></returns>
         public static Fraction operator +(Fraction a, Fraction b)
         {
-            int numerator = a.Numerator * b.Denominator + b.Numerator * a.Denominator;
-            int denominator = a.Denominator * b.Denominator;
+            int numerator;
+            int denominator;
+            if (a.Denominator == 0)
+            {
+                numerator = b.Numerator;
+                denominator = b.Denominator;
+            }
+            else if (b.Denominator == 0)
+            {
+                numerator = a.Numerator;
+                denominator = a.Denominator;
+            }
+            else
+            {
+                numerator = a.Numerator * b.Denominator + b.Numerator * a.Denominator;
+                denominator = a.Denominator * b.Denominator;
+            }
             var result = new Fraction(a.Number + b.Number, numerator, denominator);
             return result;
         }

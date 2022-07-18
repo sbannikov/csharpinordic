@@ -29,26 +29,19 @@ namespace Fractions
             int bn = textNumerator2.Text.ToInt();
             int bd = textDenominator2.Text.ToInt();
 
-            var a = new Fraction(an, ad);
-            var b = new Fraction(bn, bd);
+            var a = new Fraction(aN, an, ad);
+            var b = new Fraction(bN, bn, bd);
 
             Fraction summa = a + b;
-            summa += aN;
-            summa += bN;
 
             textNumber.Text = summa.Number.ToString();
-            if (summa.Numerator != 0)
-            {
-                textNumerator.Visible = true;
-                textDenominator.Visible = true;
-                textNumerator.Text = summa.Numerator.ToString();
-                textDenominator.Text = summa.Denominator.ToString();
-            }
-            else
-            {
-                textNumerator.Visible = false;
-                textDenominator.Visible = false;
-            }
+
+            // Показываем дробную часть, если она есть (числитель ненулевой)
+            bool visible = summa.Numerator !=0;
+            textNumerator.Visible = visible;
+            textDenominator.Visible = visible;
+            textNumerator.Text = summa.Numerator.ToString();
+            textDenominator.Text = summa.Denominator.ToString();
         }
     }
 }
